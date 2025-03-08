@@ -8,7 +8,9 @@ class Program
     static void Main(string[] args)
     {
         string inputFile = "", outputFile = "", keyFile = "";
+        string gramFile = "";
         bool encrypt = false, decrypt = false;
+        int nGram = 0;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -19,23 +21,39 @@ class Program
                 case "-k": keyFile = args[++i]; break;
                 case "-e": encrypt = true; break;
                 case "-d": decrypt = true; break;
+                case "-g1":
+                case "-g2":
+                case "-g3":
+                case "-g4":
+                    nGram = int.Parse(args[i].Substring(2, 1));
+                    gramFile = args[++i];
+                    break;
             }
         }
 
-        if ((encrypt == decrypt) || string.IsNullOrEmpty(inputFile) || string.IsNullOrEmpty(outputFile) || string.IsNullOrEmpty(keyFile))
+        if ((encrypt == decrypt) && nGram == 0 || string.IsNullOrEmpty(inputFile))
         {
-            Console.WriteLine("Użycie: program -e|-d -k klucz.txt -i wejscie.txt -o wyjscie.txt");
+            Console.WriteLine("Użycie: program -e|-d -k klucz.txt -i wejscie.txt -o wyjscie.txt [-g1|-g2|-g3|-g4 gram.txt]");
             return;
         }
 
-        var substitution = LoadKey(keyFile, decrypt);
-
         string inputText = File.ReadAllText(inputFile);
-        string outputText = ProcessText(inputText, substitution);
+        inputText = new string(inputText.ToUpper().Where(char.IsLetter).ToArray());
 
-        File.WriteAllText(outputFile, outputText);
+        if (!string.IsNullOrEmpty(keyFile))
+        {
+            var substitution = LoadKey(keyFile, decrypt);
+            string outputText = ProcessText(inputText, substitution);
+            File.WriteAllText(outputFile, outputText);
+            Console.WriteLine("Operacja zakończona pomyślnie.");
+        }
 
-        Console.WriteLine("Operacja zakończona pomyślnie.");
+        if (nGram > 0 && !string.IsNullOrEmpty(gramFile))
+        {
+            var nGramCounts = GenerateNGrams(inputText, nGram);
+            SaveNGrams(gramFile, nGramCounts);
+            Console.WriteLine($"Statystyki {nGram}-gramów zapisano do {gramFile}");
+        }
     }
 
     static Dictionary<char, char> LoadKey(string filename, bool reverse)
@@ -67,8 +85,34 @@ class Program
 
     static string ProcessText(string text, Dictionary<char, char> substitution)
     {
-        return new string(text.ToUpper().Where(char.IsLetter)
-            .Select(ch => substitution.ContainsKey(ch) ? substitution[ch] : ch)
-            .ToArray());
+        return new string(text.Select(ch => substitution.ContainsKey(ch) ? substitution[ch] : ch).ToArray());
+    }
+
+    static Dictionary<string, int> GenerateNGrams(string text, int n)
+    {
+        var nGramCounts = new Dictionary<string, int>();
+
+        for (int i = 0; i <= text.Length - n; i++)
+        {
+            string nGram = text.Substring(i, n);
+            if (nGramCounts.ContainsKey(nGram))
+                nGramCounts[nGram]++;
+            else
+                nGramCounts[nGram] = 1;
+        }
+
+        return nGramCounts;
+    }
+
+    static void SaveNGrams(string filename, Dictionary<string, int> nGramCounts)
+    {
+        using (var writer = new StreamWriter(filename))
+        {
+            writer.WriteLine("n-gram	liczność");
+            foreach (var kvp in nGramCounts.OrderByDescending(k => k.Value))
+            {
+                writer.WriteLine($"{kvp.Key}	{kvp.Value}");
+            }
+        }
     }
 }
