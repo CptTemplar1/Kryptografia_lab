@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\przem\\Desktop\\SEMESTR_2\\KRYPTO_GITHUB\\Kryptografia_lab\\lab1\\labortorium_1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{61A3F068-E9AE-46A0-8A8E-B5C1A16ED8D0}|labortorium_1\\labortorium_1.csproj|c:\\users\\przem\\desktop\\semestr_2\\krypto_github\\kryptografia_lab\\lab1\\labortorium_1\\labortorium_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61A3F068-E9AE-46A0-8A8E-B5C1A16ED8D0}|labortorium_1\\labortorium_1.csproj|solutionrelative:labortorium_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\przem\\Desktop\\SEMESTR_2\\KRYPTO_GITHUB\\Kryptografia_lab\\lab1\\labortorium_1\\labortorium_1\\Program.cs",
+              "RelativeDocumentMoniker": "labortorium_1\\Program.cs",
+              "ToolTip": "C:\\Users\\przem\\Desktop\\SEMESTR_2\\KRYPTO_GITHUB\\Kryptografia_lab\\lab1\\labortorium_1\\labortorium_1\\Program.cs",
+              "RelativeToolTip": "labortorium_1\\Program.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwBcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T12:49:11.626Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

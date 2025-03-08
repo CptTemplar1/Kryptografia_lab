@@ -1,0 +1,15 @@
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\bin\Debug\net8.0\labortorium_1.exe
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\bin\Debug\net8.0\labortorium_1.deps.json
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\bin\Debug\net8.0\labortorium_1.runtimeconfig.json
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\bin\Debug\net8.0\labortorium_1.dll
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\bin\Debug\net8.0\labortorium_1.pdb
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\labortorium_1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\labortorium_1.AssemblyInfoInputs.cache
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\labortorium_1.AssemblyInfo.cs
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\labortorium_1.csproj.CoreCompileInputs.cache
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\labortorium_1.sourcelink.json
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\labortorium_1.dll
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\refint\labortorium_1.dll
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\labortorium_1.pdb
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\labortorium_1.genruntimeconfig.cache
+C:\Users\przem\Desktop\SEMESTR_2\KRYPTO_GITHUB\Kryptografia_lab\lab1\labortorium_1\labortorium_1\obj\Debug\net8.0\ref\labortorium_1.dll
