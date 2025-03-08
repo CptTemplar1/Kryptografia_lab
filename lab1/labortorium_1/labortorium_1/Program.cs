@@ -104,9 +104,9 @@ class Program
         return new string(text.Select(ch => substitution.ContainsKey(ch) ? substitution[ch] : ch).ToArray());
     }
 
-    static Dictionary<string, int> GenerateNGrams(string text, int n)
+    static Dictionary<string, long> GenerateNGrams(string text, int n)
     {
-        var nGramCounts = new Dictionary<string, int>();
+        var nGramCounts = new Dictionary<string, long>();
 
         for (int i = 0; i <= text.Length - n; i++)
         {
@@ -120,7 +120,7 @@ class Program
         return nGramCounts;
     }
 
-    static void SaveNGrams(string filename, Dictionary<string, int> nGramCounts)
+    static void SaveNGrams(string filename, Dictionary<string, long> nGramCounts)
     {
         using (var writer = new StreamWriter(filename))
         {
@@ -132,33 +132,34 @@ class Program
         }
     }
 
-    static Dictionary<string, double> LoadReferenceNGrams(string filename)
+    static Dictionary<string, long> LoadReferenceNGrams(string filename)
     {
-        var reference = new Dictionary<string, double>();
-        double total = 0;
+        var reference = new Dictionary<string, long>();
+        long total = 0;
 
         foreach (var line in File.ReadLines(filename))
         {
             var parts = line.Split();
-            if (parts.Length == 2 && double.TryParse(parts[1], out double probability))
+            if (parts.Length == 2 && long.TryParse(parts[1], out long count))
             {
-                reference[parts[0]] = probability;
-                total += probability;
+                reference[parts[0]] = count;
+                total += count;
             }
         }
 
         return reference;
     }
 
-    static double CalculateChiSquare(Dictionary<string, int> observed, Dictionary<string, double> expected)
+    static double CalculateChiSquare(Dictionary<string, long> observed, Dictionary<string, long> expected)
     {
         double chiSquare = 0.0;
-        int totalObserved = observed.Values.Sum();
+        long totalObserved = observed.Values.Sum();
+        long totalExpected = expected.Values.Sum();
 
         foreach (var kvp in expected)
         {
-            int observedCount = observed.ContainsKey(kvp.Key) ? observed[kvp.Key] : 0;
-            double expectedCount = totalObserved * kvp.Value;
+            long observedCount = observed.ContainsKey(kvp.Key) ? observed[kvp.Key] : 0;
+            double expectedCount = (double)totalObserved * kvp.Value / totalExpected;
 
             chiSquare += Math.Pow(observedCount - expectedCount, 2) / expectedCount;
         }
