@@ -1,5 +1,51 @@
-# Ignorowanie folderu .vs
-/laboratorium_1/.vs/
+# Wzorce specyficzne dla Visual Studio
+.vs/
+.vs2019/
+.vs2017/
+# pliki konfiguracyjne związane z użytkownikiem
+.vscode/
+.idea/
 
-# Ignorowanie folderu obj
-/laboratorium_1/laboratorium_1/obj/
+# Foldery kompilacyjne
+bin/
+obj/
+
+# Pliki konfiguracyjne kompilatora
+# Ignorowanie plików buildów
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Dd]eploy/
+[Dd]evelopment/
+Release/
+TestResults/
+
+# Pliki i katalogi związane z NuGet
+# Ignorowanie paczek NuGet, logów, itp.
+*.nupkg
+*.nuget.props
+*.nuget.targets
+
+# Pliki tymczasowe generowane przez kompilację i debugging
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignorowanie plików i katalogów związanych z profilingiem
+*.psess
+*.vsp
+*.sap
+*.vspscc
+
+# Ignorowanie plików zawierających dane testowe i raporty
+# wyników testów jednostkowych i innych.
+*.trx
+*.coverage
+*.coveragexml
+*.testsettings
+
+# Wzorce ogólne
+# Ignorowanie plików systemowych
+Thumbs.db
+ehthumbs.db
