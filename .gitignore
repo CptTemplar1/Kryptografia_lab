@@ -1,0 +1,5 @@
+# Ignorowanie folderu .vs
+/laboratorium_1/.vs/
+
+# Ignorowanie folderu obj
+/laboratorium_1/laboratorium_1/obj/
