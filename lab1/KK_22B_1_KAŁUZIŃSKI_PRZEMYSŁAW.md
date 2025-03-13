@@ -151,7 +151,151 @@ Ze względu na fakt, że zadania 1-4 są ze sobą powiązane i polegają na rozb
 
 #### Wyniki
 
+Przed uruchomieniem programu, musieliśmy przygotować plik z tekstem jawnym, który będzie analizowany pod kątem statystyk n-gramów. Wykorzystaliśmy ten sam plik, który został użyty w poprzednim zadaniu (`tekst_jawny.txt`).
 
+Program został uruchomiony dla wszystkich wartości `n` (1-4), aby wygenerować statystyki mono-gramów, bi-gramów, tri-gramów i quad-gramów. Poniżej znajdują się polecenia wywołania programu dla każdej wartości `n` oraz fragmenty wyników otrzymanych statystyk. Ze względu na długość wyników, zostało wyświetlone jedynie kilka pierwszych wartości n-gramów.
+
+Polecenie, którego użyliśmy do wywołania programu w celu generowania statystyk mono-gramów:  
+`dotnet run -i tekst_jawny.txt -g1 monogramy.txt`
+
+**Wynik statystyk dla mono-gramów (monogramy.txt):**
+
+``` plaintext
+n-gram	liczność
+E	109
+A	92
+N	88
+I	84
+T	78
+O	66
+S	60
+R	55
+L	44
+D	44
+H	40
+C	32
+Y	30
+G	28
+M	23
+F	22
+V	16
+U	14
+B	11
+P	10
+W	10
+K	5
+J	2
+Z	1
+```
+
+Polecenie, którego użyliśmy do wywołania programu w celu generowania statystyk bi-gramów:  
+`dotnet run -i tekst_jawny.txt -g2 bigramy.txt`
+
+**Fragment wyniku statystyk dla bi-gramów (bigramy.txt):**
+
+``` plaintext
+n-gram	liczność
+IN	28
+TH	26
+NT	22
+TI	22
+EN	20
+AL	19
+HE	17
+AN	17
+LE	16
+NE	14
+ES	14
+DA	14
+VA	12
+AY	12
+ST	12
+ER	12
+AT	11
+ND	11
+RE	11
+SA	10
+SD	9
+OR	9
+RS	9
+...
+```
+
+Polecenie, którego użyliśmy do wywołania programu w celu generowania statystyk tri-gramów:  
+`dotnet run -i tekst_jawny.txt -g3 trigramy.txt`
+
+**Fragment wyniku statystyk dla tri-gramów (trigramy.txt):**
+
+``` plaintext
+n-gram	liczność
+THE	17
+TIN	15
+ENT	13
+NTI	12
+DAY	12
+VAL	10
+ALE	10
+LEN	10
+INE	10
+NES	8
+ESD	8
+SDA	8
+ING	7
+AND	6
+ICA	6
+ATI	5
+ALL	5
+LLY	5
+COM	5
+ANT	5
+HOL	4
+OLI	4
+...
+```
+
+Polecenie, którego użyliśmy do wywołania programu w celu generowania statystyk quad-gramów:  
+`dotnet run -i tekst_jawny.txt -g4 quadgramy.txt`
+
+**Fragment wyniku statystyk dla quad-gramów (quadgramy.txt):**
+
+``` plaintext
+n-gram	liczność
+VALE	10
+ALEN	10
+LENT	10
+ENTI	10
+NTIN	10
+TINE	10
+INES	8
+NESD	8
+ESDA	8
+SDAY	8
+ALLY	5
+HOLI	4
+OLID	4
+LIDA	4
+IDAY	4
+SIGN	4
+COMP	4
+OTHE	4
+TION	4
+DAYA	4
+TVAL	3
+IGNI	3
+...
+```
+
+**Wnioski:**
+
+Uruchomienie programu z odpowiednią flagą (-g1, -g2, -g3, -g4) oraz podanie odpowiednich argumentów (`-i tekst_jawny.txt`, `-gX n-gramy.txt`, gdzie `X` to 1, 2, 3 lub 4), program wygenerował statystyki dla wybranego typu n-gramów, które zostały zapisane do pliku wynikowego. Wynikiem jest lista n-gramów wraz z ich licznością, czyli liczbą wystąpień w tekście.
+
+Dla każdego typu n-gramów (mono-gramy, bi-gramy, tri-gramy, quad-gramy) program działa w ten sam sposób. Na przykład:
+- Dla mono-gramów (flaga -g1), program generuje statystyki pojedynczych liter. Przykładowo, litera `A` może wystąpić 50 razy, `B` 30 razy, itd.
+- Dla bi-gramów (flaga -g2), program generuje statystyki sekwencji dwóch liter. Przykładowo, bi-gram `TH` może wystąpić 15 razy, `HE` 12 razy, itd.
+- Dla tri-gramów (flaga -g3), program generuje statystyki sekwencji trzech liter. Przykładowo, tri-gram `THE` może wystąpić 8 razy, `ING` 5 razy, itd.
+- Dla quad-gramów (flaga -g4), program generuje statystyki sekwencji czterech liter. Przykładowo, quad-gram `THAT` może wystąpić 3 razy, `WITH` 2 razy, itd.
+
+Program poprawnie generuje statystyki n-gramów dla podanego tekstu, niezależnie od wybranego typu n-gramów (mono-, bi-, tri- lub quad-gramów). Wyniki są zapisywane do plików w formacie tabelarycznym, gdzie każdy wiersz zawiera n-gram oraz jego liczność. Dzięki temu możemy analizować częstotliwość występowania różnych sekwencji liter w tekście, co może być przydatne w analizie językowej lub kryptoanalizie.
 
 ### Zadanie 3
 
@@ -196,7 +340,78 @@ Ze względu na fakt, że zadania 1-4 są ze sobą powiązane i polegają na rozb
 
 #### Wyniki
 
+Przed uruchomieniem programu, musieliśmy przygotować plik z tekstem jawnym, który będzie analizowany pod kątem testu chi-kwadrat. Wykorzystaliśmy ten sam plik, który został użyty w zadaniu 1 (`tekst_jawny.txt`). Dodatkowo wykorzystaliśmy pliki z referencyjnymi bazami n-gramów przesłane przez prowadzącego (`english_monograms.txt`, `english_bigrams.txt`, `english_trigrams.txt`, `english_quadgrams.txt`). Poniżej znajduje się fragment zawartości jednego z plików referencyjnych (dla bi-gramów):
 
+**Fragment referencyjnej bazy bi-gramów (english_bigrams.txt):**
+
+``` plaintext
+TH 116997844
+HE 100689263
+IN 87674002
+ER 77134382
+AN 69775179
+RE 60923600
+ES 57070453
+ON 56915252
+ST 54018399
+NT 50701084
+EN 48991276
+AT 48274564
+ED 46647960
+ND 46194306
+TO 46115188
+OR 45725191
+EA 43329810
+...
+```
+
+Polecenie, którego użyliśmy do wywołania programu w celu obliczenia testu chi-kwadrat dla mono-gramów:  
+`dotnet run -i tekst_jawny.txt -r1 english_monograms.txt -s`
+
+Po uruchomieniu programu z przedstawionymi argumentami otrzymaliśmy wartość testu chi-kwadrat, która została wyświetlona w konsoli. Poniżej znajduje się wynik:
+
+``` plaintext
+Wartość testu chi-kwadrat: 50,4818
+```
+
+Polecenie, którego użyliśmy do wywołania programu w celu obliczenia testu chi-kwadrat dla bi-gramów:
+`dotnet run -i tekst_jawny.txt -r2 english_bigrams.txt -s`
+
+Po uruchomieniu programu z przedstawionymi argumentami otrzymaliśmy wartość testu chi-kwadrat, która została wyświetlona w konsoli. Poniżej znajduje się wynik:
+
+``` plaintext
+Wartość testu chi-kwadrat: 1084,0064
+```
+
+Polecenie, którego użyliśmy do wywołania programu w celu obliczenia testu chi-kwadrat dla tri-gramów:
+`dotnet run -i tekst_jawny.txt -r3 english_trigrams.txt -s`
+
+Po uruchomieniu programu z przedstawionymi argumentami otrzymaliśmy wartość testu chi-kwadrat, która została wyświetlona w konsoli. Poniżej znajduje się wynik:
+
+``` plaintext
+Wartość testu chi-kwadrat: 9836,0391
+```
+
+Polecenie, którego użyliśmy do wywołania programu w celu obliczenia testu chi-kwadrat dla quad-gramów:
+`dotnet run -i tekst_jawny.txt -r4 english_quadgrams.txt -s`
+
+Po uruchomieniu programu z przedstawionymi argumentami otrzymaliśmy wartość testu chi-kwadrat, która została wyświetlona w konsoli. Poniżej znajduje się wynik:
+
+``` plaintext
+Wartość testu chi-kwadrat: 86385,1160
+```
+
+**Wnioski:**
+
+Program obliczył wartość testu chi-kwadrat dla każdego typu n-gramów (mono-, bi-, tri- i quad-gramów) na podstawie porównania statystyk n-gramów w analizowanym tekście z odpowiednimi referencyjnymi bazami.
+
+Wyniki testu chi-kwadrat dla poszczególnych typów n-gramów są następujące:
+- **Mono-gramy**: Wartość testu wyniosła 50,4818. Ta stosunkowo niska wartość wskazuje na dużą zgodność rozkładu pojedynczych liter w analizowanym tekście z rozkładem w referencyjnej bazie mono-gramów. Jest to spodziewane, ponieważ mono-gramy (pojedyncze litery) mają zazwyczaj stabilny rozkład w języku angielskim.
+- **Bi-gramy**: Wartość testu wyniosła 1084,0064. Wyższa wartość wskazuje na większe różnice w rozkładzie bi-gramów w porównaniu z referencyjną bazą. Bi-gramy są bardziej zależne od kontekstu i specyfiki tekstu, co może prowadzić do większych odchyleń.
+- **Tri-gramy**: Wartość testu wyniosła 9836,0391. Znacznie wyższa wartość sugeruje, że rozkład tri-gramów w analizowanym tekście różni się znacząco od rozkładu w referencyjnej bazie. Tri-gramy są jeszcze bardziej wrażliwe na kontekst i specyfikę tekstu, co tłumaczy dużą wartość testu.
+- **Quad-gramy**: Wartość testu wyniosła 86385,1160. Ta bardzo wysoka wartość wskazuje na bardzo duże różnice w rozkładzie quad-gramów w porównaniu z referencyjną bazą. Quad-gramy są wysoce specyficzne i rzadko występują w tekście, co prowadzi do znacznych odchyleń.
+
+Wartość testu chi-kwadrat rośnie wraz ze wzrostem długości n-gramów. Jest to spodziewane, ponieważ im dłuższe sekwencje liter (np. tri-gramy, quad-gramy), tym bardziej są one zależne od kontekstu i specyfiki tekstu. W przypadku mono-gramów, które są pojedynczymi literami, rozkład jest bardziej uniwersalny i stabilny, co tłumaczy niższą wartość testu. Natomiast dla dłuższych n-gramów, takich jak bi-gramy, tri-gramy i quad-gramy, różnice w rozkładach są bardziej wyraźne, co skutkuje wyższymi wartościami testu chi-kwadrat. 
 
 ### Zadanie 4
 
