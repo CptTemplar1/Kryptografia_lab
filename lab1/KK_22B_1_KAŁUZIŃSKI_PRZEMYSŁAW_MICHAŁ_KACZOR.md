@@ -32,6 +32,84 @@ Powyższy przykład pokazuje, iż literze A przypisana jest litera G, literze B 
 - Tekst jawny (z przeznaczeniem do zaszyfrowania) powinien zawierać dłuższy akapit a lepiej kilka akapitów pisanych w języku angielskim (najlepiej beletrystyka).
 - Odczytany tekst jawny, przed dalszym przetwarzaniem, powinien być zamieniony do postaci składającej się tylko z dużych liter. Ponadto z tekstu powinny być usunięte wszystkie znaki, które nie są literami, np: odstępy, przecinki, kropki itp.
 
+#### Implementacja
+
+Ze względu na fakt, że zadania 1-4 są ze sobą powiązane i polegają na rozbudowie jednego programu, zdecydowaliśmy się na umieszczenie kodu źródłowego w osobnej sekcji implementacja, znajdującej się pod zadaniem 4.
+
+#### Wyniki
+
+Przed uruchomieniem programu, musieliśmy utworzyć plik z kluczem, który będzie używany do szyfrowania i deszyfrowania tekstu oraz zadeklarować plik z tekstem jawnym, który będzie poddany szyfrowaniu. Poniżej znajduje się wykorzystany przez nas klucz oraz tekst jawny:
+
+**Klucz (klucz.txt):**
+
+``` plaintext
+A Q
+B W
+C E
+D R
+E T
+F Y
+G U
+H I
+I O
+J P
+K A
+L S
+M D
+N F
+O G
+P H
+Q J
+R K
+S L
+T Z
+U X
+V C
+W V
+X B
+Y N
+Z M
+```
+
+**Tekst jawny (tekst_jawny.txt):**
+
+``` plaintext
+Valentine's Day (or Saint Valentine's Day) is a holiday that, in the United States, takes place on February 14, and technically signifies the accomplishments of St. Valentine, a third-century Roman saint.
+
+With that said, most Americans, instead of honoring St. Valentine through religious ceremony, enjoy the holiday by engaging in "romantic" behavior with their significant other or someone who they wish to be their significant other; gifts, special dinners, and other acknowledgements of affection comprise most individuals' Valentine's Day celebrations.
+
+Chocolates and flowers are commonly given as gifts during Valentine's Day, as are accompanying greeting cards (greeting card companies release new Valentine's Day designs annually). Red and pink are generally understood to be "the colors" of Valentine's Day, and many individuals, instead of celebrating romantically, spend the holiday with their friends and/or family members.
+
+Variations of Valentine's Day are celebrated across the globe throughout the year. In America, the holiday, although acknowledged by the vast majority of the population, isn't federally recognized; no time off work is granted for Valentine's Day.
+```
+
+Polecenie, którego użyliśmy do wywołania programu w celu zaszyfrowania tekstu:  
+`dotnet run -e -k klucz.txt -i tekst_jawny.txt -o szyfrogram.txt`
+
+Po uruchomieniu programu z przedstawionymi argumentami otrzymaliśmy zaszyfrowany tekst, który został zapisany do pliku `szyfrogram.txt`. Poniżej znajduje się wynik szyfrowania:
+
+**Szyfrogram (szyfrogram.txt):**
+
+``` plaintext
+CQSTFZOFTLRQNGKLQOFZCQSTFZOFTLRQNOLQIGSORQNZIQZOFZITXFOZTRLZQZTLZQATLHSQETGFYTWKXQKNQFRZTEIFOEQSSNLOUFOYOTLZITQEEGDHSOLIDTFZLGYLZCQSTFZOFTQZIOKRETFZXKNKGDQFLQOFZVOZIZIQZLQORDGLZQDTKOEQFLOFLZTQRGYIGFGKOFULZCQSTFZOFTZIKGXUIKTSOUOGXLETKTDGFNTFPGNZITIGSORQNWNTFUQUOFUOFKGDQFZOEWTIQCOGKVOZIZITOKLOUFOYOEQFZGZITKGKLGDTGFTVIGZITNVOLIZGWTZITOKLOUFOYOEQFZGZITKUOYZLLHTEOQSROFFTKLQFRGZITKQEAFGVSTRUTDTFZLGYQYYTEZOGFEGDHKOLTDGLZOFROCORXQSLCQSTFZOFTLRQNETSTWKQZOGFLEIGEGSQZTLQFRYSGVTKLQKTEGDDGFSNUOCTFQLUOYZLRXKOFUCQSTFZOFTLRQNQLQKTQEEGDHQFNOFUUKTTZOFUEQKRLUKTTZOFUEQKREGDHQFOTLKTSTQLTFTVCQSTFZOFTLRQNRTLOUFLQFFXQSSNKTRQFRHOFAQKTUTFTKQSSNXFRTKLZGGRZGWTZITEGSGKLGYCQSTFZOFTLRQNQFRDQFNOFROCORXQSLOFLZTQRGYETSTWKQZOFUKGDQFZOEQSSNLHTFRZITIGSORQNVOZIZITOKYKOTFRLQFRGKYQDOSNDTDWTKLCQKOQZOGFLGYCQSTFZOFTLRQNQKTETSTWKQZTRQEKGLLZITUSGWTZIKGXUIGXZZITNTQKOFQDTKOEQZITIGSORQNQSZIGXUIQEAFGVSTRUTRWNZITCQLZDQPGKOZNGYZITHGHXSQZOGFOLFZYTRTKQSSNKTEGUFOMTRFGZODTGYYVGKAOLUKQFZTRYGKCQSTFZOFTLRQN
+```
+
+Następnie uruchomiliśmy program ponownie w celu odszyfrowania tekstu. Polecenie, którego użyliśmy do wywołania programu w celu odszyfrowania tekstu:  
+`dotnet run -d -k klucz.txt -i szyfrogram.txt -o tekst_odszyfrowany.txt`
+
+Po uruchomieniu programu z przedstawionymi argumentami otrzymaliśmy odszyfrowany tekst, który został zapisany do pliku `tekst_odszyfrowany.txt`. Poniżej znajduje się wynik odszyfrowania:
+
+**Tekst odszyfrowany (tekst_odszyfrowany.txt):**
+
+``` plaintext
+VALENTINESDAYORSAINTVALENTINESDAYISAHOLIDAYTHATINTHEUNITEDSTATESTAKESPLACEONFEBRUARYANDTECHNICALLYSIGNIFIESTHEACCOMPLISHMENTSOFSTVALENTINEATHIRDCENTURYROMANSAINTWITHTHATSAIDMOSTAMERICANSINSTEADOFHONORINGSTVALENTINETHROUGHRELIGIOUSCEREMONYENJOYTHEHOLIDAYBYENGAGINGINROMANTICBEHAVIORWITHTHEIRSIGNIFICANTOTHERORSOMEONEWHOTHEYWISHTOBETHEIRSIGNIFICANTOTHERGIFTSSPECIALDINNERSANDOTHERACKNOWLEDGEMENTSOFAFFECTIONCOMPRISEMOSTINDIVIDUALSVALENTINESDAYCELEBRATIONSCHOCOLATESANDFLOWERSARECOMMONLYGIVENASGIFTSDURINGVALENTINESDAYASAREACCOMPANYINGGREETINGCARDSGREETINGCARDCOMPANIESRELEASENEWVALENTINESDAYDESIGNSANNUALLYREDANDPINKAREGENERALLYUNDERSTOODTOBETHECOLORSOFVALENTINESDAYANDMANYINDIVIDUALSINSTEADOFCELEBRATINGROMANTICALLYSPENDTHEHOLIDAYWITHTHEIRFRIENDSANDORFAMILYMEMBERSVARIATIONSOFVALENTINESDAYARECELEBRATEDACROSSTHEGLOBETHROUGHOUTTHEYEARINAMERICATHEHOLIDAYALTHOUGHACKNOWLEDGEDBYTHEVASTMAJORITYOFTHEPOPULATIONISNTFEDERALLYRECOGNIZEDNOTIMEOFFWORKISGRANTEDFORVALENTINESDAY
+```
+
+**Wnioski:**
+
+Przed szyfrowaniem tekst jawny został przekształcony w ciąg wielkich liter, z usunięciem wszystkich znaków niebędących literami (np. spacji, znaków interpunkcyjnych). Miało to na celu uproszczenie procesu szyfrowania i uniknięcie niejednoznaczności. Po uruchomieniu programu z flagą `-e` (szyfrowanie) oraz podaniu odpowiednich argumentów (`-k klucz.txt`, `-i tekst_jawny.txt`, `-o szyfrogram.txt`), program zaszyfrował tekst jawny przy użyciu podanego klucza. Wynikiem szyfrowania jest tekst zaszyfrowany, który został zapisany do pliku `szyfrogram.txt`. Tekst ten jest ciągiem znaków, w którym każda litera z tekstu jawnego została zastąpiona odpowiadającą jej literą z klucza. Na przykład litera `A` została zamieniona na `Q`, `B` na `W`, itd. W efekcie otrzymaliśmy tekst, który jest trudny do odczytania bez znajomości klucza.
+
+Następnie, aby zweryfikować poprawność szyfrowania, uruchomiliśmy program z flagą `-d` (deszyfrowanie) oraz tymi samymi argumentami (`-k klucz.txt`, `-i szyfrogram.txt`, `-o tekst_odszyfrowany.txt`). Program odszyfrował tekst zaszyfrowany, używając odwrotnego mapowania z klucza. Wynikiem jest tekst odszyfrowany, który został zapisany do pliku `tekst_odszyfrowany.txt`. Tekst ten jest identyczny z oryginalnym tekstem jawnym, z wyjątkiem tego, że wszystkie litery zostały zamienione na wielkie, a znaki niebędące literami (np. spacje, znaki interpunkcyjne) zostały usunięte.
 
 ### Zadanie 2
 
@@ -66,6 +144,13 @@ IS 2
 SI 1  
 SA 1  
 ...  
+
+#### Implementacja
+
+Ze względu na fakt, że zadania 1-4 są ze sobą powiązane i polegają na rozbudowie jednego programu, zdecydowaliśmy się na umieszczenie kodu źródłowego w osobnej sekcji implementacja, znajdującej się pod zadaniem 4.
+
+#### Wyniki
+
 
 
 ### Zadanie 3
@@ -105,6 +190,13 @@ gdzie:
 - $E_i$ – wartość oczekiwana liczby wystąpień *i*-tego symbolu (*n*-gramu) w tekście,  
 - $n$ – całkowita liczba *n*-gramów w analizowanym tekście.
 
+#### Implementacja
+
+Ze względu na fakt, że zadania 1-4 są ze sobą powiązane i polegają na rozbudowie jednego programu, zdecydowaliśmy się na umieszczenie kodu źródłowego w osobnej sekcji implementacja, znajdującej się pod zadaniem 4.
+
+#### Wyniki
+
+
 
 ### Zadanie 4
 
@@ -112,18 +204,26 @@ Wykonać eksperymenty:
 - Dokonaj obserwacji wyniku testu χ2 dla tekstu jawnego i zaszyfrowanego o różnych długościach.
 - Wiadomo, iż wynik testu może być znacząco zaburzony w przypadku gdy brane są pod uwagę symbole (n-gramy), które rzadko występują w tekście, np w przypadku mono-gramów języka angielskiego są to litery: J, K, Q, X oraz Z (patrz odczytana tablica częstości mono-gramów). Zbadaj wynik testu χ2 w przypadku gdy do wyznaczenia testu pominięte zostaną rzadko występujące n-gramy.
 
+#### Implementacja
+
+Ze względu na fakt, że zadania 1-4 są ze sobą powiązane i polegają na rozbudowie jednego programu, zdecydowaliśmy się na umieszczenie kodu źródłowego w osobnej sekcji implementacja, znajdującej się pod zadaniem 4.
+
+#### Wyniki
+
+
+
 ### Implementacja
 
 **1. Funkcja `Main`**
 
 **Wejście:**
-- `args`: Argumenty przekazane do programu z linii poleceń.
+- `args`: Argumenty przekazane do programu z linii poleceń. Argumenty te określają operacje do wykonania, takie jak szyfrowanie, deszyfrowanie, generowanie statystyk n-gramów oraz obliczanie testu chi-kwadrat.
 
 **Wyjście:**
-- Brak bezpośredniego wyjścia. Program wykonuje operacje na plikach i wyświetla komunikaty w konsoli.
+- Brak bezpośredniego wyjścia. Program wykonuje operacje na plikach i wyświetla komunikaty w konsoli, informujące o postępie i wynikach operacji.
 
 **Opis:**  
-Funkcja `Main` jest punktem wejścia programu. Odczytuje argumenty z linii poleceń, przetwarza je i wywołuje odpowiednie funkcje w zależności od podanych flag. Program obsługuje szyfrowanie, deszyfrowanie, generowanie statystyk n-gramów oraz obliczanie testu chi-kwadrat.
+Funkcja `Main` jest punktem wejścia programu. Odczytuje argumenty z linii poleceń, przetwarza je i wywołuje odpowiednie funkcje w zależności od podanych flag. Program obsługuje szyfrowanie, deszyfrowanie, generowanie statystyk n-gramów oraz obliczanie testu chi-kwadrat. Funkcja sprawdza poprawność przekazanych argumentów i wyświetla komunikat o błędzie, jeśli argumenty są nieprawidłowe.
 
 **Kod:**
 ``` C#
@@ -198,14 +298,14 @@ static void Main(string[] args)
 **2. Funkcja `LoadKey`**
 
 **Wejście:**
-- `filename`: Nazwa pliku zawierającego tablicę podstawieniową.
+- `filename`: Nazwa pliku zawierającego tablicę podstawieniową. Plik ten powinien zawierać mapowanie liter z tekstu jawnego na litery szyfrogramu.
 - `reverse`: Flaga określająca, czy należy odwrócić tablicę podstawieniową (używane przy deszyfrowaniu).
 
 **Wyjście:**
 - `Dictionary<char, char>`: Słownik zawierający mapowanie liter z tekstu jawnego na szyfrogram (lub odwrotnie w przypadku deszyfrowania).
 
 **Opis:**  
-Funkcja `LoadKey` wczytuje tablicę podstawieniową z pliku i tworzy słownik, który mapuje litery z tekstu jawnego na litery szyfrogramu. Jeśli flaga `reverse` jest ustawiona, funkcja odwraca mapowanie, co jest potrzebne przy deszyfrowaniu.
+Funkcja `LoadKey` wczytuje tablicę podstawieniową z pliku i tworzy słownik, który mapuje litery z tekstu jawnego na litery szyfrogramu. Jeśli flaga reverse jest ustawiona, funkcja odwraca mapowanie, co jest potrzebne przy deszyfrowaniu. Funkcja sprawdza również, czy tablica podstawieniowa zawiera dokładnie 26 znaków (dla wszystkich liter alfabetu angielskiego). Jeśli nie, program kończy działanie z komunikatem o błędzie.
 
 **Kod:**
 
@@ -241,14 +341,14 @@ static Dictionary<char, char> LoadKey(string filename, bool reverse)
 **3. Funkcja `ProcessText`**
 
 **Wejście:**
-- `text`: Tekst do przetworzenia (zaszyfrowania lub odszyfrowania).
+- `text`: Tekst do przetworzenia (zaszyfrowania lub odszyfrowania). Tekst ten jest już oczyszczony z niealfabetycznych znaków i zamieniony na wielkie litery.
 - `substitution`: Słownik zawierający mapowanie liter.
 
 **Wyjście:**
 - `string`: Przetworzony tekst (zaszyfrowany lub odszyfrowany).
 
 **Opis:**  
-Funkcja `ProcessText` przyjmuje tekst i słownik mapowania, a następnie zamienia każdą literę w tekście na odpowiadającą jej literę z słownika. Wynikiem jest przetworzony tekst.
+Funkcja `ProcessText` przyjmuje tekst i słownik mapowania, a następnie zamienia każdą literę w tekście na odpowiadającą jej literę z słownika. Wynikiem jest przetworzony tekst. Funkcja wykorzystuje LINQ do przekształcenia każdego znaku w tekście na podstawie mapowania zawartego w słowniku.
 
 **Kod:**
 
@@ -262,14 +362,14 @@ static string ProcessText(string text, Dictionary<char, char> substitution)
 **4. Funkcja `GenerateNGrams`**
 
 **Wejście:**
-- `text`: Tekst do analizy.
+- `text`: Tekst do analizy. Tekst ten jest już oczyszczony z niealfabetycznych znaków i zamieniony na wielkie litery.
 - `n`: Długość n-gramu (1 dla mono-gramów, 2 dla bi-gramów itd.).
 
 **Wyjście:**
 - `Dictionary<string, long>`: Słownik zawierający n-gramy jako klucze i ich liczność jako wartości.
 
 **Opis:**  
-Funkcja `GenerateNGrams` generuje n-gramy z podanego tekstu i zlicza ich występowanie. Wynikiem jest słownik, w którym kluczami są n-gramy, a wartościami ich liczność.
+Funkcja `GenerateNGrams` generuje n-gramy z podanego tekstu i zlicza ich występowanie. Wynikiem jest słownik, w którym kluczami są n-gramy, a wartościami ich liczność. Funkcja iteruje przez tekst, wycina n-gramy o długości `n` i zlicza ich wystąpienia.
 
 **Kod:**
 
@@ -301,7 +401,7 @@ static Dictionary<string, long> GenerateNGrams(string text, int n)
 - Brak bezpośredniego wyjścia. Funkcja zapisuje statystyki do pliku.
 
 **Opis:**  
-Funkcja `SaveNGrams` zapisuje statystyki n-gramów do pliku w formacie tabeli, gdzie każdy wiersz zawiera n-gram i jego liczność.
+Funkcja `SaveNGrams` zapisuje statystyki n-gramów do pliku w formacie tabeli, gdzie każdy wiersz zawiera n-gram i jego liczność. Funkcja sortuje n-gramy malejąco według liczności przed zapisem do pliku.
 
 **Kod:**
 
@@ -328,7 +428,7 @@ static void SaveNGrams(string filename, Dictionary<string, long> nGramCounts)
 - `Dictionary<string, long>`: Słownik zawierający referencyjne n-gramy i ich liczność.
 
 **Opis:**  
-Funkcja `LoadReferenceNGrams` wczytuje referencyjną bazę n-gramów z pliku i zwraca słownik, w którym kluczami są n-gramy, a wartościami ich liczność.
+Funkcja `LoadReferenceNGrams` wczytuje referencyjną bazę n-gramów z pliku i zwraca słownik, w którym kluczami są n-gramy, a wartościami ich liczność. Funkcja również oblicza całkowitą liczbę n-gramów w referencyjnej bazie.
 
 **Kod:**
 
@@ -362,7 +462,7 @@ static Dictionary<string, long> LoadReferenceNGrams(string filename)
 - `double`: Wartość testu chi-kwadrat.
 
 **Opis:**  
-Funkcja `CalculateChiSquare` oblicza wartość testu chi-kwadrat na podstawie obserwowanych i oczekiwanych n-gramów. Wynikiem jest wartość testu chi-kwadrat.
+Funkcja `CalculateChiSquare` oblicza wartość testu chi-kwadrat na podstawie obserwowanych i oczekiwanych n-gramów. Wynikiem jest wartość testu chi-kwadrat, która jest używana do porównania rozkładu n-gramów w tekście z rozkładem referencyjnym. Funkcja oblicza oczekiwaną liczność n-gramów na podstawie proporcji w referencyjnej bazie i porównuje ją z obserwowaną licznością.
 
 **Kod:**
 
