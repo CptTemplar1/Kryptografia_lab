@@ -425,7 +425,44 @@ Ze względu na fakt, że zadania 1-4 są ze sobą powiązane i polegają na rozb
 
 #### Wyniki
 
+W ramach zadania 4 przeprowadziliśmy eksperymenty, aby zaobserwować wyniki testu chi-kwadrat dla tekstu jawnego i zaszyfrowanego o różnych długościach. Szyfrowanie przeprowadziliśmy z wykorzystaniem funkcjonalości programu z zadania 1. Ze względu na długość tekstu, nie przedstawiliśmy go w raporcie, a jedynie umieścilimy informację o ich długości. Poniżej znajdują się wyniki eksperymentów:
 
+**Długość analizowanego tekstu:**
+
+- **Długi tekst jawny:** Tekst składał się z **16159 znaków**
+- **Krótki tekst jawny:** Tekst składał się z **1185 znaków**
+
+**Tabela wyników testu chi-kwadrat**
+
+| Typ n-gramu | Tekst jawny (długi) | Szyfrogram (długi) | Tekst jawny (krótki) | Szyfrogram (krótki) |
+|-------------|---------------------|--------------------|----------------------|---------------------|
+| Mono-gramy  | 379,9119            | 180684,0010        | 50,4818              | 14635,5831          |
+| Bi-gramy    | 3614,9834           | 38883889,6392      | 1084,0064            | 2755717,7049        |
+| Tri-gramy   | 29912,4879          | 1374338013,1173    | 9836,0391            | 118466475,9358      |
+| Quad-gramy  | 410538,8369         | 2059523791,1963    | 86385,1160           | 1084040903,3257     |
+
+**Wnioski:**
+
+Przeprowadzone eksperymenty pokazują, że wartość testu chi-kwadrat rośnie wraz ze wzrostem długości n-gramów oraz po zaszyfrowaniu tekstu. Dla tekstu jawnego wartości testu są niższe, co wskazuje na większą zgodność z referencyjnymi bazami n-gramów. Po zaszyfrowaniu tekstu wartości testu chi-kwadrat znacząco wzrastają, co odzwierciedla losowy rozkład liter w szyfrogramie. Długość analizowanego tekstu również wpływa na wyniki testu. Zakładaliśmy, że w przypadku dłuższego tekstu wartości testu będą bardziej stabilne i zbliżone do referencyjnych baz n-gramów. Wyniki eksperymentów pokazują jednak, że wraz ze wzrostem ilości znaków, otrzymujemy bardziej niestabilne i rozbieżne wyniki testu chi-kwadrat.
+
+**Pominięcie rzadko występujących n-gramów:**
+
+W drugim etapie zadania zbadaliśmy wpływ pominięcia rzadko występujących n-gramów na wyniki testu chi-kwadrat. Z referencyjnych baz n-gramów języka angielskiego usunęliśmy rzadko występujące pozycje (pozostały n-gramy z licznościami nie niższymi niż 100 tysięcy). Następnie ponownie obliczyliśmy test chi-kwadrat dla długiego oraz krótkiego tekstu jawnego i zaszyfrowanego. Wyniki eksperymentu przedstawiamy w poniższej tabeli:
+
+### Tabela wyników testu chi-kwadrat (bez rzadkich n-gramów)
+
+| Typ n-gramu | Tekst jawny (długi) | Szyfrogram (długi) | Tekst jawny (krótki) | Szyfrogram (krótki) |
+|-------------|---------------------|--------------------|----------------------|---------------------|
+| Mono-gramy  | 452,4778            | 4147,9283          | 35,9866              | 330,0803            |
+| Bi-gramy    | 3027,6717           | 28165,8802         | 779,6808             | 3398,6111           |
+| Tri-gramy   | 4463,1387           | 11501,9068         | 2122,0409            | 1042,5702           |
+| Quad-gramy  | 8193,0183           | 12111,8548         | 836,5947             | 961,0000            |
+
+**Wnioski:**
+
+Przeprowadzone eksperymenty wykazały, że usunięcie rzadko występujących n-gramów obniża wartości testu chi-kwadrat w porównaniu do wyników uzyskanych z pełnymi bazami n-gramów. W przypadku tekstu jawnego wartości testu pozostają niższe niż dla szyfrogramów, co sugeruje większą zgodność z bazami referencyjnymi. Po zaszyfrowaniu tekstu wartości testu chi-kwadrat wzrastają, jednak różnice w stosunku do pełnych baz n-gramów są mniej znaczące.
+
+Eliminacja rzadkich n-gramów z baz referencyjnych wpływa na lepsze dopasowanie rozkładów n-gramów w analizowanych tekstach do baz wzorcowych. Test chi-kwadrat nadal pozostaje skutecznym narzędziem analizy statystycznej zarówno dla tekstu jawnego, jak i zaszyfrowanego, a pominięcie rzadkich n-gramów może prowadzić do bardziej stabilnych wyników, zwłaszcza w przypadku krótszych tekstów.
 
 ### Implementacja
 
