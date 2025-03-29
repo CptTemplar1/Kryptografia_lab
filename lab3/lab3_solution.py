@@ -23,26 +23,26 @@ def substitute(text, key):
     return ''.join(key.get(char, char) for char in text)
 
 # Przetwarza plik wejściowy: czyści tekst, szyfruje lub deszyfruje i zapisuje wynik
-def process_file(input_file, output_file, key_file, mode):
+def process_file(input_file, output_file, key_file, encrypt, decrypt):
     with open(input_file, 'r', encoding='utf-8') as f:
         text = f.read()
     
     clean = clean_text(text)
     
-    if mode == 'encrypt':
+    if encrypt:
         key = generate_key()
         transformed = substitute(clean, key)
         with open(key_file, 'w', encoding='utf-8') as kf:
             json.dump(key, kf)
         print(f"Tekst został zaszyfrowany i zapisany do {output_file}. Klucz zapisano w {key_file}.")
-    elif mode == 'decrypt':
+    elif decrypt:
         with open(key_file, 'r', encoding='utf-8') as kf:
             key = json.load(kf)
         inv_key = invert_key(key)
         transformed = substitute(clean, inv_key)
         print(f"Tekst został odszyfrowany i zapisany do {output_file}.")
     else:
-        raise ValueError("Niepoprawny tryb. Użyj 'encrypt' lub 'decrypt'.")
+        raise ValueError("Niepoprawny tryb. Użyj flag -e dla szyfrowania lub -d dla deszyfrowania.")
     
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(transformed)
@@ -50,13 +50,18 @@ def process_file(input_file, output_file, key_file, mode):
 # Główna funkcja obsługująca argumenty wiersza poleceń
 def main():
     parser = argparse.ArgumentParser(description='Szyfr podstawieniowy')
-    parser.add_argument('mode', choices=['encrypt', 'decrypt'], help='Tryb: encrypt (szyfrowanie) lub decrypt (deszyfrowanie)')
-    parser.add_argument('input_file', help='Plik wejściowy z tekstem')
-    parser.add_argument('output_file', help='Plik wyjściowy z wynikiem')
-    parser.add_argument('key_file', help='Plik do zapisania/odczytu klucza')
+    parser.add_argument('-i', required=True, help='Plik wejściowy z tekstem')
+    parser.add_argument('-o', required=True, help='Plik wyjściowy z wynikiem')
+    parser.add_argument('-k', required=True, help='Plik do zapisania/odczytu klucza')
+    parser.add_argument('-e', action='store_true', help='Tryb szyfrowania')
+    parser.add_argument('-d', action='store_true', help='Tryb deszyfrowania')
     
     args = parser.parse_args()
-    process_file(args.input_file, args.output_file, args.key_file, args.mode)
+    
+    if args.e and args.d:
+        raise ValueError("Nie można jednocześnie wybrać trybu szyfrowania i deszyfrowania.")
+    
+    process_file(args.i, args.o, args.k, args.e, args.d)
 
 if __name__ == '__main__':
     main()

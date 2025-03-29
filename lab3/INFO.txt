@@ -1,0 +1,4 @@
+Zadanie 5
+Sprawdzamy jak wygląda wynik testu chi kwadrat dla 10, 100, 1000 iteracji i analizujemy wyniki. Zrobić tabele dla każdego z algorytmów i porównać dla któego z nich otrzymujemy szybciej wynik.
+
+Można też dodać próbę ataku typu bruteForce, żeby zobaczyć jak skuteczne są te algorytmy w porównaniu z tradycyjnymi metodami (bruteforce)
