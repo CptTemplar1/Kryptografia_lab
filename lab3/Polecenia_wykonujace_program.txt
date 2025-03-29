@@ -1,0 +1,6 @@
+Szyfrowanie
+python lab3_solution.py encrypt tekst_jawny.txt szyfrogram.txt klucz.json
+
+Deszyfrowanie
+python lab3_solution.py decrypt szyfrogram.txt tekst_odszyfrowany.txt klucz.json
+
