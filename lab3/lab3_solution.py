@@ -126,12 +126,12 @@ def create_bigram_matrix(text):
     return bigram_matrix
 
 # Funkcja do obliczania logarytmicznej funkcji wiarygodności
-def log_likelihood(bigram_matrix, reference_matrix):
+def log_likelihood(decrypted_bigrams, reference_bigrams):
     log_likelihood = 0.0
     for i in range(26):
         for j in range(26):
-            if reference_matrix[i][j] > 0 and bigram_matrix[i][j] > 0:
-                log_likelihood += bigram_matrix[i][j] * math.log(reference_matrix[i][j])
+            if reference_bigrams[i][j] > 0 and decrypted_bigrams[i][j] > 0:
+                log_likelihood += decrypted_bigrams[i][j] * math.log(reference_bigrams[i][j])
     return log_likelihood
 
 # Funkcja do generowania nowej permutacji przez zamianę dwóch znaków
@@ -144,7 +144,6 @@ def generate_new_key(current_key):
 
 # Implementacja algorytmu Metropolis-Hastings dla kryptoanalizy
 def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000):
-    # Inicjalizacja losowego klucza
     current_key = generate_key()
     current_inv_key = invert_key(current_key)
     current_decrypted = substitute(cipher_text, current_inv_key)
@@ -155,30 +154,22 @@ def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000)
     best_log_likelihood = current_log_likelihood
     
     for t in range(iterations):
-        # Generowanie nowego klucza
         new_key = generate_new_key(current_key)
         new_inv_key = invert_key(new_key)
         new_decrypted = substitute(cipher_text, new_inv_key)
         new_bigrams = create_bigram_matrix(new_decrypted)
         new_log_likelihood = log_likelihood(new_bigrams, reference_bigrams)
         
-        # Obliczanie współczynnika akceptacji
-        if current_log_likelihood == 0:
-            acceptance_ratio = 1.0
-        else:
-            acceptance_ratio = math.exp(new_log_likelihood - current_log_likelihood)
+        acceptance_ratio = min(1.0, math.exp(new_log_likelihood - current_log_likelihood))
         
-        # Akceptacja lub odrzucenie nowego klucza
         if random.random() <= acceptance_ratio:
             current_key = new_key
             current_log_likelihood = new_log_likelihood
             
-            # Aktualizacja najlepszego klucza
             if new_log_likelihood > best_log_likelihood:
                 best_key = new_key
                 best_log_likelihood = new_log_likelihood
         
-        # Wypisywanie postępu co 1000 iteracji
         if t % 1000 == 0:
             print(f"Iteracja {t}: aktualne log-wiarygodność = {current_log_likelihood:.2f}, najlepsze = {best_log_likelihood:.2f}")
     
@@ -194,6 +185,8 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
     with open(reference_file, 'r', encoding='utf-8') as f:
         reference_text = clean_text(f.read())
     reference_bigrams = create_bigram_matrix(reference_text)
+    # Dodaj 1 aby uniknąć log(0) - smoothing
+    reference_bigrams += 1
     
     # Normalizacja macierzy bigramów
     reference_bigrams += 1  # Dodanie 1 aby uniknąć zer
