@@ -3,3 +3,6 @@ python lab3_solution.py -e -i tekst_jawny.txt -o szyfrogram.txt -k klucz.json
 
 Deszyfrowanie:
 python lab3_solution.py -d -i szyfrogram.txt -o tekst_odszyfrowany.txt -k klucz.json
+
+BruteForce:
+python lab3_solution.py -a bf -i szyfrogram.txt -o tekst_odszyfrowany_brute_forcem.txt
