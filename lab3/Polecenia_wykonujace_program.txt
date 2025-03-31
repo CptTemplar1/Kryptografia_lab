@@ -1,5 +1,17 @@
 Szyfrowanie:
-python lab3_solution.py -e -i tekst_jawny.txt -o szyfrogram.txt -k klucz.json
+python lab3_solution.py -e -i tekst_jawny.txt -o szyfrogram.txt -k klucz.json -g
+python lab3_solution.py -e -i tekst_jawny.txt -o szyfrogram.txt -k klucz.json 
 
 Deszyfrowanie:
 python lab3_solution.py -d -i szyfrogram.txt -o tekst_odszyfrowany.txt -k klucz.json
+
+BruteForce:
+python lab3_solution.py -a bf -i szyfrogram.txt -o tekst_odszyfrowany_brute_forcem.txt
+
+Zadanie 2:
+python lab3_solution.py -i szyfrogram.txt -o wynik_3.txt -a mh -r tekst_jawny.txt
+
+Plik referencyjny:
+https://www.gutenberg.org/files/2701/old/moby10b.txt
+
+
