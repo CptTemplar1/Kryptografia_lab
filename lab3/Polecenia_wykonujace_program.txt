@@ -17,4 +17,7 @@ https://www.gutenberg.org/files/2701/old/moby10b.txt
 Zadanie 3:
 python lab3_solution.py -a sa -i szyfrogram.txt -o wynik_3.txt -r reference.txt --iterations 20000
 
+Zadanie 4:
+python lab3_solution.py -a ga -i szyfrogram.txt -o wynik_4.txt -r reference.txt --population-size 200 --crossover-prob 0.9 --mutation-prob 0.1 --iterations 5000
+
 
