@@ -212,6 +212,113 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
     print(f"Zakończono atak Metropolis-Hastings. Znaleziono klucz z log-wiarygodnością: {best_log_likelihood:.2f}")
     print(f"Zapisano odszyfrowany tekst do {output_file} i klucz do {key_output_file}")
 
+###########################################################################################################################################################
+#ZADANIE 3
+
+def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000.0, cooling_rate=0.99, iterations=10000):
+    """
+    Perform simulated annealing attack on substitution cipher.
+    
+    Args:
+        cipher_text (str): Encrypted text to attack
+        reference_bigrams (np.array): Reference bigram frequencies (26x26 matrix)
+        initial_temp (float): Initial temperature
+        cooling_rate (float): Cooling rate (0 < rate < 1)
+        iterations (int): Number of iterations
+        
+    Returns:
+        tuple: (best_key, best_score) where best_key is the found key and best_score is its score
+    """
+    # Initialize with random key
+    current_key = generate_key()
+    current_inv_key = invert_key(current_key)
+    current_decrypted = substitute(cipher_text, current_inv_key)
+    current_bigrams = create_bigram_matrix(current_decrypted)
+    current_score = log_likelihood(current_bigrams, reference_bigrams)
+    
+    best_key = current_key
+    best_score = current_score
+    
+    temp = initial_temp
+    
+    for i in range(iterations):
+        # Generate new key by swapping two random letters
+        new_key = generate_new_key(current_key)
+        new_inv_key = invert_key(new_key)
+        new_decrypted = substitute(cipher_text, new_inv_key)
+        new_bigrams = create_bigram_matrix(new_decrypted)
+        new_score = log_likelihood(new_bigrams, reference_bigrams)
+        
+        # Calculate score difference
+        score_diff = new_score - current_score
+        
+        # Acceptance probability
+        if score_diff > 0:
+            # Always accept better solutions
+            accept = True
+        else:
+            # Accept worse solutions with some probability
+            accept_prob = math.exp(score_diff / temp)
+            accept = random.random() < accept_prob
+        
+        if accept:
+            current_key = new_key
+            current_score = new_score
+            
+            if current_score > best_score:
+                best_key = current_key
+                best_score = current_score
+        
+        # Cool down
+        temp *= cooling_rate
+        
+        if i % 1000 == 0:
+            print(f"Iteration {i}: temp={temp:.2f}, current_score={current_score:.2f}, best_score={best_score:.2f}")
+    
+    return best_key, best_score
+
+# Funkcja do ataku symulowanego wyżarzania
+def sa_attack(input_file, output_file, reference_file, iterations=10000, initial_temp=1000.0, cooling_rate=0.99):
+    """
+    Perform simulated annealing attack on a ciphertext file.
+    """
+    # Read ciphertext
+    with open(input_file, 'r', encoding='utf-8') as f:
+        cipher_text = clean_text(f.read())
+    
+    # Read reference text and create bigram matrix
+    with open(reference_file, 'r', encoding='utf-8') as f:
+        reference_text = clean_text(f.read())
+    reference_bigrams = create_bigram_matrix(reference_text)
+    
+    # Add smoothing to avoid zeros
+    reference_bigrams += 1
+    # Normalize bigram matrix
+    row_sums = reference_bigrams.sum(axis=1)
+    reference_bigrams = reference_bigrams / row_sums[:, np.newaxis]
+    
+    # Run simulated annealing
+    best_key, best_score = simulated_annealing_attack(
+        cipher_text, reference_bigrams, initial_temp, cooling_rate, iterations)
+    
+    # Decrypt with best key
+    best_inv_key = invert_key(best_key)
+    decrypted_text = substitute(cipher_text, best_inv_key)
+    
+    # Save results
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(decrypted_text)
+    
+    key_output_file = output_file + '.JSON'
+    with open(key_output_file, 'w', encoding='utf-8') as kf:
+        json.dump(best_key, kf)
+    
+    print(f"Simulated annealing attack completed. Best score: {best_score:.2f}")
+    print(f"Decrypted text saved to {output_file}, key saved to {key_output_file}")
+
+
+###########################################################################################################################################################
+
 # Główna funkcja obsługująca argumenty wiersza poleceń
 def main():
     parser = argparse.ArgumentParser(description='Szyfr podstawieniowy')
@@ -220,9 +327,12 @@ def main():
     parser.add_argument('-k', '--key', help='Plik do zapisania/odczytu klucza')
     parser.add_argument('-e', '--encrypt', action='store_true', help='Tryb szyfrowania')
     parser.add_argument('-d', '--decrypt', action='store_true', help='Tryb deszyfrowania')
-    parser.add_argument('-a', '--attack', choices=['bf', 'mh'], help='Tryb ataku (bf - brute force, mh - Metropolis-Hastings)')
-    parser.add_argument('-r', '--reference', help='Plik z tekstem referencyjnym (wymagany dla ataku MH)')
-    parser.add_argument('--iterations', type=int, default=10000, help='Liczba iteracji dla ataku MH')
+    parser.add_argument('-a', '--attack', choices=['bf', 'mh', 'sa'], 
+                       help='Tryb ataku (bf - brute force, mh - Metropolis-Hastings, sa - Simulated Annealing)')
+    parser.add_argument('-r', '--reference', help='Plik z tekstem referencyjnym (wymagany dla ataków MH i SA)')
+    parser.add_argument('--iterations', type=int, default=10000, help='Liczba iteracji dla ataków MH i SA')
+    parser.add_argument('--initial-temp', type=float, default=1000.0, help='Początkowa temperatura dla ataku SA')
+    parser.add_argument('--cooling-rate', type=float, default=0.99, help='Współczynnik chłodzenia dla ataku SA')
     parser.add_argument('-g', '--generate-key', action='store_true', 
                        help='Wymuś generację nowego klucza (tylko dla szyfrowania)')
     
@@ -234,6 +344,11 @@ def main():
         if not args.reference:
             raise ValueError("Plik referencyjny jest wymagany dla ataku Metropolis-Hastings.")
         mh_attack(args.input, args.output, args.reference, args.iterations)
+    elif args.attack == 'sa':
+        if not args.reference:
+            raise ValueError("Plik referencyjny jest wymagany dla ataku Symulowanego Wyżarzania.")
+        sa_attack(args.input, args.output, args.reference, args.iterations, 
+                 args.initial_temp, args.cooling_rate)
     else:
         if args.encrypt and args.decrypt:
             raise ValueError("Nie można jednocześnie wybrać trybu szyfrowania i deszyfrowania.")

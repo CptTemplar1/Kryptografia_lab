@@ -9,9 +9,12 @@ BruteForce:
 python lab3_solution.py -a bf -i szyfrogram.txt -o tekst_odszyfrowany_brute_forcem.txt
 
 Zadanie 2:
-python lab3_solution.py -i szyfrogram.txt -o wynik_3.txt -a mh -r tekst_jawny.txt
+python lab3_solution.py -i szyfrogram.txt -o wynik_2.txt -a mh -r tekst_jawny.txt
 
 Plik referencyjny:
 https://www.gutenberg.org/files/2701/old/moby10b.txt
+
+Zadanie 3:
+python lab3_solution.py -a sa -i szyfrogram.txt -o wynik_3.txt -r reference.txt --iterations 20000
 
 
