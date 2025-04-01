@@ -318,8 +318,202 @@ def sa_attack(input_file, output_file, reference_file, iterations=10000, initial
 
 
 ###########################################################################################################################################################
+#ZADANIE 4
+def fitness_function(decrypted_text, reference_bigrams):
+    """
+    Calculate fitness score using log-likelihood of bigram frequencies
+    """
+    decrypted_bigrams = create_bigram_matrix(decrypted_text)
+    return log_likelihood(decrypted_bigrams, reference_bigrams)
 
-# Główna funkcja obsługująca argumenty wiersza poleceń
+def roulette_wheel_selection(population, fitness_scores):
+    """
+    Perform roulette wheel selection
+    """
+    total_fitness = sum(fitness_scores)
+    if total_fitness == 0:
+        return random.choice(population)
+    probabilities = [score/total_fitness for score in fitness_scores]
+    r = random.random()
+    cumulative = 0
+    for i, prob in enumerate(probabilities):
+        cumulative += prob
+        if r <= cumulative:
+            return population[i]
+    return population[-1]
+
+def single_point_crossover(parent1, parent2):
+    """
+    Perform single-point crossover between two keys
+    """
+    letters = string.ascii_uppercase
+    child1 = parent1.copy()
+    child2 = parent2.copy()
+    
+    # Choose random crossover point (1-25)
+    crossover_point = random.randint(1, 24)
+    
+    # Get the letters after crossover point from each parent
+    parent1_letters = {k: v for k, v in parent1.items() if ord(k) - ord('A') >= crossover_point}
+    parent2_letters = {k: v for k, v in parent2.items() if ord(k) - ord('A') >= crossover_point}
+    
+    # Create mapping for conflicting letters
+    conflict_map1 = {}
+    conflict_map2 = {}
+    
+    # Handle conflicts in child1 (parent1 + parent2's tail)
+    for letter in parent2_letters:
+        new_val = parent2_letters[letter]
+        original_val = parent1[letter]
+        
+        # Find if new_val is already mapped to something else
+        for k, v in child1.items():
+            if v == new_val and k != letter:
+                conflict_map1[k] = original_val
+                break
+        
+        child1[letter] = new_val
+    
+    # Resolve conflicts in child1
+    for k, v in conflict_map1.items():
+        child1[k] = v
+    
+    # Handle conflicts in child2 (parent2 + parent1's tail)
+    for letter in parent1_letters:
+        new_val = parent1_letters[letter]
+        original_val = parent2[letter]
+        
+        # Find if new_val is already mapped to something else
+        for k, v in child2.items():
+            if v == new_val and k != letter:
+                conflict_map2[k] = original_val
+                break
+        
+        child2[letter] = new_val
+    
+    # Resolve conflicts in child2
+    for k, v in conflict_map2.items():
+        child2[k] = v
+    
+    return child1, child2
+
+def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100, 
+                           crossover_prob=0.8, mutation_prob=0.2, 
+                           max_generations=1000, max_std_dev=0.1):
+    """
+    Perform genetic algorithm attack on substitution cipher
+    """
+    # Initialize population
+    population = [generate_key() for _ in range(population_size)]
+    
+    # Evaluate initial population
+    fitness_scores = []
+    for key in population:
+        inv_key = invert_key(key)
+        decrypted = substitute(cipher_text, inv_key)
+        score = fitness_function(decrypted, reference_bigrams)
+        fitness_scores.append(score)
+    
+    best_key = population[np.argmax(fitness_scores)]
+    best_score = max(fitness_scores)
+    
+    for generation in range(max_generations):
+        new_population = []
+        
+        # Calculate population statistics
+        mean_fitness = np.mean(fitness_scores)
+        std_dev = np.std(fitness_scores)
+        
+        # Check convergence
+        if std_dev < max_std_dev:
+            print(f"Converged at generation {generation} with std dev {std_dev:.4f}")
+            break
+        
+        # Create next generation
+        while len(new_population) < population_size:
+            # Selection
+            parent1 = roulette_wheel_selection(population, fitness_scores)
+            parent2 = roulette_wheel_selection(population, fitness_scores)
+            
+            # Crossover
+            if random.random() < crossover_prob:
+                child1, child2 = single_point_crossover(parent1, parent2)
+            else:
+                child1, child2 = parent1.copy(), parent2.copy()
+            
+            # Mutation
+            if random.random() < mutation_prob:
+                child1 = generate_new_key(child1)
+            if random.random() < mutation_prob:
+                child2 = generate_new_key(child2)
+            
+            new_population.extend([child1, child2])
+        
+        # Ensure population size stays constant
+        population = new_population[:population_size]
+        
+        # Evaluate new population
+        fitness_scores = []
+        for key in population:
+            inv_key = invert_key(key)
+            decrypted = substitute(cipher_text, inv_key)
+            score = fitness_function(decrypted, reference_bigrams)
+            fitness_scores.append(score)
+        
+        # Update best key
+        current_best_idx = np.argmax(fitness_scores)
+        if fitness_scores[current_best_idx] > best_score:
+            best_key = population[current_best_idx]
+            best_score = fitness_scores[current_best_idx]
+        
+        if generation % 100 == 0:
+            print(f"Generation {generation}: Best score = {best_score:.2f}, Mean score = {mean_fitness:.2f}, Std dev = {std_dev:.4f}")
+    
+    return best_key, best_score
+
+def ga_attack(input_file, output_file, reference_file, population_size=100, 
+             crossover_prob=0.8, mutation_prob=0.2, max_generations=1000, 
+             max_std_dev=0.1):
+    """
+    Perform genetic algorithm attack on a ciphertext file
+    """
+    # Read ciphertext
+    with open(input_file, 'r', encoding='utf-8') as f:
+        cipher_text = clean_text(f.read())
+    
+    # Read reference text and create bigram matrix
+    with open(reference_file, 'r', encoding='utf-8') as f:
+        reference_text = clean_text(f.read())
+    reference_bigrams = create_bigram_matrix(reference_text)
+    
+    # Add smoothing and normalize
+    reference_bigrams += 1
+    row_sums = reference_bigrams.sum(axis=1)
+    reference_bigrams = reference_bigrams / row_sums[:, np.newaxis]
+    
+    # Run genetic algorithm
+    best_key, best_score = genetic_algorithm_attack(
+        cipher_text, reference_bigrams, population_size, crossover_prob,
+        mutation_prob, max_generations, max_std_dev)
+    
+    # Decrypt with best key
+    best_inv_key = invert_key(best_key)
+    decrypted_text = substitute(cipher_text, best_inv_key)
+    
+    # Save results
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(decrypted_text)
+    
+    key_output_file = output_file + '.JSON'
+    with open(key_output_file, 'w', encoding='utf-8') as kf:
+        json.dump(best_key, kf)
+    
+    print(f"Genetic algorithm attack completed. Best score: {best_score:.2f}")
+    print(f"Decrypted text saved to {output_file}, key saved to {key_output_file}")
+
+
+###########################################################################################################################################################
+# Główna funkcja MAIN obsługująca argumenty wiersza poleceń
 def main():
     parser = argparse.ArgumentParser(description='Szyfr podstawieniowy')
     parser.add_argument('-i', '--input', required=True, help='Plik wejściowy z tekstem')
@@ -327,12 +521,16 @@ def main():
     parser.add_argument('-k', '--key', help='Plik do zapisania/odczytu klucza')
     parser.add_argument('-e', '--encrypt', action='store_true', help='Tryb szyfrowania')
     parser.add_argument('-d', '--decrypt', action='store_true', help='Tryb deszyfrowania')
-    parser.add_argument('-a', '--attack', choices=['bf', 'mh', 'sa'], 
-                       help='Tryb ataku (bf - brute force, mh - Metropolis-Hastings, sa - Simulated Annealing)')
-    parser.add_argument('-r', '--reference', help='Plik z tekstem referencyjnym (wymagany dla ataków MH i SA)')
+    parser.add_argument('-a', '--attack', choices=['bf', 'mh', 'sa', 'ga'], 
+                       help='Tryb ataku (bf - brute force, mh - Metropolis-Hastings, sa - Simulated Annealing, ga - Genetic Algorithm)')
+    parser.add_argument('-r', '--reference', help='Plik z tekstem referencyjnym (wymagany dla ataków MH, SA i GA)')
     parser.add_argument('--iterations', type=int, default=10000, help='Liczba iteracji dla ataków MH i SA')
     parser.add_argument('--initial-temp', type=float, default=1000.0, help='Początkowa temperatura dla ataku SA')
     parser.add_argument('--cooling-rate', type=float, default=0.99, help='Współczynnik chłodzenia dla ataku SA')
+    parser.add_argument('--population-size', type=int, default=100, help='Rozmiar populacji dla ataku GA')
+    parser.add_argument('--crossover-prob', type=float, default=0.8, help='Prawdopodobieństwo krzyżowania dla ataku GA')
+    parser.add_argument('--mutation-prob', type=float, default=0.2, help='Prawdopodobieństwo mutacji dla ataku GA')
+    parser.add_argument('--max-std-dev', type=float, default=0.1, help='Maksymalne odchylenie standardowe dla zbieżności w ataku GA')
     parser.add_argument('-g', '--generate-key', action='store_true', 
                        help='Wymuś generację nowego klucza (tylko dla szyfrowania)')
     
@@ -349,6 +547,12 @@ def main():
             raise ValueError("Plik referencyjny jest wymagany dla ataku Symulowanego Wyżarzania.")
         sa_attack(args.input, args.output, args.reference, args.iterations, 
                  args.initial_temp, args.cooling_rate)
+    elif args.attack == 'ga':
+        if not args.reference:
+            raise ValueError("Plik referencyjny jest wymagany dla ataku Algorytmem Genetycznym.")
+        ga_attack(args.input, args.output, args.reference, args.population_size,
+                 args.crossover_prob, args.mutation_prob, args.iterations,
+                 args.max_std_dev)
     else:
         if args.encrypt and args.decrypt:
             raise ValueError("Nie można jednocześnie wybrać trybu szyfrowania i deszyfrowania.")
