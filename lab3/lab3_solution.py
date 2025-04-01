@@ -6,6 +6,9 @@ import math
 from collections import defaultdict
 import numpy as np
 
+###########################################################################################################################################################
+#SZYFROWANIE I DESZYFROWANIE TEKSTU z GENEREOWANYM KLUCZEM
+
 # Generuje losowy klucz szyfrowania (permutacja alfabetu)
 def generate_key():
     letters = list(string.ascii_uppercase)
@@ -60,6 +63,9 @@ def process_file(input_file, output_file, key_file, encrypt, decrypt, generate_n
     
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(transformed)
+
+###########################################################################################################################################################
+# ATAK BRUTE-FORCE NA SZYFR PODSTAWIENIOWY
 
 # Funkcja do ataku brute-force na szyfr podstawieniowy
 def brute_force_attack(input_file, output_file, max_attempts=1000000):
@@ -116,6 +122,9 @@ def brute_force_attack(input_file, output_file, max_attempts=1000000):
         json.dump(best_key, kf)
     print(f"Zapisano odszyfrowany tekst do {output_file} i klucz do {key_output_file}")
 
+###########################################################################################################################################################
+# FUNKCJE POMOCNICZE DLA ZADAŃ 2, 3 i 4
+
 # Funkcja do tworzenia macierzy bigramów z tekstu
 def create_bigram_matrix(text):
     bigram_matrix = np.zeros((26, 26))
@@ -141,6 +150,9 @@ def generate_new_key(current_key):
     i, j = random.sample(range(26), 2)
     new_key[letters[i]], new_key[letters[j]] = new_key[letters[j]], new_key[letters[i]]
     return new_key
+
+###########################################################################################################################################################
+# ZADANIE 2 (Metropolis-Hastings)
 
 # Implementacja algorytmu Metropolis-Hastings dla kryptoanalizy
 def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000):
@@ -213,7 +225,7 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
     print(f"Zapisano odszyfrowany tekst do {output_file} i klucz do {key_output_file}")
 
 ###########################################################################################################################################################
-#ZADANIE 3
+# ZADANIE 3 (Simulated Annealing)
 
 def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000.0, cooling_rate=0.99, iterations=10000):
     """
@@ -318,7 +330,8 @@ def sa_attack(input_file, output_file, reference_file, iterations=10000, initial
 
 
 ###########################################################################################################################################################
-#ZADANIE 4
+# ZADANIE 4 (Algorytm Genetyczny)
+
 def fitness_function(decrypted_text, reference_bigrams):
     """
     Calculate fitness score using log-likelihood of bigram frequencies
@@ -513,7 +526,8 @@ def ga_attack(input_file, output_file, reference_file, population_size=100,
 
 
 ###########################################################################################################################################################
-# Główna funkcja MAIN obsługująca argumenty wiersza poleceń
+# GŁÓWNA FUNKCJA MAIN Z OBSŁUGĄ ARGUMENTÓW WEJŚCIOWYCH
+
 def main():
     parser = argparse.ArgumentParser(description='Szyfr podstawieniowy')
     parser.add_argument('-i', '--input', required=True, help='Plik wejściowy z tekstem')
