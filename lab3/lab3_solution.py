@@ -9,7 +9,8 @@ import numpy as np
 ###########################################################################################################################################################
 #SZYFROWANIE I DESZYFROWANIE TEKSTU z GENEREOWANYM KLUCZEM
 
-# Generuje losowy klucz szyfrowania (permutacja alfabetu)
+# Generuje losowy klucz szyfrowania jako słownik, gdzie kluczami są litery A-Z, a wartościami są losowe litery A-Z.
+# Ilość możliwości to 26! (permutacja alfabetu), co daje 403291461126605635584000000 (około 4.03 * 10^26) różnych kluczy.
 def generate_key():
     letters = list(string.ascii_uppercase)
     shuffled = letters[:]
@@ -67,8 +68,8 @@ def process_file(input_file, output_file, key_file, encrypt, decrypt, generate_n
 ###########################################################################################################################################################
 # ATAK BRUTE-FORCE NA SZYFR PODSTAWIENIOWY
 
-# Funkcja do ataku brute-force na szyfr podstawieniowy
-def brute_force_attack(input_file, output_file, max_attempts=1000000):
+# Funkcja realizująca atak brute-force na szyfr podstawieniowy. Generuje losowe klucze i oblicza chi-kwadrat dla odszyfrowanego tekstu, aby znaleźć najlepsze dopasowanie do języka angielskiego.
+def brute_force_attack(input_file, output_file, iterations=1000000):
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
     
@@ -86,7 +87,7 @@ def brute_force_attack(input_file, output_file, max_attempts=1000000):
     best_text = ""
     best_key = {}
     
-    for attempt in range(max_attempts):
+    for attempt in range(iterations):
         key = generate_key()
         inv_key = invert_key(key)
         decrypted_text = substitute(cipher_text, inv_key)
@@ -125,7 +126,7 @@ def brute_force_attack(input_file, output_file, max_attempts=1000000):
 ###########################################################################################################################################################
 # FUNKCJE POMOCNICZE DLA ZADAŃ 2, 3 i 4
 
-# Funkcja do tworzenia macierzy bigramów z tekstu
+# Tworzy macierz bigramów (częstotliwości występowania par liter) z tekstu
 def create_bigram_matrix(text):
     bigram_matrix = np.zeros((26, 26))
     for i in range(len(text)-1):
@@ -134,7 +135,7 @@ def create_bigram_matrix(text):
         bigram_matrix[current][next_char] += 1
     return bigram_matrix
 
-# Funkcja do obliczania logarytmicznej funkcji wiarygodności
+# Oblicza logarytmiczną funkcję wiarygodności, porównując bigramy tekstu odszyfrowanego z referencyjnymi
 def log_likelihood(decrypted_bigrams, reference_bigrams):
     log_likelihood = 0.0
     for i in range(26):
@@ -143,7 +144,7 @@ def log_likelihood(decrypted_bigrams, reference_bigrams):
                 log_likelihood += decrypted_bigrams[i][j] * math.log(reference_bigrams[i][j])
     return log_likelihood
 
-# Funkcja do generowania nowej permutacji przez zamianę dwóch znaków
+# Generuje nowy klucz przez zamianę dwóch losowych liter w obecnym kluczu (używane w MH i SA)
 def generate_new_key(current_key):
     letters = list(string.ascii_uppercase)
     new_key = current_key.copy()
@@ -154,7 +155,7 @@ def generate_new_key(current_key):
 ###########################################################################################################################################################
 # ZADANIE 2 (Metropolis-Hastings)
 
-# Implementacja algorytmu Metropolis-Hastings dla kryptoanalizy
+# Implementacja algorytmu Metropolis-Hastings. Losowo przeszukuje przestrzeń kluczy, akceptując lepsze rozwiązania i czasem gorsze (zależnie od prawdopodobieństwa).
 def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000):
     current_key = generate_key()
     current_inv_key = invert_key(current_key)
@@ -187,33 +188,26 @@ def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000)
     
     return best_key, best_log_likelihood
 
-# Funkcja do ataku Metropolis-Hastings
+# Funkcja służąca do wywołania ataku Metropolis-Hastings
 def mh_attack(input_file, output_file, reference_file, iterations=10000):
-    # Wczytanie szyfrogramu
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
     
-    # Wczytanie tekstu referencyjnego i tworzenie macierzy bigramów
     with open(reference_file, 'r', encoding='utf-8') as f:
         reference_text = clean_text(f.read())
     reference_bigrams = create_bigram_matrix(reference_text)
-    # Dodaj 1 aby uniknąć log(0) - smoothing
-    reference_bigrams += 1
+    reference_bigrams += 1   # Dodaj 1 aby uniknąć log(0) - smoothing
     
-    # Normalizacja macierzy bigramów
     reference_bigrams += 1  # Dodanie 1 aby uniknąć zer
     row_sums = reference_bigrams.sum(axis=1)
     reference_bigrams = reference_bigrams / row_sums[:, np.newaxis]
     
-    # Uruchomienie algorytmu Metropolis-Hastings
     best_key, best_log_likelihood = metropolis_hastings_attack(
         cipher_text, reference_bigrams, iterations)
     
-    # Odszyfrowanie tekstu najlepszym kluczem
     best_inv_key = invert_key(best_key)
     decrypted_text = substitute(cipher_text, best_inv_key)
     
-    # Zapis wyników
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(decrypted_text)
     
@@ -227,21 +221,8 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
 ###########################################################################################################################################################
 # ZADANIE 3 (Simulated Annealing)
 
+# Implementacja ataku symulowanego wyżarzania dla szyfru podstawieniowego. Stopniowo "schładza" system, redukując prawdopodobieństwo akceptacji gorszych rozwiązań w miarę postępu iteracji.
 def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000.0, cooling_rate=0.99, iterations=10000):
-    """
-    Perform simulated annealing attack on substitution cipher.
-    
-    Args:
-        cipher_text (str): Encrypted text to attack
-        reference_bigrams (np.array): Reference bigram frequencies (26x26 matrix)
-        initial_temp (float): Initial temperature
-        cooling_rate (float): Cooling rate (0 < rate < 1)
-        iterations (int): Number of iterations
-        
-    Returns:
-        tuple: (best_key, best_score) where best_key is the found key and best_score is its score
-    """
-    # Initialize with random key
     current_key = generate_key()
     current_inv_key = invert_key(current_key)
     current_decrypted = substitute(cipher_text, current_inv_key)
@@ -254,22 +235,17 @@ def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000
     temp = initial_temp
     
     for i in range(iterations):
-        # Generate new key by swapping two random letters
         new_key = generate_new_key(current_key)
         new_inv_key = invert_key(new_key)
         new_decrypted = substitute(cipher_text, new_inv_key)
         new_bigrams = create_bigram_matrix(new_decrypted)
         new_score = log_likelihood(new_bigrams, reference_bigrams)
         
-        # Calculate score difference
         score_diff = new_score - current_score
         
-        # Acceptance probability
         if score_diff > 0:
-            # Always accept better solutions
             accept = True
         else:
-            # Accept worse solutions with some probability
             accept_prob = math.exp(score_diff / temp)
             accept = random.random() < accept_prob
         
@@ -281,43 +257,32 @@ def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000
                 best_key = current_key
                 best_score = current_score
         
-        # Cool down
-        temp *= cooling_rate
+        temp *= cooling_rate # Stopniowe chłodzenie
         
         if i % 1000 == 0:
             print(f"Iteration {i}: temp={temp:.2f}, current_score={current_score:.2f}, best_score={best_score:.2f}")
     
     return best_key, best_score
 
-# Funkcja do ataku symulowanego wyżarzania
+# Funkcja służąca do wywołania ataku symulowanego wyżarzania
 def sa_attack(input_file, output_file, reference_file, iterations=10000, initial_temp=1000.0, cooling_rate=0.99):
-    """
-    Perform simulated annealing attack on a ciphertext file.
-    """
-    # Read ciphertext
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
     
-    # Read reference text and create bigram matrix
     with open(reference_file, 'r', encoding='utf-8') as f:
         reference_text = clean_text(f.read())
     reference_bigrams = create_bigram_matrix(reference_text)
     
-    # Add smoothing to avoid zeros
     reference_bigrams += 1
-    # Normalize bigram matrix
     row_sums = reference_bigrams.sum(axis=1)
     reference_bigrams = reference_bigrams / row_sums[:, np.newaxis]
     
-    # Run simulated annealing
     best_key, best_score = simulated_annealing_attack(
         cipher_text, reference_bigrams, initial_temp, cooling_rate, iterations)
     
-    # Decrypt with best key
     best_inv_key = invert_key(best_key)
     decrypted_text = substitute(cipher_text, best_inv_key)
     
-    # Save results
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(decrypted_text)
     
@@ -325,24 +290,20 @@ def sa_attack(input_file, output_file, reference_file, iterations=10000, initial
     with open(key_output_file, 'w', encoding='utf-8') as kf:
         json.dump(best_key, kf)
     
-    print(f"Simulated annealing attack completed. Best score: {best_score:.2f}")
-    print(f"Decrypted text saved to {output_file}, key saved to {key_output_file}")
+    print(f"Atak symulowanego wyżarzania zakończony. Znaleziono klucz z log-wiarygodnością: {best_score:.2f}")
+    print(f"Zapisano odszyfrowany tekst do {output_file} i klucz do {key_output_file}")
 
 
 ###########################################################################################################################################################
 # ZADANIE 4 (Algorytm Genetyczny)
 
+# Ocenia jakość klucza na podstawie dopasowania bigramów do tekstu referencyjnego.
 def fitness_function(decrypted_text, reference_bigrams):
-    """
-    Calculate fitness score using log-likelihood of bigram frequencies
-    """
     decrypted_bigrams = create_bigram_matrix(decrypted_text)
     return log_likelihood(decrypted_bigrams, reference_bigrams)
 
+# Selekcja rodziców w algorytmie genetycznym (ruletka). wybiera rodziców z prawdopodobieństwem proporcjonalnym do ich oceny fitness.
 def roulette_wheel_selection(population, fitness_scores):
-    """
-    Perform roulette wheel selection
-    """
     total_fitness = sum(fitness_scores)
     if total_fitness == 0:
         return random.choice(population)
@@ -355,18 +316,17 @@ def roulette_wheel_selection(population, fitness_scores):
             return population[i]
     return population[-1]
 
+# Krzyżowanie jednopunktowe - łączy dwa klucze rodzicielskie, tworząc nowe klucze-potomków.
 def single_point_crossover(parent1, parent2):
-    """
-    Perform single-point crossover between two keys
-    """
     letters = string.ascii_uppercase
     child1 = parent1.copy()
     child2 = parent2.copy()
     
-    # Choose random crossover point (1-25)
+    # Wybierz punkt krzyżowania losowo w zakresie 1-24
     crossover_point = random.randint(1, 24)
     
     # Get the letters after crossover point from each parent
+    # Zach
     parent1_letters = {k: v for k, v in parent1.items() if ord(k) - ord('A') >= crossover_point}
     parent2_letters = {k: v for k, v in parent2.items() if ord(k) - ord('A') >= crossover_point}
     
@@ -410,6 +370,7 @@ def single_point_crossover(parent1, parent2):
     
     return child1, child2
 
+# Implementacja algorytmu genetycznego, który symuluje proces ewolucji, używając selekcji, krzyżowania i mutacji do generowania coraz lepszych kluczy.
 def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100, 
                            crossover_prob=0.8, mutation_prob=0.2, 
                            max_generations=1000, max_std_dev=0.1):
@@ -484,12 +445,11 @@ def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100
     
     return best_key, best_score
 
+# Funkcja służąca do wywołania ataku genetycznego
 def ga_attack(input_file, output_file, reference_file, population_size=100, 
              crossover_prob=0.8, mutation_prob=0.2, max_generations=1000, 
              max_std_dev=0.1):
-    """
-    Perform genetic algorithm attack on a ciphertext file
-    """
+    
     # Read ciphertext
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
@@ -528,6 +488,7 @@ def ga_attack(input_file, output_file, reference_file, population_size=100,
 ###########################################################################################################################################################
 # GŁÓWNA FUNKCJA MAIN Z OBSŁUGĄ ARGUMENTÓW WEJŚCIOWYCH
 
+# Parsuje argumenty wejściowe i uruchamia odpowiednią funkcję (szyfrowanie, deszyfrowanie lub atak). Istnieje możliwość definiowania parametrów ataku, takich jak liczba iteracji, temperatura początkowa, współczynnik chłodzenia itp.
 def main():
     parser = argparse.ArgumentParser(description='Szyfr podstawieniowy')
     parser.add_argument('-i', '--input', required=True, help='Plik wejściowy z tekstem')
@@ -538,7 +499,7 @@ def main():
     parser.add_argument('-a', '--attack', choices=['bf', 'mh', 'sa', 'ga'], 
                        help='Tryb ataku (bf - brute force, mh - Metropolis-Hastings, sa - Simulated Annealing, ga - Genetic Algorithm)')
     parser.add_argument('-r', '--reference', help='Plik z tekstem referencyjnym (wymagany dla ataków MH, SA i GA)')
-    parser.add_argument('--iterations', type=int, default=10000, help='Liczba iteracji dla ataków MH i SA')
+    parser.add_argument('--iterations', type=int, default=10000, help='Liczba iteracji dla ataków BF, MH i SA')
     parser.add_argument('--initial-temp', type=float, default=1000.0, help='Początkowa temperatura dla ataku SA')
     parser.add_argument('--cooling-rate', type=float, default=0.99, help='Współczynnik chłodzenia dla ataku SA')
     parser.add_argument('--population-size', type=int, default=100, help='Rozmiar populacji dla ataku GA')
@@ -550,6 +511,7 @@ def main():
     
     args = parser.parse_args()
     
+    # Sprawdzenie poprawności argumentów
     if args.attack == 'bf':
         brute_force_attack(args.input, args.output)
     elif args.attack == 'mh':
