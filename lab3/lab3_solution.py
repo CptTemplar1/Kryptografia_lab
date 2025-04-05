@@ -31,33 +31,47 @@ def substitute(text, key):
 
 # Przetwarza plik wejściowy: czyści tekst, szyfruje lub deszyfruje i zapisuje wynik. Pozwala zdecydować, czy klucz ma być generowany na nowo czy wczytany z pliku.
 def process_file(input_file, output_file, key_file, encrypt, decrypt, generate_new_key):
+    # Otwarcie i odczyt pliku wejściowego
     with open(input_file, 'r', encoding='utf-8') as f:
         text = f.read()
     
+    # Usunięcie znaków specjalnych i spacji, konwersja na wielkie litery
     clean = clean_text(text)
     
     if encrypt:
+        # Generowanie nowego klucza szyfrowania
         if generate_new_key:
             key = generate_key()
             print("Wygenerowano nowy klucz szyfrowania.")
+        # Próba wczytania istniejącego klucza
         else:
             try:
                 with open(key_file, 'r', encoding='utf-8') as kf:
                     key = json.load(kf)
                 print(f"Wczytano istniejący klucz z {key_file}.")
+            # Jeśli plik klucza nie istnieje, generujemy nowy klucz
             except FileNotFoundError:
                 print("Błąd: Plik klucza nie istnieje. Generuję nowy klucz.")
                 key = generate_key()
         
+        # Zaszyfrowanie tekstu
         transformed = substitute(clean, key)
+        
+        # Wyświetlenie komunikatu i zapisanie zaszyfrowanego tekstu oraz klucza do pliku
         with open(key_file, 'w', encoding='utf-8') as kf:
             json.dump(key, kf)
         print(f"Tekst został zaszyfrowany i zapisany do {output_file}. Klucz zapisano w {key_file}.")
+    
     elif decrypt:
+        # Wczytanie klucza szyfrowania z pliku
         with open(key_file, 'r', encoding='utf-8') as kf:
             key = json.load(kf)
         inv_key = invert_key(key)
+
+        # Deszyfrowanie tekstu
         transformed = substitute(clean, inv_key)
+        
+        # Wyświetlenie komunikatu i zapisanie odszyfrowanego tekstu do pliku
         print(f"Tekst został odszyfrowany i zapisany do {output_file}.")
     else:
         raise ValueError("Niepoprawny tryb. Użyj flag -e dla szyfrowania lub -d dla deszyfrowania.")
@@ -70,9 +84,11 @@ def process_file(input_file, output_file, key_file, encrypt, decrypt, generate_n
 
 # Funkcja realizująca atak brute-force na szyfr podstawieniowy. Generuje losowe klucze i oblicza chi-kwadrat dla odszyfrowanego tekstu, aby znaleźć najlepsze dopasowanie do języka angielskiego.
 def brute_force_attack(input_file, output_file, iterations=1000000):
+    # Wczytanie zaszyfrowanego tekstu i usunięcie niealfabetycznych znaków
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
     
+    # Częstotliwości liter w języku angielskim (do porównania)
     english_frequencies = {
         'A': 0.08167, 'B': 0.01492, 'C': 0.02782, 'D': 0.04253,
         'E': 0.12702, 'F': 0.02228, 'G': 0.02015, 'H': 0.06094,
@@ -83,37 +99,45 @@ def brute_force_attack(input_file, output_file, iterations=1000000):
         'Y': 0.01974, 'Z': 0.00074
     }
     
+    # Inicjalizacja najlepszego wyniku (najmniejsze chi-kwadrat)
     best_score = float('inf')
     best_text = ""
     best_key = {}
     
+    # Główna pętla ataku brute-force
     for attempt in range(iterations):
         key = generate_key()
         inv_key = invert_key(key)
         decrypted_text = substitute(cipher_text, inv_key)
         
+        # Pominięcie pustego tekstu
         text_length = len(decrypted_text)
         if text_length == 0:
             continue
-            
+
+        # Obliczenie częstotliwości liter w odszyfrowanym tekście
         observed_frequencies = {}
         for letter in string.ascii_uppercase:
             observed_frequencies[letter] = decrypted_text.count(letter) / text_length
         
+        # Obliczenie statystyki chi-kwadrat (im mniejsza, tym lepsze dopasowanie)
         chi_squared = 0.0
         for letter in english_frequencies:
             expected = english_frequencies[letter]
             observed = observed_frequencies.get(letter, 0.0)
             chi_squared += ((observed - expected) ** 2) / expected
         
+        # Aktualizacja najlepszego wyniku
         if chi_squared < best_score:
             best_score = chi_squared
             best_text = decrypted_text
             best_key = key
             
+            # Przerwanie, jeśli wynik jest wystarczająco dobry
             if math.isclose(best_score, 0.0, abs_tol=0.01):
                 break
     
+    # Wypisanie wyników i zapisanie najlepszego odszyfrowanego tekstu i klucza do pliku
     print(f"Znaleziono najlepsze dopasowanie z wynikiem chi-kwadrat: {best_score:.4f}")
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(best_text)
@@ -157,6 +181,7 @@ def generate_new_key(current_key):
 
 # Implementacja algorytmu Metropolis-Hastings. Losowo przeszukuje przestrzeń kluczy, akceptując lepsze rozwiązania i czasem gorsze (zależnie od prawdopodobieństwa).
 def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000):
+    # Inicjalizacja początkowego klucza
     current_key = generate_key()
     current_inv_key = invert_key(current_key)
     current_decrypted = substitute(cipher_text, current_inv_key)
@@ -167,22 +192,27 @@ def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000)
     best_log_likelihood = current_log_likelihood
     
     for t in range(iterations):
+        # Generowanie nowego klucza przez zamianę dwóch liter
         new_key = generate_new_key(current_key)
         new_inv_key = invert_key(new_key)
         new_decrypted = substitute(cipher_text, new_inv_key)
         new_bigrams = create_bigram_matrix(new_decrypted)
         new_log_likelihood = log_likelihood(new_bigrams, reference_bigrams)
         
+        # Obliczenie prawdopodobieństwa akceptacji nowego klucza
         acceptance_ratio = min(1.0, math.exp(new_log_likelihood - current_log_likelihood))
         
+        # Akceptacja nowego klucza z pewnym prawdopodobieństwem
         if random.random() <= acceptance_ratio:
             current_key = new_key
             current_log_likelihood = new_log_likelihood
             
+            # Aktualizacja najlepszego klucza, jeśli nowy jest lepszy
             if new_log_likelihood > best_log_likelihood:
                 best_key = new_key
                 best_log_likelihood = new_log_likelihood
         
+        # Wyświetlanie postępu co 1000 iteracji
         if t % 1000 == 0:
             print(f"Iteracja {t}: aktualne log-wiarygodność = {current_log_likelihood:.2f}, najlepsze = {best_log_likelihood:.2f}")
     
@@ -190,9 +220,11 @@ def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000)
 
 # Funkcja służąca do wywołania ataku Metropolis-Hastings
 def mh_attack(input_file, output_file, reference_file, iterations=10000):
+    # Wczytanie zaszyfrowanego tekstu i jego oczyszczenie
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
     
+    # Wczytanie tekstu referencyjnego i jego oczyszczenie
     with open(reference_file, 'r', encoding='utf-8') as f:
         reference_text = clean_text(f.read())
     reference_bigrams = create_bigram_matrix(reference_text)
@@ -202,12 +234,15 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
     row_sums = reference_bigrams.sum(axis=1)
     reference_bigrams = reference_bigrams / row_sums[:, np.newaxis]
     
+    # Uruchomienie ataku Metropolis-Hastings
     best_key, best_log_likelihood = metropolis_hastings_attack(
         cipher_text, reference_bigrams, iterations)
     
+    # Odszyfrowanie tekstu przy użyciu najlepszego znalezionego klucza
     best_inv_key = invert_key(best_key)
     decrypted_text = substitute(cipher_text, best_inv_key)
     
+    # Zapisanie odszyfrowanego tekstu i klucza do pliku
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(decrypted_text)
     
@@ -215,6 +250,7 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
     with open(key_output_file, 'w', encoding='utf-8') as kf:
         json.dump(best_key, kf)
     
+    # Wypisanie wyników 
     print(f"Zakończono atak Metropolis-Hastings. Znaleziono klucz z log-wiarygodnością: {best_log_likelihood:.2f}")
     print(f"Zapisano odszyfrowany tekst do {output_file} i klucz do {key_output_file}")
 
@@ -223,6 +259,7 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
 
 # Implementacja ataku symulowanego wyżarzania dla szyfru podstawieniowego. Stopniowo "schładza" system, redukując prawdopodobieństwo akceptacji gorszych rozwiązań w miarę postępu iteracji.
 def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000.0, cooling_rate=0.99, iterations=10000):
+    # Inicjalizacja klucza i temperatury
     current_key = generate_key()
     current_inv_key = invert_key(current_key)
     current_decrypted = substitute(cipher_text, current_inv_key)
@@ -235,17 +272,21 @@ def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000
     temp = initial_temp
     
     for i in range(iterations):
+        # Generowanie nowego klucza
         new_key = generate_new_key(current_key)
         new_inv_key = invert_key(new_key)
         new_decrypted = substitute(cipher_text, new_inv_key)
         new_bigrams = create_bigram_matrix(new_decrypted)
         new_score = log_likelihood(new_bigrams, reference_bigrams)
         
+        # Obliczenie różnicy w ocenie
         score_diff = new_score - current_score
         
+        # Decyzja o akceptacji nowego klucza
         if score_diff > 0:
-            accept = True
+            accept = True # Akceptuj, jeśli nowy klucz jest lepszy
         else:
+            # Akceptuj z prawdopodobieństwem zależnym od temperatury
             accept_prob = math.exp(score_diff / temp)
             accept = random.random() < accept_prob
         
@@ -253,12 +294,15 @@ def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000
             current_key = new_key
             current_score = new_score
             
+            # Aktualizacja najlepszego klucza
             if current_score > best_score:
                 best_key = current_key
                 best_score = current_score
         
-        temp *= cooling_rate # Stopniowe chłodzenie
+        # Zmniejszenie temperatury (schładzanie)
+        temp *= cooling_rate
         
+        # Wyświetlanie postępu co 1000 iteracji
         if i % 1000 == 0:
             print(f"Iteration {i}: temp={temp:.2f}, current_score={current_score:.2f}, best_score={best_score:.2f}")
     
@@ -266,23 +310,28 @@ def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000
 
 # Funkcja służąca do wywołania ataku symulowanego wyżarzania
 def sa_attack(input_file, output_file, reference_file, iterations=10000, initial_temp=1000.0, cooling_rate=0.99):
+    # Wczytanie zaszyfrowanego tekstu i jego oczyszczenie
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
     
+    # Wczytanie tekstu referencyjnego i jego oczyszczenie
     with open(reference_file, 'r', encoding='utf-8') as f:
         reference_text = clean_text(f.read())
     reference_bigrams = create_bigram_matrix(reference_text)
     
-    reference_bigrams += 1
+    reference_bigrams += 1 # Dodanie 1 aby uniknąć zer (smoothing)
     row_sums = reference_bigrams.sum(axis=1)
     reference_bigrams = reference_bigrams / row_sums[:, np.newaxis]
     
+    # Uruchomienie ataku Symulowanego Wyżarzania
     best_key, best_score = simulated_annealing_attack(
         cipher_text, reference_bigrams, initial_temp, cooling_rate, iterations)
     
+    # Odszyfrowanie tekstu przy użyciu najlepszego znalezionego klucza
     best_inv_key = invert_key(best_key)
     decrypted_text = substitute(cipher_text, best_inv_key)
     
+    # Zapisanie odszyfrowanego tekstu i klucza do pliku
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(decrypted_text)
     
@@ -290,6 +339,7 @@ def sa_attack(input_file, output_file, reference_file, iterations=10000, initial
     with open(key_output_file, 'w', encoding='utf-8') as kf:
         json.dump(best_key, kf)
     
+    # Wypisanie wyników
     print(f"Atak symulowanego wyżarzania zakończony. Znaleziono klucz z log-wiarygodnością: {best_score:.2f}")
     print(f"Zapisano odszyfrowany tekst do {output_file} i klucz do {key_output_file}")
 
@@ -325,21 +375,20 @@ def single_point_crossover(parent1, parent2):
     # Wybierz punkt krzyżowania losowo w zakresie 1-24
     crossover_point = random.randint(1, 24)
     
-    # Get the letters after crossover point from each parent
-    # Zach
+    # Zamień litery w kluczach rodzicielskich na podstawie punktu krzyżowania
     parent1_letters = {k: v for k, v in parent1.items() if ord(k) - ord('A') >= crossover_point}
     parent2_letters = {k: v for k, v in parent2.items() if ord(k) - ord('A') >= crossover_point}
     
-    # Create mapping for conflicting letters
+    # Stwórz mapowanie dla konfliktowych liter
     conflict_map1 = {}
     conflict_map2 = {}
     
-    # Handle conflicts in child1 (parent1 + parent2's tail)
+    # Obsługuje konflikty w child1 (parent1 + ogon parent2)
     for letter in parent2_letters:
         new_val = parent2_letters[letter]
         original_val = parent1[letter]
         
-        # Find if new_val is already mapped to something else
+        # Sprawdź, czy new_val jest już przypisany do czegoś innego
         for k, v in child1.items():
             if v == new_val and k != letter:
                 conflict_map1[k] = original_val
@@ -347,16 +396,17 @@ def single_point_crossover(parent1, parent2):
         
         child1[letter] = new_val
     
-    # Resolve conflicts in child1
+    # Rozwiązuje konflikty w child1
     for k, v in conflict_map1.items():
         child1[k] = v
     
-    # Handle conflicts in child2 (parent2 + parent1's tail)
+    # To samo co powyżej, ale dla child2
+    # Obsługuje konflikty w child2 (parent2 + ogon parent1)
     for letter in parent1_letters:
         new_val = parent1_letters[letter]
         original_val = parent2[letter]
         
-        # Find if new_val is already mapped to something else
+        # Sprawdź, czy new_val jest już przypisany do czegoś innego
         for k, v in child2.items():
             if v == new_val and k != letter:
                 conflict_map2[k] = original_val
@@ -364,23 +414,18 @@ def single_point_crossover(parent1, parent2):
         
         child2[letter] = new_val
     
-    # Resolve conflicts in child2
+    # Rozwiązuje konflikty w child2
     for k, v in conflict_map2.items():
         child2[k] = v
     
     return child1, child2
 
 # Implementacja algorytmu genetycznego, który symuluje proces ewolucji, używając selekcji, krzyżowania i mutacji do generowania coraz lepszych kluczy.
-def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100, 
-                           crossover_prob=0.8, mutation_prob=0.2, 
-                           max_generations=1000, max_std_dev=0.1):
-    """
-    Perform genetic algorithm attack on substitution cipher
-    """
-    # Initialize population
+def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100, crossover_prob=0.8, mutation_prob=0.2, max_generations=1000, max_std_dev=0.1):
+    # Inicjalizacja populacji losowymi kluczami
     population = [generate_key() for _ in range(population_size)]
     
-    # Evaluate initial population
+    # Obliczenie fitness dla każdego klucza w populacji
     fitness_scores = []
     for key in population:
         inv_key = invert_key(key)
@@ -388,34 +433,35 @@ def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100
         score = fitness_function(decrypted, reference_bigrams)
         fitness_scores.append(score)
     
+    # Znalezienie najlepszego klucza w początkowej populacji
     best_key = population[np.argmax(fitness_scores)]
     best_score = max(fitness_scores)
     
     for generation in range(max_generations):
         new_population = []
         
-        # Calculate population statistics
+        # Obliczenie statystyk populacji
         mean_fitness = np.mean(fitness_scores)
         std_dev = np.std(fitness_scores)
         
-        # Check convergence
+        # Sprawdzenie zbieżności (jeśli odchylenie standardowe jest małe)
         if std_dev < max_std_dev:
             print(f"Converged at generation {generation} with std dev {std_dev:.4f}")
             break
         
-        # Create next generation
+        # Tworzenie nowej populacji
         while len(new_population) < population_size:
-            # Selection
+            # Selekcja rodziców metodą ruletki
             parent1 = roulette_wheel_selection(population, fitness_scores)
             parent2 = roulette_wheel_selection(population, fitness_scores)
             
-            # Crossover
+            # Krzyżowanie z prawdopodobieństwem crossover_prob
             if random.random() < crossover_prob:
                 child1, child2 = single_point_crossover(parent1, parent2)
             else:
                 child1, child2 = parent1.copy(), parent2.copy()
             
-            # Mutation
+            # Mutacja z prawdopodobieństwem mutation_prob
             if random.random() < mutation_prob:
                 child1 = generate_new_key(child1)
             if random.random() < mutation_prob:
@@ -423,10 +469,10 @@ def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100
             
             new_population.extend([child1, child2])
         
-        # Ensure population size stays constant
+        # Przycięcie populacji do oryginalnego rozmiaru
         population = new_population[:population_size]
         
-        # Evaluate new population
+        # Obliczenie fitness dla nowej populacji
         fitness_scores = []
         for key in population:
             inv_key = invert_key(key)
@@ -434,46 +480,45 @@ def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100
             score = fitness_function(decrypted, reference_bigrams)
             fitness_scores.append(score)
         
-        # Update best key
+        # Aktualizacja najlepszego klucza
         current_best_idx = np.argmax(fitness_scores)
         if fitness_scores[current_best_idx] > best_score:
             best_key = population[current_best_idx]
             best_score = fitness_scores[current_best_idx]
         
+        # Wyświetlanie postępu co 100 generacji
         if generation % 100 == 0:
             print(f"Generation {generation}: Best score = {best_score:.2f}, Mean score = {mean_fitness:.2f}, Std dev = {std_dev:.4f}")
     
     return best_key, best_score
 
 # Funkcja służąca do wywołania ataku genetycznego
-def ga_attack(input_file, output_file, reference_file, population_size=100, 
-             crossover_prob=0.8, mutation_prob=0.2, max_generations=1000, 
-             max_std_dev=0.1):
+def ga_attack(input_file, output_file, reference_file, population_size=100, crossover_prob=0.8, mutation_prob=0.2, max_generations=1000, max_std_dev=0.1):
     
-    # Read ciphertext
+    # Wczytanie zaszyfrowanego tekstu i usunięcie niealfabetycznych znaków
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
     
-    # Read reference text and create bigram matrix
+    # Wczytanie tekstu referencyjnego i stworzenie macierzy bigramów
     with open(reference_file, 'r', encoding='utf-8') as f:
         reference_text = clean_text(f.read())
     reference_bigrams = create_bigram_matrix(reference_text)
     
-    # Add smoothing and normalize
+    # Dodanie 1 do macierzy bigramów, aby uniknąć zer (smoothing)
     reference_bigrams += 1
     row_sums = reference_bigrams.sum(axis=1)
     reference_bigrams = reference_bigrams / row_sums[:, np.newaxis]
     
-    # Run genetic algorithm
+    # Uruchomienie algorytmu genetycznego
     best_key, best_score = genetic_algorithm_attack(
         cipher_text, reference_bigrams, population_size, crossover_prob,
         mutation_prob, max_generations, max_std_dev)
     
-    # Decrypt with best key
+    # Odszyfrowanie tekstu za pomocą najlepszego klucza
     best_inv_key = invert_key(best_key)
     decrypted_text = substitute(cipher_text, best_inv_key)
     
-    # Save results
+    # Zapisanie odszyfrowanego tekstu i klucza do pliku
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(decrypted_text)
     
@@ -481,6 +526,7 @@ def ga_attack(input_file, output_file, reference_file, population_size=100,
     with open(key_output_file, 'w', encoding='utf-8') as kf:
         json.dump(best_key, kf)
     
+    # Wypisanie wyników i zapisanie najlepszego odszyfrowanego tekstu i klucza do pliku
     print(f"Genetic algorithm attack completed. Best score: {best_score:.2f}")
     print(f"Decrypted text saved to {output_file}, key saved to {key_output_file}")
 
