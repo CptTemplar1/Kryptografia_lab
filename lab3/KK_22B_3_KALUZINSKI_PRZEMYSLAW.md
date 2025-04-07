@@ -15,13 +15,13 @@ Zrealizować program implementujący podstawieniowy algorytm szyfrowania.
 **1. Funkcja `generate_key`**
 
 **Wejście:**
-- 
+- Brak parametrów wejściowych.
 
 **Wyjście:**
-- 
+- Słownik zawierający 26 par klucz-wartość, gdzie klucze to litery od 'A' do 'Z', a wartości to losowa permutacja tych liter. Każda litera jest mapowana na unikatową inną literę.
 
 **Opis:**  
-Funkcja `generate_key` 
+Funkcja generuje losowy klucz szyfrowania dla szyfru podstawieniowego poprzez przetasowanie liter alfabetu angielskiego. Klucz jest permutacją - nie ma powtórzeń, a każda litera ma unikalne mapowanie. Złożoność przestrzeni kluczy wynosi 26! (~4.03×10^26 możliwości). Funkcja wykorzystuje moduł random do losowego mieszania liter.
 
 **Kod:**
 ``` python
@@ -35,13 +35,13 @@ def generate_key():
 **2. Funkcja `invert_key`**
 
 **Wejście:**
-- 
+- `key` (dict): Słownik reprezentujący klucz szyfrowania, gdzie klucze to oryginalne litery (A-Z), a wartości to ich zaszyfrowane odpowiedniki.
 
 **Wyjście:**
-- 
+- Nowy słownik, gdzie klucze to zaszyfrowane litery, a wartości to oryginalne litery (odwrócone mapowanie).
 
 **Opis:**  
-Funkcja `invert_key` 
+Funkcja tworzy klucz deszyfrowania poprzez odwrócenie par klucz-wartość w słowniku szyfrowania. Implementacja wykorzystuje składnię dictionary comprehension. Jest to operacja deterministyczna - dla tego samego klucza wejściowego zawsze zwróci ten sam klucz wyjściowy.
 
 **Kod:**
 ``` python
@@ -52,13 +52,13 @@ def invert_key(key):
 **3. Funkcja `clean_text`**
 
 **Wejście:**
-- 
+- `text` (str): Dowolny ciąg znaków, który może zawierać litery, cyfry, znaki interpunkcyjne, białe znaki itd.
 
 **Wyjście:**
-- 
+- Ciąg znaków zawierający tylko wielkie litery alfabetu angielskiego (A-Z), pozbawiony wszystkich innych znaków.
 
 **Opis:**  
-Funkcja `clean_text` 
+Funkcja filtruje tekst wejściowy, usuwając wszystkie znaki, które nie są literami (w tym polskie znaki diakrytyczne), a następnie konwertuje pozostałe litery na wielkie. Implementacja używa filter() z funkcją str.isalpha oraz join(). Jest to ważny krok przygotowawczy przed szyfrowaniem/deszyfrowaniem. 
 
 **Kod:**
 ``` python
@@ -69,13 +69,14 @@ def clean_text(text):
 **4. Funkcja `substitute`**
 
 **Wejście:**
-- 
+- `text` (str): Tekst do transformacji (zaszyfrowania lub odszyfrowania).
+- `key` (dict): Słownik mapujący litery na ich zaszyfrowane/odszyfrowane odpowiedniki.
 
 **Wyjście:**
-- 
+- Przekształcony tekst, gdzie każda litera została zamieniona zgodnie z mapowaniem w kluczu.
 
 **Opis:**  
-Funkcja `substitute` 
+Funkcja wykonuje podstawienie znak po znaku zgodnie z podanym kluczem. Dla każdej litery w tekście sprawdza jej mapowanie w kluczu. Jeśli litera nie istnieje w kluczu (np. po wyczyszczeniu tekstu nie powinno się to zdarzyć), pozostawia ją bez zmian. Implementacja używa generator expression z join() dla efektywności.
 
 **Kod:**
 ``` python
@@ -86,13 +87,20 @@ def substitute(text, key):
 **5. Funkcja `process_file`**
 
 **Wejście:**
-- 
+- `input_file` (str): Ścieżka do pliku z tekstem do przetworzenia.
+- `output_file` (str): Ścieżka do pliku wyjściowego.
+- `key_file` (str): Ścieżka do pliku JSON z kluczem.
+- `encrypt` (bool): Flaga aktywująca tryb szyfrowania.
+- `decrypt` (bool): Flaga aktywująca tryb deszyfrowania.
+- `generate_new_key` (bool): Flaga wymuszająca generację nowego klucza.
 
 **Wyjście:**
-- 
+- Zapisuje wynik do pliku wyjściowego.
+- W trybie szyfrowania zapisuje również klucz do pliku JSON.
+- Komunikaty statusu wypisywane na stdout.
 
 **Opis:**  
-Funkcja `process_file` 
+Główna funkcja zarządzająca procesem szyfrowania/deszyfrowania. Czyści tekst wejściowy, w zależności od flag albo szyfruje go (ewentualnie generując nowy klucz), albo deszyfruje przy użyciu podanego klucza. Obsługuje błędy związane z nieistniejącym plikiem klucza. Wykorzystuje funkcje pomocnicze clean_text, substitute i invert_key.
 
 **Kod:**
 ``` python
@@ -149,13 +157,17 @@ def process_file(input_file, output_file, key_file, encrypt, decrypt, generate_n
 **6. Funkcja `brute_force_attack`**
 
 **Wejście:**
-- 
+- `input_file` (str): Ścieżka do pliku z zaszyfrowanym tekstem.
+- `output_file` (str): Ścieżka do pliku wyjściowego.
+- `iterations` (int, opcjonalne): Maksymalna liczba prób (domyślnie 1 000 000).
 
 **Wyjście:**
-- 
+- Zapisuje najlepszy znaleziony tekst do pliku wyjściowego.
+- Zapisuje odpowiadający mu klucz do pliku JSON.
+- Wypisuje statystyki na stdout.
 
 **Opis:**  
-Funkcja `brute_force_attack` 
+Funkcja implementuje atak brute-force na szyfr podstawieniowy. Generuje losowe klucze i ocenia je za pomocą statystyki chi-kwadrat, porównując rozkład liter z typowym rozkładem dla języka angielskiego. Przechowuje najlepsze znalezione rozwiązanie. Może zakończyć się wcześniej, jeśli znajdzie idealne dopasowanie (chi-kwadrat bliskie 0).
 
 **Kod:**
 ``` python
@@ -235,13 +247,13 @@ def brute_force_attack(input_file, output_file, iterations=1000000):
 **1. Funkcja `create_bigram_matrix`**
 
 **Wejście:**
-- 
+- `text` (str): Tekst do analizy (już oczyszczony).
 
 **Wyjście:**
-- 
+- Macierz numpy 26x26 zawierająca zliczenia wystąpień wszystkich możliwych par liter (bigramów).
 
 **Opis:**  
-Funkcja `create_bigram_matrix` 
+Funkcja tworzy macierz częstości występowania par kolejnych liter w tekście. Każda komórka matrix[i][j] reprezentuje liczbę wystąpień pary liter (i-tej i j-tej litery alfabetu). Wykorzystuje indeksowanie ASCII (ord(letter) - ord('A')) do mapowania liter na indeksy. Macierz jest inicjalizowana zerami, a następnie wypełniana podczas jednego przejścia przez tekst. 
 
 **Kod:**
 ``` python
@@ -257,13 +269,14 @@ def create_bigram_matrix(text):
 **2. Funkcja `log_likelihood`**
 
 **Wejście:**
-- 
+- `decrypted_bigrams` (numpy.ndarray): Macierz bigramów tekstu odszyfrowanego.
+- `reference_bigrams` (numpy.ndarray): Macierz bigramów tekstu referencyjnego (znormalizowana).
 
 **Wyjście:**
-- 
+- Wartość logarytmicznej funkcji wiarygodności (float).
 
 **Opis:**  
-Funkcja `log_likelihood` 
+Funkcja oblicza miarę dopasowania tekstu odszyfrowanego do tekstu referencyjnego. Dla każdej pary liter oblicza iloczyn częstości w tekście odszyfrowanym i logarytmu częstości referencyjnej, a następnie sumuje te wartości. Im wyższa wartość, tym lepsze dopasowanie. Używa logarytmów, aby uniknąć underflow w obliczeniach na małych prawdopodobieństwach.
 
 **Kod:**
 ``` python
@@ -279,13 +292,13 @@ def log_likelihood(decrypted_bigrams, reference_bigrams):
 **3. Funkcja `generate_new_key`**
 
 **Wejście:**
-- 
+- `current_key` (dict): Aktualny klucz permutacyjny.
 
 **Wyjście:**
-- 
+- Nowy klucz, który różni się od wejściowego zamianą dwóch losowo wybranych liter.
 
 **Opis:**  
-Funkcja `generate_new_key` 
+Funkcja tworzy nowy klucz poprzez losową transpozycję (zamianę miejscami) dwóch liter w obecnym kluczu. Zachowuje właściwość permutacji - każda litera nadal ma unikalne mapowanie. Jest to tzw. "sąsiedztwo" w przestrzeni przeszukiwania, używane w algorytmach optymalizacji.
 
 **Kod:**
 ``` python
@@ -389,13 +402,16 @@ Należy również zauważyć, iż współczynnik akceptacji nie powinien być wi
 **1. Funkcja `metropolis_hastings_attack`**
 
 **Wejście:**
-- 
+- `cipher_text` (str): Tekst zaszyfrowany.
+- `reference_bigrams` (numpy.ndarray): Znormalizowana macierz bigramów referencyjnych.
+- `iterations` (int): Liczba iteracji algorytmu.
 
 **Wyjście:**
-- 
+- Najlepszy znaleziony klucz (dict).
+- Najlepsza wartość funkcji wiarygodności (float).
 
 **Opis:**  
-Funkcja `metropolis_hastings_attack` 
+Implementacja algorytmu Metropolis-Hastings do łamania szyfru podstawieniowego. W każdej iteracji generuje nowy klucz poprzez małą modyfikację obecnego, a następnie decyduje o jego akceptacji na podstawie poprawy wiarygodności i losowego prawdopodobieństwa. Pozwala na czasowe akceptowanie gorszych rozwiązań, co pomaga uniknąć minima lokalnego. Śledzi najlepsze znalezione rozwiązanie niezależnie od ścieżki przeszukiwania. 
 
 **Kod:**
 ``` python
@@ -441,13 +457,17 @@ def metropolis_hastings_attack(cipher_text, reference_bigrams, iterations=10000)
 **2. Funkcja `mh_attack`**
 
 **Wejście:**
-- 
+- `input_file` (str): Plik z tekstem zaszyfrowanym.
+- `output_file` (str): Plik wyjściowy.
+- `reference_file` (str): Plik z tekstem referencyjnym.
+- `iterations` (int): Liczba iteracji.
 
 **Wyjście:**
-- 
+- Zapisuje odszyfrowany tekst i klucz do plików.
+- Wypisuje statystyki na stdout.
 
 **Opis:**  
-Funkcja `mh_attack` 
+Funkcja przygotowująca dane i uruchamiająca atak Metropolis-Hastings. Wczytuje i czyści teksty, normalizuje macierz bigramów referencyjnych (dodaje 1 i normalizuje do rozkładu prawdopodobieństwa), a następnie wywołuje główny algorytm. Na koniec zapisuje wyniki i wypisuje podsumowanie. 
 
 **Kod:**
 ``` python
@@ -486,8 +506,6 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
     print(f"Zakończono atak Metropolis-Hastings. Znaleziono klucz z log-wiarygodnością: {best_log_likelihood:.2f}")
     print(f"Zapisano odszyfrowany tekst do {output_file} i klucz do {key_output_file}")
 ```
-
-
 
 #### Wyniki
 
@@ -623,14 +641,20 @@ gdzie:
 
 **1. Funkcja `simulated_annealing_attack`**
 
+**12. Funkcja simulated_annealing_attack**
+
 **Wejście:**
-- 
+- `cipher_text` (str): Tekst zaszyfrowany.
+- `reference_bigrams` (numpy.ndarray): Macierz bigramów referencyjnych.
+- `initial_temp` (float): Początkowa temperatura.
+- `cooling_rate` (float): Szybkość schładzania.
+- `iterations` (int): Liczba iteracji.
 
 **Wyjście:**
-- 
+- Najlepszy klucz i wartość funkcji celu.
 
 **Opis:**  
-Funkcja `simulated_annealing_attack` 
+Implementacja symulowanego wyżarzania dla problemu łamania szyfru. Podobna do Metropolis-Hastings, ale z dynamicznie malejącą "temperaturą", która systematycznie zmniejsza prawdopodobieństwo akceptacji gorszych rozwiązań. W wysokich temperaturach eksploruje przestrzeń rozwiązań, w niskich skupia się na eksploatacji najlepszych obszarów. Parametry temperatury mają kluczowe znaczenie dla skuteczności.
 
 **Kod:**
 ``` python
@@ -688,13 +712,14 @@ def simulated_annealing_attack(cipher_text, reference_bigrams, initial_temp=1000
 **2. Funkcja `sa_attack`**
 
 **Wejście:**
-- 
+- `input_file`, `output_file`, `reference_file`: Ścieżki plików.
+- `iterations`, `initial_temp`, `cooling_rate`: Parametry algorytmu.
 
 **Wyjście:**
-- 
+- Zapisuje wyniki do plików.
 
 **Opis:**  
-Funkcja `sa_attack` 
+Funkcja przygotowująca i uruchamiająca symulowane wyżarzanie. Podobna w działaniu do mh_attack, ale z dodatkowymi parametrami kontrolującymi proces schładzania. Normalizuje macierz referencyjną i zarządza zapisem wyników.
 
 **Kod:**
 ``` python
@@ -916,13 +941,14 @@ Ensure: π_best
 **1. Funkcja `fitness_function`**
 
 **Wejście:**
-- 
+- `decrypted_text` (str): Tekst do oceny.
+- `reference_bigrams` (numpy.ndarray): Macierz referencyjna.
 
 **Wyjście:**
-- 
+- Wartość fitness (float).
 
 **Opis:**  
-Funkcja `fitness_function` 
+Funkcja oceny jakości rozwiązania w algorytmie genetycznym. Wykorzystuje logarytmiczną funkcję wiarygodności bigramów. Im wyższa wartość, tym lepiej tekst pasuje do wzorca języka.
 
 **Kod:**
 ``` python
@@ -934,13 +960,14 @@ def fitness_function(decrypted_text, reference_bigrams):
 **2. Funkcja `roulette_wheel_selection`**
 
 **Wejście:**
-- 
+- `population` (list): Populacja kluczy.
+- `fitness_scores` (list): Oceny fitness.
 
 **Wyjście:**
-- 
+- Wybrany klucz (dict).
 
 **Opis:**  
-Funkcja `roulette_wheel_selection` 
+Implementacja selekcji ruletkowej w algorytmie genetycznym. Wybiera klucz z prawdopodobieństwem proporcjonalnym do jego fitness. Obsługuje przypadki skrajne (zerowy sumaryczny fitness).
 
 **Kod:**
 ``` python
@@ -961,13 +988,13 @@ def roulette_wheel_selection(population, fitness_scores):
 **3. Funkcja `single_point_crossover`**
 
 **Wejście:**
-- 
+- `parent1`, `parent2` (dict): Klucze-rodzice.
 
 **Wyjście:**
-- 
+- Dwa nowe klucze (dict).
 
 **Opis:**  
-Funkcja `single_point_crossover` 
+Operator krzyżowania jednopunktowego. Dzieli alfabet na dwie części i łączy odpowiednie fragmenty kluczy rodzicielskich. Zapewnia, że potomkowie są poprawnymi permutacjami poprzez specjalną obsługę konfliktów w mapowaniach. 
 
 **Kod:**
 ``` python
@@ -1028,13 +1055,19 @@ def single_point_crossover(parent1, parent2):
 **4. Funkcja `genetic_algorithm_attack`**
 
 **Wejście:**
-- 
+- `cipher_text` (str): Tekst zaszyfrowany.
+- `reference_bigrams` (numpy.ndarray): Macierz referencyjna.
+- `population_size` (int): Rozmiar populacji.
+- `crossover_prob` (float): Prawd. krzyżowania.
+- `mutation_prob` (float): Prawd. mutacji.
+- `max_generations` (int): Maks. liczba pokoleń.
+- `max_std_dev` (float): Kryterium zbieżności.
 
 **Wyjście:**
-- 
+- Najlepszy klucz i wartość fitness.
 
 **Opis:**  
-Funkcja `genetic_algorithm_attack` 
+Pełna implementacja algorytmu genetycznego. Inicjalizuje populację, ewaluuje fitness, przeprowadza selekcję, krzyżowanie i mutację przez wiele pokoleń. Monitoruje zbieżność poprzez odchylenie standardowe fitness i może zakończyć się wcześniej, jeśli populacja się ustabilizuje.
 
 **Kod:**
 ``` python
@@ -1113,13 +1146,13 @@ def genetic_algorithm_attack(cipher_text, reference_bigrams, population_size=100
 **5. Funkcja `ga_attack`**
 
 **Wejście:**
-- 
+- Parametry plików i parametry algorytmu.
 
 **Wyjście:**
-- 
+- Zapisuje wyniki do plików.
 
 **Opis:**  
-Funkcja `ga_attack` 
+Funkcja przygotowująca dane i uruchamiająca algorytm genetyczny. Wczytuje i czyści teksty, przygotowuje macierz referencyjną, uruchamia główny algorytm i zarządza wynikami. 
 
 **Kod:**
 ``` python
@@ -1172,13 +1205,13 @@ def ga_attack(input_file, output_file, reference_file, population_size=100, cros
 **Funkcja `Main`**
 
 **Wejście:**
-- 
+- Argumenty wiersza poleceń (argparse).
 
 **Wyjście:**
-- 
+- Wynik odpowiedniej operacji.
 
 **Opis:**  
-Funkcja `Main` 
+Główna funkcja programu. Parsuje argumenty, weryfikuje ich poprawność i wywołuje odpowiednią funkcję (szyfrowanie, deszyfrowanie lub wybrany atak) z podanymi parametrami. Obsługuje błędy wejściowe i zapewnia odpowiednie komunikaty dla użytkownika.
 
 **Kod:**
 ```python
