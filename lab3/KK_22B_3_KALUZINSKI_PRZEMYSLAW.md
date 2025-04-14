@@ -238,6 +238,8 @@ def brute_force_attack(input_file, output_file, iterations=1000000):
 
 #### Wyniki
 
+
+
 **Wnioski:**
 
 

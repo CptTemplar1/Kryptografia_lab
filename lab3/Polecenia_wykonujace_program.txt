@@ -11,13 +11,1421 @@ python lab3_solution.py -a bf -i szyfrogram.txt -o tekst_odszyfrowany_brute_forc
 Zadanie 2:
 python lab3_solution.py -i szyfrogram.txt -o wynik_2.txt -a mh -r tekst_jawny.txt
 
-Plik referencyjny:
-https://www.gutenberg.org/files/2701/old/moby10b.txt
-
 Zadanie 3:
 python lab3_solution.py -a sa -i szyfrogram.txt -o wynik_3.txt -r reference.txt --iterations 20000
 
 Zadanie 4:
 python lab3_solution.py -a ga -i szyfrogram.txt -o wynik_4.txt -r reference.txt --population-size 200 --crossover-prob 0.9 --mutation-prob 0.1 --iterations 5000
 
+
+Plik referencyjny - pierwszy rozdział z MobyDicka:
+https://gist.github.com/StevenClontz/4445774
+
+
+TEKSTY DO SPRAWKA
+TEKST JAWNY
+CALL me Ishmael. Some years ago never mind how 
+long precisely having little or no money in my purse, 
+and nothing particular to interest me on shore, I thought 
+I would sail about a little and see the watery part of the 
+world. It is a way I have of driving off the spleen, and 
+regulating the circulation. Whenever I find myself 
+growing grim about the mouth ; whenever it is a damp, 
+drizzly November in my soul ; whenever I find myself 
+involuntarily pausing before coffin warehouses, and bring- 
+ing up the rear of every funeral I meet ; and especially 
+whenever my hypos get such an upper hand of me, that 
+it requires a strong moral principle to prevent me from 
+deliberately stepping into the street, and methodically 
+knocking people's hats off then, I account it high time 
+to get to sea as soon as I can. This is my substitute for 
+pistol and ball. With a philosophical flourish Cato throws 
+himself upon his sword ; I quietly take to the ship. 
+There is nothing surprising in this. If they but knew 
+it, almost all men in their degree, some time or other, 
+cherish very nearly the same feelings toward the ocean 
+with me. 
+
+
+TEKST REFERENCYJNY
+MOBY-DICK 
+
+CHAPTER I 
+
+LOOMINGS 
+
+CALL me Ishmael. Some years ago never mind how 
+long precisely having little or no money in my purse, 
+and nothing particular to interest me on shore, I thought 
+I would sail about a little and see the watery part of the 
+world. It is a way I have of driving off the spleen, and 
+regulating the circulation. Whenever I find myself 
+growing grim about the mouth ; whenever it is a damp, 
+drizzly November in my soul ; whenever I find myself 
+involuntarily pausing before coffin warehouses, and bring- 
+ing up the rear of every funeral I meet ; and especially 
+whenever my hypos get such an upper hand of me, that 
+it requires a strong moral principle to prevent me from 
+deliberately stepping into the street, and methodically 
+knocking people's hats off then, I account it high time 
+to get to sea as soon as I can. This is my substitute for 
+pistol and ball. With a philosophical flourish Cato throws 
+himself upon his sword ; I quietly take to the ship. 
+There is nothing surprising in this. If they but knew 
+it, almost all men in their degree, some time or other, 
+cherish very nearly the same feelings toward the ocean 
+with me. 
+
+There now is your insular city of the Manhattoes, 
+belted round by wharves as Indian isles by coral reefs 
+commerce surrounds it with her surf. Right and left, the 
+streets take you waterward. Its extreme down -town is the 
+battery, where that noble mole is washed by waves, and 
+
+VOL. I. A 
+
+
+
+2 MOBY-DICK 
+
+cooled by breezes, which a few hours previous were out of 
+sight of land. Look at the crowds of water -gazers there. 
+
+Circumambulate the city of a dreamy Sabbath after- 
+noon. Go from Corlears Hook to Coenties Slip, and 
+from thence, by Whitehall, northward. What do you 
+see ? Posted like silent sentinels all around the town, 
+stand thousands upon thousands of mortal men fixed 
+in ocean reveries. Some leaning against the spiles ; 
+some seated upon the pier-heads ; some looking over 
+Vhe bulwarks of ships from China ; some high aloft in 
+the rigging, as if striving to get a still better seaward 
+peep. But these are all landsmen ; of week days pent 
+up in lath and plaster tied to counters, nailed to benches, 
+clinched to desks. How then is this ? Are the green 
+fields gone ? What do they here ? 
+
+But look ! here come more crowds, pacing straight for 
+the water, and seemingly bound for a dive. Strange ! 
+Nothing will content them but the extremest limit of the 
+land ; loitering under the shady lee of yonder warehouses 
+will not suffice. No. They must get just as nigh the 
+water as they possibly can without falling in. And there 
+they stand miles of them leagues. Inlanders all, they 
+come from lanes and alleys, streets and avenues north, 
+east, south, and west. Yet here they all unite. Tell me, 
+does the magnetic virtue of the needles of the compasses 
+of all those ships attract them thither ? 
+
+Once more. Say, you are in the country ; in some 
+high land of lakes. Take almost any path you please, 
+and ten to one it carries you down in a dale, and leaves 
+you there by a pool in the stream. There is magic in it. 
+Let the most absent-minded of men be plunged in his 
+deepest reveries stand that man on his legs, set his feet 
+a-going, and he will infallibly lead you to water, if water 
+there be in all that region. Should you ever be athirst 
+in the great American desert, try this experiment, if your 
+
+
+
+LOOMINGS 3 
+
+caravan happen to be supplied with a metaphysical 
+professor. Yes, as everyone knows, meditation andli 
+water are wedded forever. 
+
+But here is an artist. He desires to paint you the 
+dreamiest, shadiest, quietest, most enchanting bit of 
+romantic landscape in all the valley of the Saco. What 
+is the chief element he employs ? There stand his trees, 
+each with a hollow trunk, as if a hermit and a crucifix 
+were within ; and here sleeps his meadow, and there sleep 
+his cattle ; and up from yonder cottage goes a sleepy 
+smoke. Deep into distant woodlands winds a mazy way, 
+reaching to overlapping spurs of mountains bathed in 
+their hillside blue. But though the picture lies thus 
+tranced, and though this pine-tree shakes down its sighs 
+like leaves upon this shepherd's head, yet all were 
+vain, unless the shepherd's eye were fixed upon the 
+magic stream before him. Go visit the Prairies in June, 
+when for scores on scores of miles you wade knee -deep 
+among tiger-lilies what is the one charm wanting ?- 
+Water there is not a drop of water there ! Were Niagara 
+but a cataract of sand, would you travel your thousand 
+miles to see it ? Why did the poor poet of Tennessee, 
+upon suddenly receiving two handfuls of silver, deliberate 
+whether to buy him a coat, which he sadly needed, or 
+invest his money in a pedestrian trip to Rockaway Beach ? 
+Why is almost every robust healthy boy with a robust 
+healthy soul in him, at some time or other crazy to go to 
+sea ? Why upon your first voyage as a passenger, did 
+you yourself feel such a mystical vibration, when first ; 
+told that you and your ship were now out of sight of ' 
+land ? Why did the old Persians hold the sea holy ? 
+Why did the Greeks give it a separate deity, and own 
+brother of Jove ? Surely all this is not without meaning. 
+And still deeper the meaning of that story of Narcissus, 
+who because he could not grasp the tormenting, mild 
+
+
+
+4 MOBY-DICK 
+
+image he saw in the fountain, plunged into it and was 
+drowned. But that same image, we ourselves see in all 
+rivers and oceans. It is the image of the ungraspable 
+phantom of life ; and this is the key to it all. 
+
+Now, when I say that I am in the habit of going to sea 
+whenever I begin to grow hazy about the eyes, and begin 
+to be over conscious of my lungs, I do not mean to have 
+it inferred that I ever go to sea as a passenger. For to 
+go as a passenger you must needs have a purse, and a 
+purse is but a rag unless you have something in it. Be- 
+sides, passengers get sea-sick grow quarrelsome don't 
+sleep of nights do not enjoy themselves much, as a 
+general thing ; no, I never go as a passenger ; nor, 
+though I am something of a salt, do I ever go to sea as a 
+Commodore, or a Captain, or a Cook. I abandon the 
+glory and distinction of such offices to those who like 
+them. For my part, I abominate all honourable respect- 
+able toils, trials, and tribulations of every kind what- 
+soever. It is quite as much as I can do to take care 
+of myself, without taking care of ships, barques, brigs, 
+schooners, and what not. And as for going as cook, 
+though I confess there is considerable glory in that, a 
+cook being a sort of officer on shipboard yet, somehow, 
+I never fancied broiling fowls ; though once broiled, 
+judiciously buttered, and judgmatically salted and 
+peppered, there is no one who will speak more respect- 
+fully, not to say reverentially, of a broiled fowl than I 
+will. It is out of the idolatrous do tings of the old 
+Egyptians upon broiled ibis and roasted river horse, that 
+you see the mummies of those creatures in their huge 
+bake-houses the pyramids. 
+
+No, when I go to sea, I go as a simple sailor, right 
+before the mast, plumb down into the forecastle, aloft 
+there to the royal mast-head. True, they rather order 
+me about some, and make me jump from spar to spar, 
+
+
+
+LOOMINGS 5 
+
+like a grasshopper in a May meadow. And at first, this 
+sort of thing is unpleasant enough. It touches one's 
+sense of honour, particularly if you come of an old estab- 
+lished family in the land, the Van Rensselaers, or Ran- 
+dolphs, or Hardicanutes. And more than all, if just 
+previous to putting your hand into the tar-pot, you have 
+been lording it as a country schoolmaster, making the 
+tallest boys stand in awe of you. The transition is a 
+keen one, I assure you, from a schoolmaster to a sailor, 
+and requires a strong decoction of Seneca and the Stoics 
+to enable you to grin and bear it. But even this wears 
+off hi time. 
+
+What of it, if some old hunks of a sea-captain orders 
+me to get a broom and sweep down the decks ? What 
+does that indignity amount to, weighed, I mean, in the 
+scales of the New Testament ? Do you think the arch- 
+angel Gabriel thinks anything the less of me, because I 
+promptly and respectfully obey that old hunks in that 
+particular instance ? Who ain/t a slave ? Tell me that. 
+Well, then, however the~old^sea -captains may order me 
+about however they may thump and punch me about, 
+I have the satisfaction of knowing that it is all right ; 
+that everybody else is one way or other served in much the 
+same way either in a physical or metaphysical point of 
+view, that is ; and so the universal thump is passed 
+round, and all hands should rub each other's shoulder- 
+blades, and be content. 
+
+Again, I always go to sea as a sailor, because they make 
+a point of paying me for my trouble, whereas they never 
+pay passengers a single penny that I ever heard of. On 
+the contrary, passengers themselves must pay. And 
+there is all the difference in the world between paying 
+and being paid. The act of paying is perhaps the most 
+uncomfortable infliction that the two orchard thieves 
+entailed upon us. But being paid, what will compare 
+
+
+
+6 MOBY-DICK 
+
+with it ? The urbane activity with which a man receives 
+money is really marvellous, considering that we so 
+earnestly believe money to be the root of all earthly ills, 
+and that on no account can a monied man enter heaven. 
+Ah ! how cheerfully we consign ourselves to perdition ! 
+
+Finally, I always go to sea as a sailor, because of the 
+wholesome exercise and pure air of the forecastle deck. 
+For as in this world, head-winds are far more prevalent 
+than winds from astern (that is, if you never violate 
+the Pythagorean maxim), so for the most part the com- 
+modore on the quarter-deck gets his atmosphere at 
+second hand from the sailors on the forecastle. He thinks 
+he breathes it first ; but not so. In much the same 
+way do the commonalty lead their leaders in many other 
+things, at the same time that the leaders little suspect it. 
+But wherefore it was that after having repeatedly smelt 
+the sea as a merchant sailor, I should now take it into 
+my head to go on a whaling voyage ; this the invisible 
+police-officer of the Fates, who has the constant surveil- 
+lance of me, and secretly dogs me, and influences me in 
+some unaccountable way he can better answer than any 
+one else. And, doubtless, my going on this whaling 
+voyage formed part of the grand programme of Provi- 
+dence that was drawn up a long time ago. It came in 
+as a sort of brief interlude and solo between more exten- 
+sive performances. I take it that this part of the bill 
+must have run something like this : 
+
+' Grand Contested Election for the Presidency of the 
+United States. 
+
+' WHALING VOYAGE BY ONE ISHMAEL. 
+
+1 BLOODY BATTLE IN AFGHANISTAN.' 
+
+Though I cannot tell why it was exactly that those 
+stage managers, the Fates, put me down for this shabby 
+
+
+
+LOOMINGS 7 
+
+part of a whaling voyage, when others were set down 
+for magnificent parts in high tragedies, and short and easy 
+parts in genteel comedies, and jolly parts in farces 
+though I cannot tell why this was exactly ; yet, now that 
+I recall all the circumstances, I think I can see a little 
+into the springs and motives which, being cunningly 
+presented to me under various disguises, induced me to 
+set about performing the part I did, besides cajoling me 
+into the delusion that it was a choice resulting from my 
+own unbiased freewill and discriminating judgment. 
+
+Chief among these motives was the overwhelming idea 
+of the great whale himself. Such a gortentous and 
+mysterious monster roused all my curiosity. Then the 
+wild and distant seas where he rolled his island bulk ; 
+the undeliverable, nameless perils of the whale ; these, 
+with all the attending marvels of a thousand Patagonian 
+sights and sounds, helped to sway me to my wish. With 
+other men, perhaps, such things would not have been 
+inducements ; but as for me, I am tormented with an 
+everlasting itch for things remote. I love to sail for- 
+bidden seas, and land on barbarous coasts. Not ignoring 
+what is good, I am quick to perceive a horror, and could 
+still be social with it would they let me since it is 
+but well to be on friendly terms with all the inmates of 
+the place one lodges in. 
+
+By reason of these things, then, the whaling voyage 
+was welcome ; the great flood-gates of the wonder-world 
+swung open, and in the wild conceits that swayed me to 
+my purpose, two and two there floated into my inmost 
+soul, endless processions of the whale, and, midmost of 
+them all, one grand hooded phantom, like a snow hill in 
+the air. 
+
+
+
+TEKST REFERENCYJNY PO PRZETWORZENIU
+MOBYDICKCHAPTERILOOMINGSCALLMEISHMAELSOMEYEARSAGONEVERMINDHOWLONGPRECISELYHAVINGLITTLEORNOMONEYINMYPURSEANDNOTHINGPARTICULARTOINTERESTMEONSHOREITHOUGHTIWOULDSAILABOUTALITTLEANDSEETHEWATERYPARTOFTHEWORLDITISAWAYIHAVEOFDRIVINGOFFTHESPLEENANDREGULATINGTHECIRCULATIONWHENEVERIFINDMYSELFGROWINGGRIMABOUTTHEMOUTHWHENEVERITISADAMPDRIZZLYNOVEMBERINMYSOULWHENEVERIFINDMYSELFINVOLUNTARILYPAUSINGBEFORECOFFINWAREHOUSESANDBRINGINGUPTHEREAROFEVERYFUNERALIMEETANDESPECIALLYWHENEVERMYHYPOSGETSUCHANUPPERHANDOFMETHATITREQUIRESASTRONGMORALPRINCIPLETOPREVENTMEFROMDELIBERATELYSTEPPINGINTOTHESTREETANDMETHODICALLYKNOCKINGPEOPLESHATSOFFTHENIACCOUNTITHIGHTIMETOGETTOSEAASSOONASICANTHISISMYSUBSTITUTEFORPISTOLANDBALLWITHAPHILOSOPHICALFLOURISHCATOTHROWSHIMSELFUPONHISSWORDIQUIETLYTAKETOTHESHIPTHEREISNOTHINGSURPRISINGINTHISIFTHEYBUTKNEWITALMOSTALLMENINTHEIRDEGREESOMETIMEOROTHERCHERISHVERYNEARLYTHESAMEFEELINGSTOWARDTHEOCEANWITHMETHERENOWISYOURINSULARCITYOFTHEMANHATTOESBELTEDROUNDBYWHARVESASINDIANISLESBYCORALREEFSCOMMERCESURROUNDSITWITHHERSURFRIGHTANDLEFTTHESTREETSTAKEYOUWATERWARDITSEXTREMEDOWNTOWNISTHEBATTERYWHERETHATNOBLEMOLEISWASHEDBYWAVESANDVOLIAMOBYDICKCOOLEDBYBREEZESWHICHAFEWHOURSPREVIOUSWEREOUTOFSIGHTOFLANDLOOKATTHECROWDSOFWATERGAZERSTHERECIRCUMAMBULATETHECITYOFADREAMYSABBATHAFTERNOONGOFROMCORLEARSHOOKTOCOENTIESSLIPANDFROMTHENCEBYWHITEHALLNORTHWARDWHATDOYOUSEEPOSTEDLIKESILENTSENTINELSALLAROUNDTHETOWNSTANDTHOUSANDSUPONTHOUSANDSOFMORTALMENFIXEDINOCEANREVERIESSOMELEANINGAGAINSTTHESPILESSOMESEATEDUPONTHEPIERHEADSSOMELOOKINGOVERVHEBULWARKSOFSHIPSFROMCHINASOMEHIGHALOFTINTHERIGGINGASIFSTRIVINGTOGETASTILLBETTERSEAWARDPEEPBUTTHESEAREALLLANDSMENOFWEEKDAYSPENTUPINLATHANDPLASTERTIEDTOCOUNTERSNAILEDTOBENCHESCLINCHEDTODESKSHOWTHENISTHISARETHEGREENFIELDSGONEWHATDOTHEYHEREBUTLOOKHERECOMEMORECROWDSPACINGSTRAIGHTFORTHEWATERANDSEEMINGLYBOUNDFORADIVESTRANGENOTHINGWILLCONTENTTHEMBUTTHEEXTREMESTLIMITOFTHELANDLOITERINGUNDERTHESHADYLEEOFYONDERWAREHOUSESWILLNOTSUFFICENOTHEYMUSTGETJUSTASNIGHTHEWATERASTHEYPOSSIBLYCANWITHOUTFALLINGINANDTHERETHEYSTANDMILESOFTHEMLEAGUESINLANDERSALLTHEYCOMEFROMLANESANDALLEYSSTREETSANDAVENUESNORTHEASTSOUTHANDWESTYETHERETHEYALLUNITETELLMEDOESTHEMAGNETICVIRTUEOFTHENEEDLESOFTHECOMPASSESOFALLTHOSESHIPSATTRACTTHEMTHITHERONCEMORESAYYOUAREINTHECOUNTRYINSOMEHIGHLANDOFLAKESTAKEALMOSTANYPATHYOUPLEASEANDTENTOONEITCARRIESYOUDOWNINADALEANDLEAVESYOUTHEREBYAPOOLINTHESTREAMTHEREISMAGICINITLETTHEMOSTABSENTMINDEDOFMENBEPLUNGEDINHISDEEPESTREVERIESSTANDTHATMANONHISLEGSSETHISFEETAGOINGANDHEWILLINFALLIBLYLEADYOUTOWATERIFWATERTHEREBEINALLTHATREGIONSHOULDYOUEVERBEATHIRSTINTHEGREATAMERICANDESERTTRYTHISEXPERIMENTIFYOURLOOMINGSCARAVANHAPPENTOBESUPPLIEDWITHAMETAPHYSICALPROFESSORYESASEVERYONEKNOWSMEDITATIONANDLIWATERAREWEDDEDFOREVERBUTHEREISANARTISTHEDESIRESTOPAINTYOUTHEDREAMIESTSHADIESTQUIETESTMOSTENCHANTINGBITOFROMANTICLANDSCAPEINALLTHEVALLEYOFTHESACOWHATISTHECHIEFELEMENTHEEMPLOYSTHERESTANDHISTREESEACHWITHAHOLLOWTRUNKASIFAHERMITANDACRUCIFIXWEREWITHINANDHERESLEEPSHISMEADOWANDTHERESLEEPHISCATTLEANDUPFROMYONDERCOTTAGEGOESASLEEPYSMOKEDEEPINTODISTANTWOODLANDSWINDSAMAZYWAYREACHINGTOOVERLAPPINGSPURSOFMOUNTAINSBATHEDINTHEIRHILLSIDEBLUEBUTTHOUGHTHEPICTURELIESTHUSTRANCEDANDTHOUGHTHISPINETREESHAKESDOWNITSSIGHSLIKELEAVESUPONTHISSHEPHERDSHEADYETALLWEREVAINUNLESSTHESHEPHERDSEYEWEREFIXEDUPONTHEMAGICSTREAMBEFOREHIMGOVISITTHEPRAIRIESINJUNEWHENFORSCORESONSCORESOFMILESYOUWADEKNEEDEEPAMONGTIGERLILIESWHATISTHEONECHARMWANTINGWATERTHEREISNOTADROPOFWATERTHEREWERENIAGARABUTACATARACTOFSANDWOULDYOUTRAVELYOURTHOUSANDMILESTOSEEITWHYDIDTHEPOORPOETOFTENNESSEEUPONSUDDENLYRECEIVINGTWOHANDFULSOFSILVERDELIBERATEWHETHERTOBUYHIMACOATWHICHHESADLYNEEDEDORINVESTHISMONEYINAPEDESTRIANTRIPTOROCKAWAYBEACHWHYISALMOSTEVERYROBUSTHEALTHYBOYWITHAROBUSTHEALTHYSOULINHIMATSOMETIMEOROTHERCRAZYTOGOTOSEAWHYUPONYOURFIRSTVOYAGEASAPASSENGERDIDYOUYOURSELFFEELSUCHAMYSTICALVIBRATIONWHENFIRSTTOLDTHATYOUANDYOURSHIPWERENOWOUTOFSIGHTOFLANDWHYDIDTHEOLDPERSIANSHOLDTHESEAHOLYWHYDIDTHEGREEKSGIVEITASEPARATEDEITYANDOWNBROTHEROFJOVESURELYALLTHISISNOTWITHOUTMEANINGANDSTILLDEEPERTHEMEANINGOFTHATSTORYOFNARCISSUSWHOBECAUSEHECOULDNOTGRASPTHETORMENTINGMILDMOBYDICKIMAGEHESAWINTHEFOUNTAINPLUNGEDINTOITANDWASDROWNEDBUTTHATSAMEIMAGEWEOURSELVESSEEINALLRIVERSANDOCEANSITISTHEIMAGEOFTHEUNGRASPABLEPHANTOMOFLIFEANDTHISISTHEKEYTOITALLNOWWHENISAYTHATIAMINTHEHABITOFGOINGTOSEAWHENEVERIBEGINTOGROWHAZYABOUTTHEEYESANDBEGINTOBEOVERCONSCIOUSOFMYLUNGSIDONOTMEANTOHAVEITINFERREDTHATIEVERGOTOSEAASAPASSENGERFORTOGOASAPASSENGERYOUMUSTNEEDSHAVEAPURSEANDAPURSEISBUTARAGUNLESSYOUHAVESOMETHINGINITBESIDESPASSENGERSGETSEASICKGROWQUARRELSOMEDONTSLEEPOFNIGHTSDONOTENJOYTHEMSELVESMUCHASAGENERALTHINGNOINEVERGOASAPASSENGERNORTHOUGHIAMSOMETHINGOFASALTDOIEVERGOTOSEAASACOMMODOREORACAPTAINORACOOKIABANDONTHEGLORYANDDISTINCTIONOFSUCHOFFICESTOTHOSEWHOLIKETHEMFORMYPARTIABOMINATEALLHONOURABLERESPECTABLETOILSTRIALSANDTRIBULATIONSOFEVERYKINDWHATSOEVERITISQUITEASMUCHASICANDOTOTAKECAREOFMYSELFWITHOUTTAKINGCAREOFSHIPSBARQUESBRIGSSCHOONERSANDWHATNOTANDASFORGOINGASCOOKTHOUGHICONFESSTHEREISCONSIDERABLEGLORYINTHATACOOKBEINGASORTOFOFFICERONSHIPBOARDYETSOMEHOWINEVERFANCIEDBROILINGFOWLSTHOUGHONCEBROILEDJUDICIOUSLYBUTTEREDANDJUDGMATICALLYSALTEDANDPEPPEREDTHEREISNOONEWHOWILLSPEAKMORERESPECTFULLYNOTTOSAYREVERENTIALLYOFABROILEDFOWLTHANIWILLITISOUTOFTHEIDOLATROUSDOTINGSOFTHEOLDEGYPTIANSUPONBROILEDIBISANDROASTEDRIVERHORSETHATYOUSEETHEMUMMIESOFTHOSECREATURESINTHEIRHUGEBAKEHOUSESTHEPYRAMIDSNOWHENIGOTOSEAIGOASASIMPLESAILORRIGHTBEFORETHEMASTPLUMBDOWNINTOTHEFORECASTLEALOFTTHERETOTHEROYALMASTHEADTRUETHEYRATHERORDERMEABOUTSOMEANDMAKEMEJUMPFROMSPARTOSPARLOOMINGSLIKEAGRASSHOPPERINAMAYMEADOWANDATFIRSTTHISSORTOFTHINGISUNPLEASANTENOUGHITTOUCHESONESSENSEOFHONOURPARTICULARLYIFYOUCOMEOFANOLDESTABLISHEDFAMILYINTHELANDTHEVANRENSSELAERSORRANDOLPHSORHARDICANUTESANDMORETHANALLIFJUSTPREVIOUSTOPUTTINGYOURHANDINTOTHETARPOTYOUHAVEBEENLORDINGITASACOUNTRYSCHOOLMASTERMAKINGTHETALLESTBOYSSTANDINAWEOFYOUTHETRANSITIONISAKEENONEIASSUREYOUFROMASCHOOLMASTERTOASAILORANDREQUIRESASTRONGDECOCTIONOFSENECAANDTHESTOICSTOENABLEYOUTOGRINANDBEARITBUTEVENTHISWEARSOFFHITIMEWHATOFITIFSOMEOLDHUNKSOFASEACAPTAINORDERSMETOGETABROOMANDSWEEPDOWNTHEDECKSWHATDOESTHATINDIGNITYAMOUNTTOWEIGHEDIMEANINTHESCALESOFTHENEWTESTAMENTDOYOUTHINKTHEARCHANGELGABRIELTHINKSANYTHINGTHELESSOFMEBECAUSEIPROMPTLYANDRESPECTFULLYOBEYTHATOLDHUNKSINTHATPARTICULARINSTANCEWHOAINTASLAVETELLMETHATWELLTHENHOWEVERTHEOLDSEACAPTAINSMAYORDERMEABOUTHOWEVERTHEYMAYTHUMPANDPUNCHMEABOUTIHAVETHESATISFACTIONOFKNOWINGTHATITISALLRIGHTTHATEVERYBODYELSEISONEWAYOROTHERSERVEDINMUCHTHESAMEWAYEITHERINAPHYSICALORMETAPHYSICALPOINTOFVIEWTHATISANDSOTHEUNIVERSALTHUMPISPASSEDROUNDANDALLHANDSSHOULDRUBEACHOTHERSSHOULDERBLADESANDBECONTENTAGAINIALWAYSGOTOSEAASASAILORBECAUSETHEYMAKEAPOINTOFPAYINGMEFORMYTROUBLEWHEREASTHEYNEVERPAYPASSENGERSASINGLEPENNYTHATIEVERHEARDOFONTHECONTRARYPASSENGERSTHEMSELVESMUSTPAYANDTHEREISALLTHEDIFFERENCEINTHEWORLDBETWEENPAYINGANDBEINGPAIDTHEACTOFPAYINGISPERHAPSTHEMOSTUNCOMFORTABLEINFLICTIONTHATTHETWOORCHARDTHIEVESENTAILEDUPONUSBUTBEINGPAIDWHATWILLCOMPAREMOBYDICKWITHITTHEURBANEACTIVITYWITHWHICHAMANRECEIVESMONEYISREALLYMARVELLOUSCONSIDERINGTHATWESOEARNESTLYBELIEVEMONEYTOBETHEROOTOFALLEARTHLYILLSANDTHATONNOACCOUNTCANAMONIEDMANENTERHEAVENAHHOWCHEERFULLYWECONSIGNOURSELVESTOPERDITIONFINALLYIALWAYSGOTOSEAASASAILORBECAUSEOFTHEWHOLESOMEEXERCISEANDPUREAIROFTHEFORECASTLEDECKFORASINTHISWORLDHEADWINDSAREFARMOREPREVALENTTHANWINDSFROMASTERNTHATISIFYOUNEVERVIOLATETHEPYTHAGOREANMAXIMSOFORTHEMOSTPARTTHECOMMODOREONTHEQUARTERDECKGETSHISATMOSPHEREATSECONDHANDFROMTHESAILORSONTHEFORECASTLEHETHINKSHEBREATHESITFIRSTBUTNOTSOINMUCHTHESAMEWAYDOTHECOMMONALTYLEADTHEIRLEADERSINMANYOTHERTHINGSATTHESAMETIMETHATTHELEADERSLITTLESUSPECTITBUTWHEREFOREITWASTHATAFTERHAVINGREPEATEDLYSMELTTHESEAASAMERCHANTSAILORISHOULDNOWTAKEITINTOMYHEADTOGOONAWHALINGVOYAGETHISTHEINVISIBLEPOLICEOFFICEROFTHEFATESWHOHASTHECONSTANTSURVEILLANCEOFMEANDSECRETLYDOGSMEANDINFLUENCESMEINSOMEUNACCOUNTABLEWAYHECANBETTERANSWERTHANANYONEELSEANDDOUBTLESSMYGOINGONTHISWHALINGVOYAGEFORMEDPARTOFTHEGRANDPROGRAMMEOFPROVIDENCETHATWASDRAWNUPALONGTIMEAGOITCAMEINASASORTOFBRIEFINTERLUDEANDSOLOBETWEENMOREEXTENSIVEPERFORMANCESITAKEITTHATTHISPARTOFTHEBILLMUSTHAVERUNSOMETHINGLIKETHISGRANDCONTESTEDELECTIONFORTHEPRESIDENCYOFTHEUNITEDSTATESWHALINGVOYAGEBYONEISHMAELBLOODYBATTLEINAFGHANISTANTHOUGHICANNOTTELLWHYITWASEXACTLYTHATTHOSESTAGEMANAGERSTHEFATESPUTMEDOWNFORTHISSHABBYLOOMINGSPARTOFAWHALINGVOYAGEWHENOTHERSWERESETDOWNFORMAGNIFICENTPARTSINHIGHTRAGEDIESANDSHORTANDEASYPARTSINGENTEELCOMEDIESANDJOLLYPARTSINFARCESTHOUGHICANNOTTELLWHYTHISWASEXACTLYYETNOWTHATIRECALLALLTHECIRCUMSTANCESITHINKICANSEEALITTLEINTOTHESPRINGSANDMOTIVESWHICHBEINGCUNNINGLYPRESENTEDTOMEUNDERVARIOUSDISGUISESINDUCEDMETOSETABOUTPERFORMINGTHEPARTIDIDBESIDESCAJOLINGMEINTOTHEDELUSIONTHATITWASACHOICERESULTINGFROMMYOWNUNBIASEDFREEWILLANDDISCRIMINATINGJUDGMENTCHIEFAMONGTHESEMOTIVESWASTHEOVERWHELMINGIDEAOFTHEGREATWHALEHIMSELFSUCHAGORTENTOUSANDMYSTERIOUSMONSTERROUSEDALLMYCURIOSITYTHENTHEWILDANDDISTANTSEASWHEREHEROLLEDHISISLANDBULKTHEUNDELIVERABLENAMELESSPERILSOFTHEWHALETHESEWITHALLTHEATTENDINGMARVELSOFATHOUSANDPATAGONIANSIGHTSANDSOUNDSHELPEDTOSWAYMETOMYWISHWITHOTHERMENPERHAPSSUCHTHINGSWOULDNOTHAVEBEENINDUCEMENTSBUTASFORMEIAMTORMENTEDWITHANEVERLASTINGITCHFORTHINGSREMOTEILOVETOSAILFORBIDDENSEASANDLANDONBARBAROUSCOASTSNOTIGNORINGWHATISGOODIAMQUICKTOPERCEIVEAHORRORANDCOULDSTILLBESOCIALWITHITWOULDTHEYLETMESINCEITISBUTWELLTOBEONFRIENDLYTERMSWITHALLTHEINMATESOFTHEPLACEONELODGESINBYREASONOFTHESETHINGSTHENTHEWHALINGVOYAGEWASWELCOMETHEGREATFLOODGATESOFTHEWONDERWORLDSWUNGOPENANDINTHEWILDCONCEITSTHATSWAYEDMETOMYPURPOSETWOANDTWOTHEREFLOATEDINTOMYINMOSTSOULENDLESSPROCESSIONSOFTHEWHALEANDMIDMOSTOFTHEMALLONEGRANDHOODEDPHANTOMLIKEASNOWHILLINTHEAIR
+
+
+
+KLUCZ WYGENEROWANY RPZEZ PROGRAM
+{"A": "Z", "B": "G", "C": "L", "D": "S", "E": "D", "F": "C", "G": "Q", "H": "X", "I": "M", "J": "P", "K": "K", "L": "O", "M": "I", "N": "V", "O": "R", "P": "N", "Q": "H", "R": "W", "S": "A", "T": "U", "U": "Y", "V": "F", "W": "T", "X": "B", "Y": "E", "Z": "J"}
+
+
+
+WYNIKI
+BruteForce:
+python lab3_solution.py -a bf -i szyfrogram.txt -o tekst_odszyfrowany_brute_forcem.txt --iterations 500000
+
+Znaleziono najlepsze dopasowanie z wynikiem chi-kwadrat: 0.4983
+Zapisano odszyfrowany tekst do tekst_odszyfrowany_brute_forcem.txt i klucz do tekst_odszyfrowany_brute_forcem.txt.JSON
+
+
+Zadanie 2:
+python lab3_solution.py -i szyfrogram.txt -o wynik_2.txt -a mh -r reference.txt --iterations 500000
+
+Iteracja 0: aktualne log-wiarygodność = -3102.44, najlepsze = -3102.44
+Iteracja 1000: aktualne log-wiarygodność = -2357.14, najlepsze = -2354.93
+Iteracja 2000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 3000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 4000: aktualne log-wiarygodność = -2210.85, najlepsze = -2207.12
+Iteracja 5000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 6000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 7000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 8000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 9000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 10000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 11000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 12000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 13000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 14000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 15000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 16000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 17000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 18000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 19000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 20000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 21000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 22000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 23000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 24000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 25000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 26000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 27000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 28000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 29000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 30000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 31000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 32000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 33000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 34000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 35000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 36000: aktualne log-wiarygodność = -2211.86, najlepsze = -2207.12
+Iteracja 37000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 38000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 39000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 40000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 41000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 42000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 43000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 44000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 45000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 46000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 47000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 48000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 49000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 50000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 51000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 52000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 53000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 54000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 55000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 56000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 57000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 58000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 59000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 60000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 61000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 62000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 63000: aktualne log-wiarygodność = -2212.33, najlepsze = -2207.12
+Iteracja 64000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 65000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 66000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 67000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 68000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 69000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 70000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 71000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 72000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 73000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 74000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 75000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 76000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 77000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 78000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 79000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 80000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 81000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 82000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 83000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 84000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 85000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 86000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 87000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 88000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 89000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 90000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 91000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 92000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 93000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 94000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 95000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 96000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 97000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 98000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 99000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 100000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 101000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 102000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 103000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 104000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 105000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 106000: aktualne log-wiarygodność = -2210.85, najlepsze = -2207.12
+Iteracja 107000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 108000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 109000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 110000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 111000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 112000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 113000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 114000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 115000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 116000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 117000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 118000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 119000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 120000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 121000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 122000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 123000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 124000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 125000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 126000: aktualne log-wiarygodność = -2210.85, najlepsze = -2207.12
+Iteracja 127000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 128000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 129000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 130000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 131000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 132000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 133000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 134000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 135000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 136000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 137000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 138000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 139000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 140000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 141000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 142000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 143000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 144000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 145000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 146000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 147000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 148000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 149000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 150000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 151000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 152000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 153000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 154000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 155000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 156000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 157000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 158000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 159000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 160000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 161000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 162000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 163000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 164000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 165000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 166000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 167000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 168000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 169000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 170000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 171000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 172000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 173000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 174000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 175000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 176000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 177000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 178000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 179000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 180000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 181000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 182000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 183000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 184000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 185000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 186000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 187000: aktualne log-wiarygodność = -2212.33, najlepsze = -2207.12
+Iteracja 188000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 189000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 190000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 191000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 192000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 193000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 194000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 195000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 196000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 197000: aktualne log-wiarygodność = -2211.41, najlepsze = -2207.12
+Iteracja 198000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 199000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 200000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 201000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 202000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 203000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 204000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 205000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 206000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 207000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 208000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 209000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 210000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 211000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 212000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 213000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 214000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 215000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 216000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 217000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 218000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 219000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 220000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 221000: aktualne log-wiarygodność = -2214.51, najlepsze = -2207.12
+Iteracja 222000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 223000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 224000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 225000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 226000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 227000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 228000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 229000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 230000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 231000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 232000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 233000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 234000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 235000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 236000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 237000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 238000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 239000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 240000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 241000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 242000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 243000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 244000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 245000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 246000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 247000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 248000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 249000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 250000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 251000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 252000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 253000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 254000: aktualne log-wiarygodność = -2211.41, najlepsze = -2207.12
+Iteracja 255000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 256000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 257000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 258000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 259000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 260000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 261000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 262000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 263000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 264000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 265000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 266000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 267000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 268000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 269000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 270000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 271000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 272000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 273000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 274000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 275000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 276000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 277000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 278000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 279000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 280000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 281000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 282000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 283000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 284000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 285000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 286000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 287000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 288000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 289000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 290000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 291000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 292000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 293000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 294000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 295000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 296000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 297000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 298000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 299000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 300000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 301000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 302000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 303000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 304000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 305000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 306000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 307000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 308000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 309000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 310000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 311000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 312000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 313000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 314000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 315000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 316000: aktualne log-wiarygodność = -2210.85, najlepsze = -2207.12
+Iteracja 317000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 318000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 319000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 320000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 321000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 322000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 323000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 324000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 325000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 326000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 327000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 328000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 329000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 330000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 331000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 332000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 333000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 334000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 335000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 336000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 337000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 338000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 339000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 340000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 341000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 342000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 343000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 344000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 345000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 346000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 347000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 348000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 349000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 350000: aktualne log-wiarygodność = -2212.33, najlepsze = -2207.12
+Iteracja 351000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 352000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 353000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 354000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 355000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 356000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 357000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 358000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 359000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 360000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 361000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 362000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 363000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 364000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 365000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 366000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 367000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 368000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 369000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 370000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 371000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 372000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 373000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 374000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 375000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 376000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 377000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 378000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 379000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 380000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 381000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 382000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 383000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 384000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 385000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 386000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 387000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 388000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 389000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 390000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 391000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 392000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 393000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 394000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 395000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 396000: aktualne log-wiarygodność = -2211.41, najlepsze = -2207.12
+Iteracja 397000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 398000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 399000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 400000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 401000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 402000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 403000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 404000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 405000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 406000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 407000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 408000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 409000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 410000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 411000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 412000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 413000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 414000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 415000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 416000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 417000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 418000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 419000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 420000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 421000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 422000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 423000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 424000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 425000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 426000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 427000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 428000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 429000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 430000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 431000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 432000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 433000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 434000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 435000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 436000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 437000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 438000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 439000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 440000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 441000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 442000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 443000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 444000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 445000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 446000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 447000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 448000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 449000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 450000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 451000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 452000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 453000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 454000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 455000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 456000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 457000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 458000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 459000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 460000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 461000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 462000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 463000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 464000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 465000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 466000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 467000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 468000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 469000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 470000: aktualne log-wiarygodność = -2209.50, najlepsze = -2207.12
+Iteracja 471000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 472000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 473000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 474000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 475000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 476000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 477000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 478000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 479000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 480000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 481000: aktualne log-wiarygodność = -2209.38, najlepsze = -2207.12
+Iteracja 482000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 483000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 484000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 485000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 486000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 487000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 488000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 489000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 490000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 491000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 492000: aktualne log-wiarygodność = -2208.94, najlepsze = -2207.12
+Iteracja 493000: aktualne log-wiarygodność = -2207.12, najlepsze = -2207.12
+Iteracja 494000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Iteracja 495000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 496000: aktualne log-wiarygodność = -2208.47, najlepsze = -2207.12
+Iteracja 497000: aktualne log-wiarygodność = -2210.38, najlepsze = -2207.12
+Iteracja 498000: aktualne log-wiarygodność = -2207.56, najlepsze = -2207.12
+Iteracja 499000: aktualne log-wiarygodność = -2208.51, najlepsze = -2207.12
+Zakończono atak Metropolis-Hastings. Znaleziono klucz z log-wiarygodnością: -2207.12
+Zapisano odszyfrowany tekst do wynik_2.txt i klucz do wynik_2.txt.JSON
+
+
+
+Zadanie 3
+python lab3_solution.py -a sa -i szyfrogram.txt -o wynik_3.txt -r reference.txt --iterations 500000
+
+Iteration 0: temp=990.00, current_score=-3468.05, best_score=-3436.44
+Iteration 1000: temp=0.04, current_score=-2343.65, best_score=-2343.65
+Iteration 2000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 3000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 4000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 5000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 6000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 7000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 8000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 9000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 10000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 11000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 12000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 13000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 14000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 15000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 16000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 17000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 18000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 19000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 20000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 21000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 22000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 23000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 24000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 25000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 26000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 27000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 28000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 29000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 30000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 31000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 32000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 33000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 34000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 35000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 36000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 37000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 38000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 39000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 40000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 41000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 42000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 43000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 44000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 45000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 46000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 47000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 48000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 49000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 50000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 51000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 52000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 53000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 54000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 55000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 56000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 57000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 58000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 59000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 60000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 61000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 62000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 63000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 64000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 65000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 66000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 67000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 68000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 69000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 70000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 71000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 72000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 73000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 74000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 75000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 76000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 77000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 78000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 79000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 80000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 81000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 82000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 83000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 84000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 85000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 86000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 87000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 88000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 89000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 90000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 91000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 92000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 93000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 94000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 95000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 96000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 97000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 98000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 99000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 100000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 101000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 102000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 103000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 104000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 105000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 106000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 107000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 108000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 109000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 110000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 111000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 112000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 113000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 114000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 115000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 116000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 117000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 118000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 119000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 120000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 121000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 122000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 123000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 124000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 125000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 126000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 127000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 128000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 129000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 130000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 131000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 132000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 133000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 134000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 135000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 136000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 137000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 138000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 139000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 140000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 141000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 142000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 143000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 144000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 145000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 146000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 147000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 148000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 149000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 150000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 151000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 152000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 153000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 154000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 155000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 156000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 157000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 158000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 159000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 160000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 161000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 162000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 163000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 164000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 165000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 166000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 167000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 168000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 169000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 170000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 171000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 172000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 173000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 174000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 175000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 176000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 177000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 178000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 179000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 180000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 181000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 182000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 183000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 184000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 185000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 186000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 187000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 188000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 189000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 190000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 191000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 192000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 193000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 194000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 195000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 196000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 197000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 198000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 199000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 200000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 201000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 202000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 203000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 204000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 205000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 206000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 207000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 208000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 209000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 210000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 211000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 212000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 213000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 214000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 215000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 216000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 217000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 218000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 219000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 220000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 221000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 222000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 223000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 224000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 225000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 226000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 227000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 228000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 229000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 230000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 231000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 232000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 233000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 234000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 235000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 236000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 237000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 238000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 239000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 240000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 241000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 242000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 243000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 244000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 245000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 246000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 247000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 248000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 249000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 250000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 251000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 252000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 253000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 254000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 255000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 256000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 257000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 258000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 259000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 260000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 261000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 262000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 263000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 264000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 265000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 266000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 267000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 268000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 269000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 270000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 271000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 272000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 273000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 274000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 275000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 276000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 277000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 278000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 279000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 280000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 281000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 282000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 283000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 284000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 285000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 286000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 287000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 288000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 289000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 290000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 291000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 292000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 293000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 294000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 295000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 296000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 297000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 298000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 299000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 300000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 301000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 302000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 303000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 304000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 305000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 306000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 307000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 308000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 309000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 310000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 311000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 312000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 313000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 314000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 315000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 316000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 317000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 318000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 319000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 320000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 321000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 322000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 323000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 324000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 325000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 326000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 327000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 328000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 329000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 330000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 331000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 332000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 333000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 334000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 335000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 336000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 337000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 338000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 339000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 340000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 341000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 342000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 343000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 344000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 345000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 346000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 347000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 348000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 349000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 350000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 351000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 352000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 353000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 354000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 355000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 356000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 357000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 358000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 359000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 360000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 361000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 362000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 363000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 364000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 365000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 366000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 367000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 368000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 369000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 370000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 371000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 372000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 373000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 374000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 375000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 376000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 377000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 378000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 379000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 380000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 381000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 382000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 383000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 384000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 385000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 386000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 387000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 388000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 389000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 390000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 391000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 392000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 393000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 394000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 395000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 396000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 397000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 398000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 399000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 400000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 401000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 402000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 403000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 404000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 405000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 406000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 407000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 408000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 409000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 410000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 411000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 412000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 413000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 414000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 415000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 416000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 417000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 418000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 419000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 420000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 421000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 422000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 423000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 424000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 425000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 426000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 427000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 428000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 429000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 430000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 431000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 432000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 433000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 434000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 435000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 436000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 437000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 438000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 439000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 440000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 441000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 442000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 443000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 444000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 445000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 446000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 447000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 448000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 449000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 450000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 451000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 452000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 453000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 454000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 455000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 456000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 457000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 458000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 459000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 460000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 461000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 462000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 463000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 464000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 465000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 466000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 467000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 468000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 469000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 470000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 471000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 472000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 473000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 474000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 475000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 476000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 477000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 478000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 479000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 480000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 481000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 482000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 483000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 484000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 485000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 486000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 487000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 488000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 489000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 490000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 491000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 492000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 493000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 494000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 495000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 496000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 497000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 498000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Iteration 499000: temp=0.00, current_score=-2192.57, best_score=-2192.57
+Atak symulowanego wyżarzania zakończony. Znaleziono klucz z log-wiarygodnością: -2192.57
+Zapisano odszyfrowany tekst do wynik_3.txt i klucz do wynik_3.txt.JSON
+
+
+Zadanie 4
+Ze względu na długi czas działania, iteracje to tylko 5000, zamiast 500 000. Dla poprzednich algorytmów 500 000 szło około 5 minut, tutaj 5000 idzie:
+12:36 START
+12:57 KONIEC
+
+python lab3_solution.py -a ga -i szyfrogram.txt -o wynik_4.txt -r reference.txt --population-size 200 --crossover-prob 0.9 --mutation-prob 0.1 --iterations 5000  
+
+Generation 0: Best score = -3074.91, Mean score = -3521.75, Std dev = 116.9823
+Generation 100: Best score = -3003.62, Mean score = -3544.77, Std dev = 116.8325
+Generation 200: Best score = -3003.62, Mean score = -3573.93, Std dev = 139.2949
+Generation 300: Best score = -2971.12, Mean score = -3564.37, Std dev = 128.0717
+Generation 400: Best score = -2971.12, Mean score = -3538.30, Std dev = 126.1776
+Generation 500: Best score = -2971.12, Mean score = -3583.60, Std dev = 129.9224
+Generation 600: Best score = -2971.12, Mean score = -3591.12, Std dev = 123.2252
+Generation 700: Best score = -2971.12, Mean score = -3560.11, Std dev = 125.7282
+Generation 800: Best score = -2971.12, Mean score = -3584.96, Std dev = 148.8650
+Generation 900: Best score = -2971.12, Mean score = -3562.70, Std dev = 131.5911
+Generation 1000: Best score = -2934.80, Mean score = -3542.81, Std dev = 132.6388
+Generation 1100: Best score = -2934.80, Mean score = -3572.68, Std dev = 126.3639
+Generation 1200: Best score = -2934.80, Mean score = -3570.68, Std dev = 132.0163
+Generation 1300: Best score = -2934.80, Mean score = -3590.31, Std dev = 134.3384
+Generation 1400: Best score = -2934.80, Mean score = -3563.46, Std dev = 128.1047
+Generation 1500: Best score = -2934.80, Mean score = -3568.35, Std dev = 121.8044
+Generation 1600: Best score = -2934.80, Mean score = -3569.51, Std dev = 127.0529
+Generation 1700: Best score = -2934.80, Mean score = -3558.05, Std dev = 125.3990
+Generation 1800: Best score = -2934.80, Mean score = -3577.44, Std dev = 129.0005
+Generation 1900: Best score = -2934.80, Mean score = -3546.00, Std dev = 126.0285
+Generation 2000: Best score = -2934.80, Mean score = -3557.85, Std dev = 137.2726
+Generation 2100: Best score = -2934.80, Mean score = -3575.28, Std dev = 127.1486
+Generation 2200: Best score = -2934.80, Mean score = -3572.57, Std dev = 121.8696
+Generation 2300: Best score = -2934.80, Mean score = -3572.19, Std dev = 136.4664
+Generation 2400: Best score = -2934.80, Mean score = -3562.24, Std dev = 120.6974
+Generation 2500: Best score = -2934.80, Mean score = -3567.86, Std dev = 123.9913
+Generation 2600: Best score = -2934.80, Mean score = -3559.85, Std dev = 133.2242
+Generation 2700: Best score = -2934.80, Mean score = -3538.94, Std dev = 121.2926
+Generation 2800: Best score = -2934.80, Mean score = -3563.41, Std dev = 142.1513
+Generation 2900: Best score = -2934.80, Mean score = -3561.68, Std dev = 135.1989
+Generation 3000: Best score = -2934.80, Mean score = -3578.45, Std dev = 136.7704
+Generation 3100: Best score = -2921.98, Mean score = -3549.69, Std dev = 133.1495
+Generation 3200: Best score = -2921.98, Mean score = -3558.17, Std dev = 127.0105
+Generation 3300: Best score = -2921.98, Mean score = -3559.81, Std dev = 131.2865
+Generation 3400: Best score = -2843.73, Mean score = -3579.78, Std dev = 134.8074
+Generation 3500: Best score = -2843.73, Mean score = -3540.91, Std dev = 133.3822
+Generation 3600: Best score = -2843.73, Mean score = -3571.79, Std dev = 134.2208
+Generation 3700: Best score = -2843.73, Mean score = -3574.33, Std dev = 134.0300
+Generation 3800: Best score = -2843.73, Mean score = -3587.85, Std dev = 124.8395
+Generation 3900: Best score = -2843.73, Mean score = -3570.01, Std dev = 121.5927
+Generation 4000: Best score = -2843.73, Mean score = -3564.14, Std dev = 132.7750
+Generation 4100: Best score = -2843.73, Mean score = -3586.22, Std dev = 126.4635
+Generation 4200: Best score = -2843.73, Mean score = -3565.80, Std dev = 151.3261
+Generation 4300: Best score = -2768.02, Mean score = -3574.74, Std dev = 130.5734
+Generation 4400: Best score = -2768.02, Mean score = -3598.21, Std dev = 127.3974
+Generation 4500: Best score = -2768.02, Mean score = -3573.77, Std dev = 138.5026
+Generation 4600: Best score = -2768.02, Mean score = -3549.43, Std dev = 121.2195
+Generation 4700: Best score = -2768.02, Mean score = -3570.62, Std dev = 125.9433
+Generation 4800: Best score = -2768.02, Mean score = -3569.65, Std dev = 128.1447
+Generation 4900: Best score = -2768.02, Mean score = -3589.40, Std dev = 133.6041
+Genetic algorithm attack completed. Best score: -2768.02
+Decrypted text saved to wynik_4.txt, key saved to wynik_4.txt.JSON
 
