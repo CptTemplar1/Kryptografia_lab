@@ -1429,3 +1429,11 @@ Generation 4900: Best score = -2768.02, Mean score = -3589.40, Std dev = 133.604
 Genetic algorithm attack completed. Best score: -2768.02
 Decrypted text saved to wynik_4.txt, key saved to wynik_4.txt.JSON
 
+
+PODSUMOWANIE WYNIKÓW:
+Algorytm	Zgodnych par	Poprawność (%)
+Algorytm (BF)	5		19.23%
+Algorytm (MH)	26		100.00% (identyczny)
+Algorytm (SA)	26		100.00% (identyczny)
+Algorytm (GA)	2		7.69%
+
