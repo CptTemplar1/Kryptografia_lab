@@ -83,7 +83,7 @@ def process_file(input_file, output_file, key_file, encrypt, decrypt, generate_n
 # ATAK BRUTE-FORCE NA SZYFR PODSTAWIENIOWY
 
 # Funkcja realizująca atak brute-force na szyfr podstawieniowy. Generuje losowe klucze i oblicza chi-kwadrat dla odszyfrowanego tekstu, aby znaleźć najlepsze dopasowanie do języka angielskiego.
-def brute_force_attack(input_file, output_file, iterations=1000000):
+def brute_force_attack(input_file, output_file, iterations=500000):
     # Wczytanie zaszyfrowanego tekstu i usunięcie niealfabetycznych znaków
     with open(input_file, 'r', encoding='utf-8') as f:
         cipher_text = clean_text(f.read())
@@ -106,6 +106,10 @@ def brute_force_attack(input_file, output_file, iterations=1000000):
     
     # Główna pętla ataku brute-force
     for attempt in range(iterations):
+        # Wyświetlanie postępu co 1000 iteracji
+        if attempt % 1000 == 0:
+            print(f"Iteracja {attempt}: Aktualny najlepszy wynik chi-kwadrat = {best_score:.4f}")
+        
         key = generate_key()
         inv_key = invert_key(key)
         decrypted_text = substitute(cipher_text, inv_key)
