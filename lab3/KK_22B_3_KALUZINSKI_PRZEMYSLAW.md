@@ -238,13 +238,102 @@ def brute_force_attack(input_file, output_file, iterations=1000000):
 
 #### Wyniki
 
+W ramach pierwszego zadania, po implementacji programu, przygotowaliśmy tekst jawny w języku angielskim, który został wykorzystany w dalszej części laboratorium. Wybraliśmy fragment pierwszego rozdziału powieśći "Moby Dick" autorstwa Hermana Melville'a, który został przedstawiony poniżej:
 
+**Tekst jawny:**
+
+```plaintext
+CALL me Ishmael. Some years ago never mind how 
+long precisely having little or no money in my purse, 
+and nothing particular to interest me on shore, I thought 
+I would sail about a little and see the watery part of the 
+world. It is a way I have of driving off the spleen, and 
+regulating the circulation. Whenever I find myself 
+growing grim about the mouth ; whenever it is a damp, 
+drizzly November in my soul ; whenever I find myself 
+involuntarily pausing before coffin warehouses, and bring- 
+ing up the rear of every funeral I meet ; and especially 
+whenever my hypos get such an upper hand of me, that 
+it requires a strong moral principle to prevent me from 
+deliberately stepping into the street, and methodically 
+knocking people's hats off then, I account it high time 
+to get to sea as soon as I can. This is my substitute for 
+pistol and ball. With a philosophical flourish Cato throws 
+himself upon his sword ; I quietly take to the ship. 
+There is nothing surprising in this. If they but knew 
+it, almost all men in their degree, some time or other, 
+cherish very nearly the same feelings toward the ocean 
+with me. 
+```
+
+Najpierw wykonaliśmy szyfrowanie tekstu jawnego za pomocą algorytmu podstawieniowego. Podczas szyfrowania tekst jawny został przetworzony do odpowiedniej postaci poprzez usunięcie z niego wszystkich znaków niebędących literami (ograniczenie do 26 liter alfabetu). Klucz szyfrowania został wygenerowany losowo.
+
+Polecenie, którego użyliśmy do wywołania programu w celu zaszyfrowania tekstu:  
+`python lab3_solution.py -e -i tekst_jawny.txt -o szyfrogram.txt -k klucz.json -g`
+
+Po uruchomieniu programu z przedstawionymi argumentami otrzymaliśmy zaszyfrowany tekst oraz klucz szyfrogramu. Wyniki zostały zapisane do plików `szyfrogram.txt` oraz `klucz.JSON`. Poniżej znajdują się otrzymane wyniki:
+
+**Wygenerowany klucz**
+
+```JSON
+{"A": "Z", "B": "G", "C": "L", "D": "S", "E": "D", "F": "C", "G": "Q", "H": "X", "I": "M", "J": "P", "K": "K", "L": "O", "M": "I", "N": "V", "O": "R", "P": "N", "Q": "H", "R": "W", "S": "A", "T": "U", "U": "Y", "V": "F", "W": "T", "X": "B", "Y": "E", "Z": "J"}
+```
+
+**Szyfrogram**
+
+```plaintext
+LZOOIDMAXIZDOARIDEDZWAZQRVDFDWIMVSXRTORVQNWDLMADOEXZFMVQOMUUODRWVRIRVDEMVIENYWADZVSVRUXMVQNZWUMLYOZWURMVUDWDAUIDRVAXRWDMUXRYQXUMTRYOSAZMOZGRYUZOMUUODZVSADDUXDTZUDWENZWURCUXDTRWOSMUMAZTZEMXZFDRCSWMFMVQRCCUXDANODDVZVSWDQYOZUMVQUXDLMWLYOZUMRVTXDVDFDWMCMVSIEADOCQWRTMVQQWMIZGRYUUXDIRYUXTXDVDFDWMUMAZSZINSWMJJOEVRFDIGDWMVIEARYOTXDVDFDWMCMVSIEADOCMVFROYVUZWMOENZYAMVQGDCRWDLRCCMVTZWDXRYADAZVSGWMVQMVQYNUXDWDZWRCDFDWECYVDWZOMIDDUZVSDANDLMZOOETXDVDFDWIEXENRAQDUAYLXZVYNNDWXZVSRCIDUXZUMUWDHYMWDAZAUWRVQIRWZONWMVLMNODURNWDFDVUIDCWRISDOMGDWZUDOEAUDNNMVQMVURUXDAUWDDUZVSIDUXRSMLZOOEKVRLKMVQNDRNODAXZUARCCUXDVMZLLRYVUMUXMQXUMIDURQDUURADZZAARRVZAMLZVUXMAMAIEAYGAUMUYUDCRWNMAUROZVSGZOOTMUXZNXMORARNXMLZOCORYWMAXLZURUXWRTAXMIADOCYNRVXMAATRWSMHYMDUOEUZKDURUXDAXMNUXDWDMAVRUXMVQAYWNWMAMVQMVUXMAMCUXDEGYUKVDTMUZOIRAUZOOIDVMVUXDMWSDQWDDARIDUMIDRWRUXDWLXDWMAXFDWEVDZWOEUXDAZIDCDDOMVQAURTZWSUXDRLDZVTMUXID
+```
+
+Następnie, w celu sprawdzenia poprawności działania programu, uruchomiliśmy program ponownie w celu odszyfrowania tekstu według wcześniej wygenerowanego klucza. Polecenie, którego użyliśmy do wywołania programu w celu odszyfrowania tekstu:  
+`python lab3_solution.py -d -i szyfrogram.txt -o tekst_odszyfrowany.txt -k klucz.json`
+
+Po uruchomieniu programu z przedstawionymi argumentami otrzymaliśmy odszyfrowany tekst, który został zapisany do pliku `tekst_odszyfrowany.txt`. Poniżej znajduje się wynik odszyfrowania:
+
+```plaintext
+CALLMEISHMAELSOMEYEARSAGONEVERMINDHOWLONGPRECISELYHAVINGLITTLEORNOMONEYINMYPURSEANDNOTHINGPARTICULARTOINTERESTMEONSHOREITHOUGHTIWOULDSAILABOUTALITTLEANDSEETHEWATERYPARTOFTHEWORLDITISAWAYIHAVEOFDRIVINGOFFTHESPLEENANDREGULATINGTHECIRCULATIONWHENEVERIFINDMYSELFGROWINGGRIMABOUTTHEMOUTHWHENEVERITISADAMPDRIZZLYNOVEMBERINMYSOULWHENEVERIFINDMYSELFINVOLUNTARILYPAUSINGBEFORECOFFINWAREHOUSESANDBRINGINGUPTHEREAROFEVERYFUNERALIMEETANDESPECIALLYWHENEVERMYHYPOSGETSUCHANUPPERHANDOFMETHATITREQUIRESASTRONGMORALPRINCIPLETOPREVENTMEFROMDELIBERATELYSTEPPINGINTOTHESTREETANDMETHODICALLYKNOCKINGPEOPLESHATSOFFTHENIACCOUNTITHIGHTIMETOGETTOSEAASSOONASICANTHISISMYSUBSTITUTEFORPISTOLANDBALLWITHAPHILOSOPHICALFLOURISHCATOTHROWSHIMSELFUPONHISSWORDIQUIETLYTAKETOTHESHIPTHEREISNOTHINGSURPRISINGINTHISIFTHEYBUTKNEWITALMOSTALLMENINTHEIRDEGREESOMETIMEOROTHERCHERISHVERYNEARLYTHESAMEFEELINGSTOWARDTHEOCEANWITHME
+```
 
 **Wnioski:**
 
+Tekst otrzymany po operacji odszyfrowania jest identyczny z oryginalnym tekstem jawnym, z wyjątkiem tego, że wszystkie litery zostały zamienione na wielkie, a znaki niebędące literami (np. spacje, znaki interpunkcyjne) zostały usunięte.
 
+**Bruteforce**
+
+Dodatkowo postanowiliśmy przetestować skuteczność algorytmu brute-force w łamaniu szyfrów podstawieniowych. Jako szyfrogram wykorzystaliśmy zaszyfrowany wcześniej tekst jawny. Polecenie, którego użyliśmy do wywołania programu w celu złamania szyfru:  
+`python lab3_solution.py -a bf -i szyfrogram.txt -o tekst_odszyfrowany_brute_forcem.txt --iterations 500000`
+
+W wyniku działania algorytmu brute-force otrzymaliśmy odszyfrowany tekst oraz odpowiadający mu klucz. Niestety skuteczność algorytmu brute-force nie była zadowalająca, ponieważ nawet po 500000 iteracji nie udało się odszyfrować tekstu. Otrzymany wynik był nieczytelny i nie przypominał oryginalnego tekstu jawnego. W związku z tym, algorytm brute-force nie był w stanie skutecznie złamać szyfru podstawieniowego w tym przypadku. Poniżej przedstawione zostały otrzymane wyniki:
+
+**Tekst odszyfrowany BruteForce**
+
+```plaintext
+CYLLUEHTMUYELTDUEFEYRTYWDNEOERUHNPMDBLDNWIRECHTELFMYOHNWLHAALEDRNDUDNEFHNUFISRTEYNPNDAMHNWIYRAHCSLYRADHNAERETAUEDNTMDREHAMDSWMAHBDSLPTYHLYJDSAYLHAALEYNPTEEAMEBYAERFIYRADVAMEBDRLPHAHTYBYFHMYOEDVPRHOHNWDVVAMETILEENYNPREWSLYAHNWAMECHRCSLYAHDNBMENEOERHVHNPUFTELVWRDBHNWWRHUYJDSAAMEUDSAMBMENEOERHAHTYPYUIPRHKKLFNDOEUJERHNUFTDSLBMENEOERHVHNPUFTELVHNODLSNAYRHLFIYSTHNWJEVDRECDVVHNBYREMDSTETYNPJRHNWHNWSIAMEREYRDVEOERFVSNERYLHUEEAYNPETIECHYLLFBMENEOERUFMFIDTWEATSCMYNSIIERMYNPDVUEAMYAHAREZSHRETYTARDNWUDRYLIRHNCHILEADIREOENAUEVRDUPELHJERYAELFTAEIIHNWHNADAMETAREEAYNPUEAMDPHCYLLFQNDCQHNWIEDILETMYATDVVAMENHYCCDSNAHAMHWMAHUEADWEAADTEYYTTDDNYTHCYNAMHTHTUFTSJTAHASAEVDRIHTADLYNPJYLLBHAMYIMHLDTDIMHCYLVLDSRHTMCYADAMRDBTMHUTELVSIDNMHTTBDRPHZSHEALFAYQEADAMETMHIAMEREHTNDAMHNWTSRIRHTHNWHNAMHTHVAMEFJSAQNEBHAYLUDTAYLLUENHNAMEHRPEWREETDUEAHUEDRDAMERCMERHTMOERFNEYRLFAMETYUEVEELHNWTADBYRPAMEDCEYNBHAMUE
+```
+
+**Klucz BruteForce**
+
+```JSON
+{"A": "U", "B": "T", "C": "L", "D": "R", "E": "D", "F": "E", "G": "P", "H": "M", "I": "N", "J": "G", "K": "J", "L": "O", "M": "X", "N": "V", "O": "F", "P": "S", "Q": "K", "R": "W", "S": "Y", "T": "A", "U": "I", "V": "C", "W": "Q", "X": "B", "Y": "Z", "Z": "H"}
+```
+
+Porównując klucz uzyskany w wyniku działania algorytmu brute-force z kluczem użytym do szyfrowania, można zauważyć, że skuteczność algorytmu była niewystarczająca, ponieważ udało się trafić jedynie 6 par liter. Jak można zauważyć w tabeli poniżej, wynik testu chi-kwadrat ustabilizował się na poziomie 0.4085 po upływie  46 tysięcy iteracji i nie był w stanie poprawić się już do samego końca.
+
+| Iteracja | Najlepszy wynik χ² | Uwagi                     |
+|----------|--------------------|---------------------------|
+| 0        | ∞                  | Początek ataku            |
+| 1000     | 0.8457             | Pierwsze znaczące dopasowanie |
+| 18000    | 0.7049             | Poprawa wyniku            |
+| 46000    | 0.4085             | Najlepsze znalezione dopasowanie |
+| 100000   | 0.4085             | Wynik utrzymuje się       |
+| 200000   | 0.4085             | Wynik utrzymuje się      |
+| 300000   | 0.4085             | Wynik utrzymuje się       |
+| 400000   | 0.4085             | Wynik utrzymuje się       |
+| 500000   | 0.4085             | Koniec ataku              |
 
 ### Implementacja pomocniczych funkcji dla dalszych algorytmów
+
+Algorytmy zaprezentowane w zadaniach 2 - 4 wykorzystują pewne funkcje pomocnicze, które nie wchodzą bezpośrednio w skład samego algorytmu. Poniżej przedstawiamy ich opisy oraz implementacje:
 
 **1. Funkcja `create_bigram_matrix`**
 
@@ -511,9 +600,42 @@ def mh_attack(input_file, output_file, reference_file, iterations=10000):
 
 #### Wyniki
 
+W ramach drugiego zadania zaimplementowaliśmy atak na szyfr podstawieniowy wykorzystujący algorytm Metropolis-Hastings (MH). Algorytm ten wymagał wykorzystania tekstu referencyjnego, który posłużył jako baza bigramów do porównania z odszyfrowywanym tekstem. W naszym przypadku wykorzystaliśmy cały pierwszy akapit "Moby Dicka". Dzięki temu, że zaszyfrowany tekst jawny pochodził bezpośrednio z tekstu referencyjnego, ułatwiliśmy pracę algorytmu, ponieważ bigramy występujące w tekście referencyjnym miały szansę na dopasowanie do tych samych bigramów w szyfrogramie. Tekst referencyjny musiał być oczywiście oczyszczony z niepotrzebnych znaków, aby algorytm mógł poprawnie działać. W tym celu wykorzystaliśmy funkcję `clean_text`, która usuwa znaki niebędące literami oraz zamienia wszystkie litery na wielkie. Poniżej przedstawiony został fragment finalnego tekstu referencyjnego:
+
+```plaintext
+MOBYDICKCHAPTERILOOMINGSCALLMEISHMAELSOMEYEARSAGONEVERMINDHOWLONGPRECISELYHAVINGLITTLEORNOMONEYINMYPURSEANDNOTHINGPARTICULARTOINTERESTMEONSHOREITHOUGHTIWOULDSAILABOUTALITTLEANDSEETHEWATERYPARTOFTHEWORLDITISAWAYIHAVEOFDRIVINGOFFTHESPLEENANDREGULATINGTHECIRCULATIONWHENEVERIFINDMYSELFGROWINGGRIMABOUTTHEMOUTHWHENEVERITISADAMPDRIZZLYNOVEMBERINMYSOULWHENEVERIFINDMYSELFINVOLUNTARILYPAUSINGBEFORECOFFINWAREHOUSESANDBRINGINGUPTHEREAROFEVERYFUNERALIMEETANDESPECIALLYWHENEVERMYHYPOSGETSUCHANUPPERHANDOFMETHATITREQUIRESASTRONGMORALPRINCIPLETOPREVENTMEFROMDELIBERATELYSTEPPINGINTOTHESTREETANDMETHODICALLYKNOCKINGPEOPLESHATSOFFTHENIACCOUNTITHIGHTIMETOGETTOSEAASSOONASICANTHISISMYSUBSTITUTEFORPISTOLANDBALLWITHAPHILOSOPHICALFLOURISHCATOTHROWSHIMSELFUPONHISSWORDIQUIETLYTAKETOTHESHIPTHEREISNOTHINGSURPRISINGINTHISIFTHEYBUTKNEWITALMOSTALLMENI
+...
+NEGRANDHOODEDPHANTOMLIKEASNOWHILLINTHEAIR
+```
+
+Działanie algorytmu zostało przeprowadzone na zaszyforwanym w ramach pierwszego zadania tekście. Podobnie jak w przypadku ataku typu brute-force program został uruchomiony dla 500000 iteracji. W tym celu użyliśmy następującego polecenia:  
+`python lab3_solution.py -i szyfrogram.txt -o wynik_2.txt -a mh -r reference.txt --iterations 500000`
+
+W wyniku działania algorytmu MH otrzymaliśmy odszyfrowany tekst oraz odpowiadający mu klucz. Otrzymany wynik był czytelny i w pełni przypominał oryginalny tekst jawny. Poniżej przedstawione zostały otrzymane wyniki:
+
+**Tekst odszyfrowany Metropolis-Hastings**
+
+```plaintext
+CALLMEISHMAELSOMEYEARSAGONEVERMINDHOWLONGPRECISELYHAVINGLITTLEORNOMONEYINMYPURSEANDNOTHINGPARTICULARTOINTERESTMEONSHOREITHOUGHTIWOULDSAILABOUTALITTLEANDSEETHEWATERYPARTOFTHEWORLDITISAWAYIHAVEOFDRIVINGOFFTHESPLEENANDREGULATINGTHECIRCULATIONWHENEVERIFINDMYSELFGROWINGGRIMABOUTTHEMOUTHWHENEVERITISADAMPDRIZZLYNOVEMBERINMYSOULWHENEVERIFINDMYSELFINVOLUNTARILYPAUSINGBEFORECOFFINWAREHOUSESANDBRINGINGUPTHEREAROFEVERYFUNERALIMEETANDESPECIALLYWHENEVERMYHYPOSGETSUCHANUPPERHANDOFMETHATITREQUIRESASTRONGMORALPRINCIPLETOPREVENTMEFROMDELIBERATELYSTEPPINGINTOTHESTREETANDMETHODICALLYKNOCKINGPEOPLESHATSOFFTHENIACCOUNTITHIGHTIMETOGETTOSEAASSOONASICANTHISISMYSUBSTITUTEFORPISTOLANDBALLWITHAPHILOSOPHICALFLOURISHCATOTHROWSHIMSELFUPONHISSWORDIQUIETLYTAKETOTHESHIPTHEREISNOTHINGSURPRISINGINTHISIFTHEYBUTKNEWITALMOSTALLMENINTHEIRDEGREESOMETIMEOROTHERCHERISHVERYNEARLYTHESAMEFEELINGSTOWARDTHEOCEANWITHME
+```
+
+**Klucz Metropolis-Hastings**
+
+```JSON
+{"A": "Z", "B": "G", "C": "L", "D": "S", "E": "D", "F": "C", "G": "Q", "H": "X", "I": "M", "J": "P", "K": "K", "L": "O", "M": "I", "N": "V", "O": "R", "P": "N", "Q": "H", "R": "W", "S": "A", "T": "U", "U": "Y", "V": "F", "W": "T", "X": "B", "Y": "E", "Z": "J"}
+```
+
 **Wnioski:**
 
+W przeciwieństwie do ataku brute-force, tutaj jako wskaźnik dokładności użyliśmy logarytmicznej funkcji wiarygodności zamiast wyniku chi-kwadrat. Porównując uzyskane wyniki z testem jawnym można zauważyć, że algorytm MH osiągnął stu procentową skuteczność, ponieważ odszyfrowany klucz w pełni zgadzał się z kluczem użytym do szyfrowania (26 trafień). Wartości log-wiarygodności w kolejnych iteracjach algorytmu MH stabilizowały się na poziomie -2207.12, co wskazuje na to, że algorytm osiągnął optymalne rozwiązanie i to zaledwie po 2000 iteracjach. Poniżej przedstawiono tabelę z wynikami dla kolejnych iteracji:
 
+| Iteracja   | Log-wiarygodność | Uwagi |
+|------------|------------------|-----------|
+| 0          | -3102.44         | Start z losowym kluczem |
+| 1 000      | -2354.93         | Pierwsza znacząca poprawa |
+| 2 000      | -2207.12         | Osiągnięcie optimum |
+| 8 000      | -2207.12         | Pełna stabilizacja |
+| 500 000    | -2207.12         | Zakończenie ataku |
 
 ### Zadanie 3
 
@@ -762,9 +884,36 @@ def sa_attack(input_file, output_file, reference_file, iterations=10000, initial
 
 #### Wyniki
 
+W trzecim zadaniu zaimplementowaliśmy atak na szyfr podstawieniowy wykorzystujący algorytm Symulowanego Wyżarzania (Simulated Annealing). Podobnie jak w przypadku ataku MH, wykorzystaliśmy ten sam fragment "Moby Dicka" jako tekst referencyjny do budowy macierzy bigramów oraz zaszyfrowany tekst jawny z pierwszego zadania. Algorytm SA różni się od MH mechanizmem akceptacji rozwiązań, który uwzględnia dynamicznie malejącą "temperaturę" systemu. Wysoka temperatura pozwala na akceptację gorszych rozwiązań, co sprzyja eksploracji przestrzeni rozwiązań. W miarę spadku temperatury algorytm staje się bardziej skłonny do akceptacji tylko lepszych rozwiązań.
+
+Podobnie jak w dwóch poprzednich przypadkach, program został uruchomiony dla 500000 iteracji. W tym celu użyliśmy następującego polecenia:  
+`python lab3_solution.py -a sa -i szyfrogram.txt -o wynik_3.txt -r reference.txt --iterations 500000`
+
+W wyniku działania algorytmu SA otrzymaliśmy następujące wyniki:
+
+**Tekst odszyfrowany Symulowanym Wyżarzaniem**
+
+```plaintext
+CALLMEISHMAELSOMEYEARSAGONEVERMINDHOWLONGPRECISELYHAVINGLITTLEORNOMONEYINMYPURSEANDNOTHINGPARTICULARTOINTERESTMEONSHOREITHOUGHTIWOULDSAILABOUTALITTLEANDSEETHEWATERYPARTOFTHEWORLDITISAWAYIHAVEOFDRIVINGOFFTHESPLEENANDREGULATINGTHECIRCULATIONWHENEVERIFINDMYSELFGROWINGGRIMABOUTTHEMOUTHWHENEVERITISADAMPDRIZZLYNOVEMBERINMYSOULWHENEVERIFINDMYSELFINVOLUNTARILYPAUSINGBEFORECOFFINWAREHOUSESANDBRINGINGUPTHEREAROFEVERYFUNERALIMEETANDESPECIALLYWHENEVERMYHYPOSGETSUCHANUPPERHANDOFMETHATITREQUIRESASTRONGMORALPRINCIPLETOPREVENTMEFROMDELIBERATELYSTEPPINGINTOTHESTREETANDMETHODICALLYKNOCKINGPEOPLESHATSOFFTHENIACCOUNTITHIGHTIMETOGETTOSEAASSOONASICANTHISISMYSUBSTITUTEFORPISTOLANDBALLWITHAPHILOSOPHICALFLOURISHCATOTHROWSHIMSELFUPONHISSWORDIQUIETLYTAKETOTHESHIPTHEREISNOTHINGSURPRISINGINTHISIFTHEYBUTKNEWITALMOSTALLMENINTHEIRDEGREESOMETIMEOROTHERCHERISHVERYNEARLYTHESAMEFEELINGSTOWARDTHEOCEANWITHME
+```
+
+**Klucz Symulowanego Wyżarzania**
+
+```JSON
+{"A": "Z", "B": "G", "C": "L", "D": "S", "E": "D", "F": "C", "G": "Q", "H": "X", "I": "M", "J": "P", "K": "K", "L": "O", "M": "I", "N": "V", "O": "R", "P": "N", "Q": "H", "R": "W", "S": "A", "T": "U", "U": "Y", "V": "F", "W": "T", "X": "B", "Y": "E", "Z": "J"}
+```
+
 **Wnioski:**
 
+Podobnie jak w przypadku algorytmu MH, uzyskane wyniki algorytmu SA były w pełni prawidłowe, a uzyskany klucz i tekst odszyfrowany były zgodne z oryginalnym tekstem jawnym. Algorytm SA osiągnął stabilizację na poziomie **-2192.57** log-wiarygodności, co stanowi nawet lepszy wynik niż w przypadku MH (-2207.12). Poniższa tabela zawiera kluczowe etapy procesu:
 
+| Iteracja | Temperatura | Log-wiarygodność | Uwagi                   |
+|----------|-------------|------------------|-------------------------|
+| 0        | 990.00      | -3436.44         | Start z losowym kluczem |
+| 1000     | 0.04        | -2343.65         | Gwałtowna poprawa       |
+| 2000     | 0.00        | -2192.57         | Osiągnięcie optimum     |
+| 5000     | 0.00        | -2192.57         | Pełna stabilizacja      |
+| 500000   | 0.00        | -2192.57         | Zakończenie             |
 
 ### Zadanie 4
 
@@ -1198,11 +1347,45 @@ def ga_attack(input_file, output_file, reference_file, population_size=100, cros
 
 #### Wyniki
 
+W ramach czwartego zadania zaimplementowaliśmy atak na szyfr podstawieniowy wykorzystujący Algorytm Genetyczny (GA). Podobnie jak w przypadku poprzednich metod, wykorzystaliśmy ten sam fragment "Moby Dicka" jako tekst referencyjny do budowy macierzy bigramów. Specyfika GA wymagała dodatkowych parametrów konfiguracyjnych, w tym rozmiaru populacji (200 osobników), prawdopodobieństwa krzyżowania (0.9) i mutacji (0.1), które znacząco wpłynęły na przebieg i efektywność ataku.
+
+Niestety ze względu na złożoność działania algorytmu, musieliśmy ograniczyć liczbę iteracji do 5000, ponieważ czas jego wykonania zająłby zbyt długo w stosunku do pozostałych algorytmów. Parametry algorytmu zostały dobrane na podstawie wcześniejszych doświadczeń i testów. Program został uruchomiony z wykorzystaniem następującego polecenia:  
+`python lab3_solution.py -a ga -i szyfrogram.txt -o wynik_4.txt -r reference.txt --population-size 200 --crossover-prob 0.9 --mutation-prob 0.1 --iterations 5000 `
+
+W wyniku działania algorytmu otrzymaliśmy następujące wyniki:
+
+**Tekst odszyfrowany Symulowanym Wyżarzaniem**
+
+```plaintext
+BROOESMAMERSOARESUSRTARFRASISTEMADMRGORAFLTSBMASOUMRIMAFOMOOOSRTARERASUMAEULYTASRADAROMMAFLRTOMBYORTORMAOSTSAOESRAAMRTSMOMRYFMOMGRYODARMORWRYOROMOOOSRADASSOMSGROSTULRTORCOMSGRTODMOMARGRUMMRISRCDTMIMAFRCCOMSALOSSARADTSFYOROMAFOMSBMTBYOROMRAGMSASISTMCMADEUASOCFTRGMAFFTMERWRYOOMSERYOMGMSASISTMOMARDRELDTMJJOUARISEWSTMAEUARYOGMSASISTMCMADEUASOCMAIROYAORTMOULRYAMAFWSCRTSBRCCMAGRTSMRYASARADWTMAFMAFYLOMSTSRTRCSISTUCYASTROMESSORADSALSBMROOUGMSASISTEUMULRAFSOAYBMRAYLLSTMRADRCESOMROMOTSYYMTSARAOTRAFERTROLTMABMLOSORLTSISAOESCTREDSOMWSTROSOUAOSLLMAFMAOROMSAOTSSORADESOMRDMBROOUZARBZMAFLSRLOSAMROARCCOMSAMRBBRYAOMOMMFMOMESORFSOORASRRAARRARAMBRAOMMAMAEUAYWAOMOYOSCRTLMAORORADWROOGMOMRLMMORARLMMBROCORYTMAMBROROMTRGAMMEASOCYLRAMMAAGRTDMYYMSOOUORZSOROMSAMMLOMSTSMAAROMMAFAYTLTMAMAFMAOMMAMCOMSUWYOZASGMOROERAOROOESAMAOMSMTDSFTSSARESOMESRTROMSTBMSTMAMISTUASRTOUOMSARESCSSOMAFAORGRTDOMSRBSRAGMOMES
+```
+
+**Klucz Symulowanego Wyżarzania**
+
+```JSON
+{"A": "V", "B": "L", "C": "N", "D": "S", "E": "I", "F": "Q", "G": "T", "H": "E", "I": "F", "J": "N", "K": "X", "L": "N", "M": "X", "N": "Z", "O": "U", "P": "P", "Q": "D", "R": "Z", "S": "D", "T": "W", "U": "E", "V": "K", "W": "G", "X": "H", "Y": "H", "Z": "K"}
+```
+
 **Wnioski:**
 
+Wynik działania algorytmu okazał się najmniej skuteczny, ponieważ otrzymany odszyfrowany tekst nie był prawie w ogóle zgodny z oryginałem. Algorytm Genetyczny osiągnął swój najlepszy wynik -2768.02 w 4300 generacji. Pomimo większej złożoności obliczeniowej (21 minut dla zaledwie 5000 generacji w porównaniu do 5 minut dla 500000 iteracji MH/SA), metoda ta znalazła jedynie 2 z 26 poprawnych liter w kluczu.
+
+Analizując przebieg ewolucji można zauważyć, że algorytm szybko utknął w minimum lokalnym około 1000 generacji, a kolejne poprawki były marginalne. Średnia wartość funkcji celu dla całej populacji utrzymywała się na względnie stałym poziomie około -3550, co wskazuje na ograniczoną zdolność do eksploracji przestrzeni rozwiązań. Niskie odchylenie standardowe (~130) potwierdza, że populacja szybko stała się zbyt jednorodna. W tabeli poniżej przedstawiono szczegółowe wyniki ewolucji algorytmu genetycznego:
+
+| Generacja | Najlepszy wynik | Średni wynik | Odchylenie standardowe | Uwagi |
+|-----------|----------------|--------------|------------------------|-------|
+| 0         | -3074.91       | -3521.75     | 116.9823               | Start populacji z losowymi kluczami |
+| 300       | -2971.12       | -3564.37     | 128.0717               | Pierwsza stabilizacja wyników |
+| 1000      | -2934.80       | -3542.81     | 132.6388               | Przełamanie bariery -3000 |
+| 3100      | -2921.98       | -3549.69     | 133.1495               | Lepsze dostosowanie części kluczy |
+| 3400      | -2843.73       | -3579.78     | 134.8074               | Największy skok jakości rozwiązania |
+| 4300      | -2768.02       | -3574.74     | 130.5734               | Osiągnięcie najlepszego wyniku |
+| 4900      | -2768.02       | -3589.40     | 133.6041               | Stabilizacja - koniec algorytmu |
 
 
 ### Implementacja głównej funkcji programu
+
+Poniżej przedstawiona została implementacja głównej funkcji programu, która obsługuje wszystkie operacje związane z szyfrowaniem, deszyfrowaniem oraz atakami na analizowany kryptosystem. Przyjmuje ona argumenty wiersza poleceń, które są następnie przetwarzane i przekazywane do odpowiednich funkcji.
 
 **Funkcja `Main`**
 
