@@ -1454,8 +1454,43 @@ def main():
 
 Dokonać analizy pracy zaimplementowanych algorytmów, porównując ich wydajność w ataku na analizowany kryptosystem.
 
-#### Implementacja
+#### 1. Skuteczność odtwarzania klucza  
+| Algorytm               | Poprawność klucza | Zgodne pary liter | Wynik funkcji celu       | Czas wykonania  |  
+|------------------------|-------------------|-------------------|--------------------------|-----------------|  
+| Brute Force (BF)       | 23.08%            | 6/26              | χ² = 0.4085              | ~5 min          |  
+| Metropolis-Hastings (MH)| 100%              | 26/26             | log-like = -2207.12      | ~5 min          |  
+| Simulated Annealing (SA)| 100%              | 26/26             | log-like = -2192.57      | ~5 min          |  
+| Genetic Algorithm (GA) | 7.69%             | 2/26              | log-like = -2768.02      | ~21 min*        |  
 
-#### Wyniki
+*Dla 5000 generacji (ze względu na złożoność obliczeniową).  
+
+#### 2. Kluczowe wnioski  
+- **BF**:  
+  - Zaleta: Brak wymagań dot. tekstu referencyjnego  
+  - Wada: Niska skuteczność (23%) nawet po 500k iteracji  
+- **MH/SA**:  
+  - Osiągnęły 100% poprawność dzięki wykorzystaniu statystyk bigramów  
+  - SA nieznacznie lepszy od MH (-2192.57 vs -2207.12 log-wiarygodności)  
+- **GA**:  
+  - Najwolniejszy przy najgorszych wynikach  
+  - Problem z przedwczesną zbieżnością populacji  
+
+#### 3. Czynniki decydujące o skuteczności  
+- **Jakość danych referencyjnych**: Tekst jawny i referencyjny pochodziły z tego samego źródła ("Moby Dick")  
+- **Parametry**:  
+  - Dla SA: `initial_temp=1000`, `cooling_rate=0.99`  
+  - Dla GA: `population_size=200`, `mutation_prob=0.1` (niewystarczające)  
+- **Kryteria stopu**:  
+  - BF/MH/SA: 500k iteracji  
+  - GA: 5k generacji (limit czasowy)  
+
+#### 4. Rekomendacje  
+1. **Dla szybkiej analizy**: Metropolis-Hastings (lepsza stabilność)  
+2. **Dokładniejsze wyniki**: Simulated Annealing (lepsza eksploracja przestrzeni)  
+3. **Unikać**:  
+   - Brute Force dla tekstów >100 znaków  
+   - Czystych GA bez modyfikacji (np. hybrydyzacja z SA)  
 
 **Wnioski:**
+
+Heurystyczne metody optymalizacji (MH i SA) okazały się znacznie bardziej efektywne niż podejścia oparte na losowym przeszukiwaniu (BF) lub ewolucji (GA). Ich siła leży w inteligentnym wykorzystaniu statystyk językowych i zdolności do unikania minimów lokalnych, co czyni je idealnymi narzędziami do kryptoanalizy szyfrów podstawieniowych.
