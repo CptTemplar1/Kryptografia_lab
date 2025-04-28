@@ -33,7 +33,8 @@ def berlekamp_massey(sequence):
                 B = T
                 m = N
 
-    return C, L
+    # Odwrócenie kolejności współczynników, aby pasowały do generatora LFSR z zadania 1
+    return C[::-1], L
 
 def format_polynomial(C):
     terms = []
