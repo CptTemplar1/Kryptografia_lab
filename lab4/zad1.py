@@ -1,7 +1,7 @@
 import argparse
 
+#Funkcja realizująca działanie LFSR.
 def lfsr(initial_state, taps, output_length):
-    """Funkcja realizująca działanie LFSR."""
     state = initial_state.copy()
     output = []
 
@@ -19,6 +19,7 @@ def lfsr(initial_state, taps, output_length):
 
     return output
 
+#Główna funkcja programu
 def main():
     parser = argparse.ArgumentParser(description="LFSR Generator")
 
