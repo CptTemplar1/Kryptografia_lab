@@ -21,3 +21,11 @@ python zad3.py --sequence 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 
 	Złożoność liniowa (L): 5
 	Współczynniki wielomianu połączeń (C(x)) (lista współczynników): [1, 0, 1, 0, 0, 1]
 	Wielomian połączeń C(x) w postaci czytelnej: 1 + x^2 + x^5
+
+
+ZADANIE 4
+python zad4.py -e -in tekst_jawny.txt -out szyfrogram.txt -i 1 0 1 1 -t 0 2              
+	✅ Wiadomość zaszyfrowana i zapisana do: szyfrogram.txt
+
+python zad4.py -d -in szyfrogram.txt -out tekst_odszyfrowany.txt -i 1 0 1 1 -t 0 2
+	✅ Wiadomość odszyfrowana i zapisana do: tekst_odszyfrowany.txt
