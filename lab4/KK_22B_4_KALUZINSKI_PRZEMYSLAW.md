@@ -94,6 +94,22 @@ def main():
 
 #### Wyniki
 
+W ramach zadania 1 zaimplementowano rejestr przesuwny z liniowym sprzężeniem zwrotnym (LFSR), który generuje sekwencję bitów na podstawie podanego stanu początkowego, indeksów sprzężenia zwrotnego oraz żądanej długości strumienia wyjściowego. LFSR działa na zasadzie przesuwania bitów w rejestrze i obliczania nowego bitu poprzez operację XOR na bitach wskazywanych przez tzw. `taps` (indeksy sprzężenia zwrotnego). Te indeksy odpowiadają niezerowym współczynnikom wielomianu charakterystycznego (z wyjątkiem najwyższej potęgi). W przypadku zadania 1 wielomian miał postać $C(x) = 1 + x + x^3$, co przekłada się na indeksy sprzężenia zwrotnego `[0, 1]` (odpowiadające potęgom $x^0$ i $x^1$), przy czym najwyższa potęga ( $x^3$ ) nie jest uwzględniana jako tap, ponieważ odpowiada ona pozycji, z której bit jest wyprowadzany.
+
+Przetestowano działanie programu na przykładzie z treści zadania, gdzie stan początkowy wynosił `[0, 0, 1]`, indeksy sprzężenia zwrotnego `[0, 1]`, a długość strumienia wyjściowego została ustawiona na 14 bitów.
+
+**Polecenie, którego użyto do wywołania programu:**  
+`python zad1.py -i 0 0 1 -t 0 1 -o 14`
+
+| Typ wyniku       | Bity                                                         |
+|------------------|-------------------------------------------------------------|
+| Oczekiwany wynik | `[0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1]`                |
+| Otrzymany wynik  | `[0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1]`                |
+
+**Wnioski:**
+
+Implementacja rejestru LFSR działa poprawnie, co potwierdza zgodność wygenerowanej sekwencji bitów z oczekiwanym wynikiem podanym w treści zadania. Program prawidłowo przetwarza dane wejściowe, uwzględniając stan początkowy rejestru oraz wskazane pozycje sprzężenia zwrotnego, i generuje na ich podstawie strumień wyjściowy o żądanej długości. Stanowi to podstawę do dalszej pracy z rejestrami przesuwnymi i ich zastosowaniami w bardziej złożonych systemach.
+
 ### Zadanie 2
 
 Wykorzystaj program z zadania pierwszego do utworzenia rejestrów LFSR opisanych wielominanami:
@@ -112,9 +128,33 @@ to dla zdefiniowanych kolejno rejestrów, sekwencja wyjściowa powinna być nast
 
 #### Implementacja
 
-
+Zadanie 2 korzysta z tego samego kodu, co zadanie 1. Wystarczy wywołać program z innymi argumentami, dlatego pominięto implementację w tym miejscu.
 
 #### Wyniki
+
+W zadaniu 2 wykorzystano zaimplementowany wcześniej rejestr LFSR do wygenerowania sekwencji bitów dla dwóch różnych wielomianów. Dla pierwszego przypadku, z wielomianem $C(x) = 1 + x^2 + x^5$ i stanem początkowym `[1, 0, 0, 1, 0]`, wywołano program z indeksami sprzężenia zwrotnego `[0, 2]`, co odpowiada kolejnym niezerowym argumentom wielomianu z pominięciem tego z najwyższą potęgą. Długość generowanej sekwencji wyniosła 25 bitów. 
+
+**Polecenie wywołania programu:**  
+`python zad1.py -i 1 0 0 1 0 -t 0 2 -o 25`  
+
+| Typ wyniku       | Bity                                                                                          |
+|------------------|-----------------------------------------------------------------------------------------------|
+| Oczekiwany wynik | `[1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1]`                 |
+| Otrzymany wynik  | `[1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1]`                 |
+
+W drugim przypadku, dla wielomianu $C(x) = 1 + x + x^3 + x^5$, użyto tych samych parametrów początkowych, ale z indeksami sprzężenia zwrotnego `[0, 1, 3]`.  
+
+**Polecenie wywołania programu:**  
+`python zad1.py -i 1 0 0 1 0 -t 0 1 3 -o 25`  
+
+| Typ wyniku       | Bity                                                                                          |
+|------------------|-----------------------------------------------------------------------------------------------|
+| Oczekiwany wynik | `[1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1]`                 |
+| Otrzymany wynik  | `[1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1]`                 |
+
+**Wnioski:**  
+
+Wyniki potwierdzają poprawność działania programu dla różnych konfiguracji rejestru LFSR. Wygenerowane sekwencje bitów są zgodne z oczekiwanymi wartościami podanymi w treści zadania, co świadczy o prawidłowej interpretacji wielomianów generujących i poprawnej implementacji mechanizmu sprzężenia zwrotnego. Różnice w sekwencjach wyjściowych dla obu przypadków wynikają bezpośrednio z zastosowania różnych kombinacji sprzężeń zwrotnych, co ilustruje wrażliwość rejestru na zmianę parametrów wejściowych. Program zachowuje się zgodnie z zasadami działania rejestrów LFSR, generując unikalne sekwencje dla różnych ustawień.  
 
 ### Zadanie 3
 
@@ -341,6 +381,32 @@ def main():
 
 #### Wyniki
 
+W zadaniu 3 zaimplementowano algorytm Berlekampa-Masseya służący do identyfikacji parametrów rejestru LFSR na podstawie wygenerowanej sekwencji bitów. Jest to efektywna metoda analizy sekwencji binarnych, pozwalająca na identyfikację minimalnego rejestru LFSR (Linear Feedback Shift Register), który mógł wygenerować daną sekwencję. Działa on w ciele Galois GF(2), gdzie wszystkie operacje wykonywane są modulo 2. Algorytm iteracyjnie oblicza tzw. rozbieżność (discrepancy) między przewidywaną a rzeczywistą wartością kolejnych bitów sekwencji, aktualizując przy tym wielomian połączeń C(x) i złożoność liniową L. Kluczową właściwością algorytmu jest to, że zawsze znajduje najkrótszy możliwy rejestr LFSR dla danej sekwencji, o ile sekwencja jest wystarczająco długa (co najmniej 2L bitów dla złożoności L).
+
+W ramach zadania przeanalizowano sekwencję bitów `[1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1]` wygenerowaną wcześniej przez rejestr LFSR zaimplementowany w zadaniu 1. Algorytm Berlekampa-Masseya pozwolił odtworzyć parametry tego rejestru – wielomian połączeń i złożoność liniową.
+
+**Polecenie wywołania programu:**  
+`python zad3.py --sequence 1 0 0 1 0 1 1 0 0 1 1 1 1 1 0 0 0 1 1 0 1 1 1 0 1`
+
+**Otrzymane wyniki:**
+- Złożoność liniowa (L): 5
+- Współczynniki wielomianu połączeń (C(x)) (lista współczynników): [1, 0, 1, 0, 0, 1]
+- Wielomian połączeń C(x) w postaci czytelnej: 1 + x^2 + x^5
+
+| Typ wyniku                                                        | Oczekiwany wynik     |Otrzymany wynik      |
+|-------------------------------------------------------------------|----------------------|---------------------|
+| Złożoność liniowa (L):                                            | 5                    | 5                   |
+| Współczynniki wielomianu połączeń (C(x)) (lista współczynników):  | [1, 0, 1, 0, 0, 1]   | [1, 0, 1, 0, 0, 1]  |
+| Wielomian połączeń C(x) w postaci czytelnej:                      | $1 + x^2 + x^5$      | $1 + x^2 + x^5$     |
+
+**Wnioski:**  
+
+Implementacja algorytmu Berlekampa-Masseya działa poprawnie, co potwierdza zgodność znalezionego wielomianu połączeń $C(x) = 1 + x^2 + x^5$ z wielomianem użytym w zadaniu 2 do wygenerowania tej sekwencji. Złożoność liniowa L=5 oznacza, że sekwencja może być generowana przez rejestr LFSR o 5 komórkach, a do przewidzenia kolejnego bitu potrzebne jest 5 poprzednich bitów.  
+
+Należy jednak zwrócić uwagę, że dla krótszych sekwencji algorytm może zwrócić różne wielomiany połączeń, które są w stanie wygenerować daną sekwencję, ale niekoniecznie odpowiadają rzeczywistemu rejestrowi LFSR użytego do jej generacji. Wynika to z faktu, że krótsze sekwencje mogą być generowane przez różne konfiguracje rejestrów, a algorytm znajduje tylko jeden z możliwych wielomianów minimalnych. Dopiero gdy sekwencja jest dostatecznie długa (co najmniej 2L bitów), wynik algorytmu staje się jednoznaczny i odpowiada rzeczywistemu wielomianowi generującemu.  
+
+W tym przypadku sekwencja była wystarczająco długa, aby algorytm poprawnie zidentyfikował oryginalny wielomian. Program działa zgodnie z założeniami teoretycznymi i może być wykorzystywany do analizy generatorów pseudolosowych oraz w zastosowaniach kryptograficznych, gdzie identyfikacja parametrów LFSR jest kluczowa dla bezpieczeństwa systemu.
+
 ### Zadanie 4
 
 Dokonaj implementacji kryptosystemu strumieniowego, który wykorzystuje pojedynczy LFSR jako strumień klucza. Przetestuj zaimplementowany kryptosystem dokonując operacji szyfrowania i deszyfrowania zadanej wiadomości w postaci tekstu w języku angielskim. 
@@ -540,3 +606,43 @@ def main():
 ```
 
 #### Wyniki
+
+W zadaniu 4 zaimplementowano kryptosystem strumieniowy wykorzystujący rejestr LFSR (Linear Feedback Shift Register) do generowania strumienia klucza. Podstawą działania systemu jest operacja XOR między bitami tekstu jawnego a bitami generowanymi przez LFSR. Ponieważ operacja XOR jest odwracalna (A ⊕ B ⊕ B = A), ten sam strumień klucza może zostać użyty zarówno do szyfrowania, jak i deszyfrowania. Kluczowymi elementami implementacji były: konwersja tekstu na bity, generowanie strumienia klucza przez LFSR oraz wykonanie operacji XOR na odpowiadających sobie bitach. Realizując zadanie wykorzystaliśmy implementację LFSR z zadania 1. 
+
+**Przebieg zadania**  
+1. **Szyfrowanie:**  
+Tekst jawny z pliku `tekst_jawny.txt` został zaszyfrowany przy użyciu rejestru LFSR o stanie początkowym `[1, 0, 1, 1]` i sprzężeniach zwrotnych na pozycjach `[0, 2]`. Wygenerowany strumień klucza został wykorzystany do zaszyfrowania tekstu poprzez operację XOR, a wynik zapisano do pliku `szyfrogram.txt`.  
+
+**Zawartość pliku `tekst_jawny.txt`**
+```plaintext
+Cryptography is both an art and a science that protects information by transforming it into secure formats. Modern encryption techniques rely on complex algorithms and mathematical principles to ensure data confidentiality. The development of stream ciphers marked significant progress in symmetric cryptography, with LFSR-based systems playing important historical role. While this example uses simplified approach, real-world applications require more sophisticated methods to withstand cryptanalysis. Testing encryption systems with varied input texts helps verify their robustness against different attack vectors.
+```
+
+**Polecenie wywołania programu:**  
+`python zad4.py -e -in tekst_jawny.txt -out szyfrogram.txt -i 1 0 1 1 -t 0 2`  
+
+
+**Wynik z pliku `szyfrogram.txt`**  
+```plaintext
+1 1 1 1 0 1 0 1 1 0 1 0 1 0 0 1 0 0 0 1 0 1 0 0 1 1 0 0 0 1 1 0 1 0 1 0 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 1 0 0 0 1 1 0 1 0 1 0 0 1 0 0 0 0 1 1 0 0 1 1 0 0 0 1 1 0 1 0 1 1 0 0 1 1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 1 0 1 0 1 1 0 0 1 0 0 0 0 1 1 1 1 0 1 0 0 1 0 1 1 0 1 0 1 1 1 0 0 1 0 0 0 0 0 0 1 0 1 1 0 0 0 0 1 0 1 0 1 1 0 0 1 1 0 1 0 0 1 1 0 1 1 1 0 1 0 1 1 1 1 0 1 1 0 1 0 1 0 1 0 0 1 1 0 1 1 1 0 1 0 1 1 1 1 0 1 0 1 0 0 1 0 0 0 1 1 0 0 1 1 0 0 1 0 1 1 0 1 0 1 1 1 0 1 0 0 0 0 0 0 0 1 1 1 1 0 1 0 0 1 0 1 1 1 1 1 0 1 1 0 0 0 0 1 1 0 0 1 0 0 1 0 1 1 0 1 0 1 0 1 0 0 0 0 0 0 0 1 1 1 0 1 1 0 1 1 1 1 1 1 0 1 1 1 1 1 0 0 0 0 0 0 0 1 1 1 1 0 1 0 1 0 1 1 0 1 1 1 1 1 0 0 1 0 0 1 1 0 1 1 1 0 0 0 0 1 0 1 0 1 1 0 0 1 1 0 0 0 0 1 1 0 0 1 1 0 0 0 0 1 0 1 1 1 1 1 0 1 1 0 0 0 1 1 1 0 1 1 1 0 0 0 1 0 0 1 0 1 1 0 1 0 0 0 0 0 1 1 0 0 1 1 1 0 1 0 0 1 1 1 0 1 1 1 0 0 0 0 0 0 1 1 0 0 1 1 1 0 0 0 1 0 1 1 1 1 1 1 0 1 1 0 0 0 0 0 1 0 0 1 1 0 1 1 0 0 0 1 0 1 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0 0 1 0 0 1 0 1 1 0 1 1 0 0 0 0 0 1 1 0 0 1 1 0 0 0 0 1 0 1 0 1 1 0 0 1 0 0 0 0 0 0 0 1 0 1 1 0 1 1 0 0 0 1 1 1 1 1 0 1 1 0 0 0 0 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 1 1 0 1 1 0 0 0 1 1 0 0 1 1 1 0 0 0 1 0 0 1 0 1 1 1 0 1 0 0 0 0 0 0 0 1 1 1 1 0 0 0 1 0 1 1 0 1 1 1 1 0 1 0 0 0 0 0 0 1 0 1 1 0 0 0 1 0 0 1 0 1 1 0 1 1 0 0 0 0 0 0 1 0 0 1 1 0 1 1 0 0 0 1 0 1 1 1 1 0 0 0 1 0 0 1 1 0 1 1 1 0 1 1 1 1 1 1 0 1 0 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 1 0 0 0 1 1 0 0 1 1 1 0 1 1 0 0 1 1 1 1 1 1 0 1 1 0 0 0 1 1 1 1 0 1 1 0 1 0 0 1 1 1 0 1 1 1 0 0 0 0 0 0 1 1 0 0 0 1 1 0 0 0 1 0 0 1 0 1 1 1 1 1 0 0 1 0 0 1 1 0 1 1 1 0 1 0 0 0 0 1 0 1 1 0 1 0 0 0 0 0 1 1 1 1 1 1 1 0 1 1 0 1 1 1 0 1 1 1 0 1 0 0 0 0 1 1 0 0 1 1 1 0 0 0 1 0 1 1 1 1 1 0 1 0 1 0 1 0 0 1 1 0 1 1 1 1 1 1 0 1 1 1 0 1 1 0 1 0 0 0 0 0 0 1 0 0 1 1 1 0 1 0 0 1 1 1 0 1 0 1 0 0 1 0 0 0 0 0 0 1 1 1 0 0 1 0 1 1 0 1 0 1 1 1 1 1 0 0 0 0 0 0 0 1 1 1 1 0 1 0 1 0 1 1 0 1 0 1 0 0 1 0 0 0 1 0 1 0 0 1 1 0 0 0 1 1 0 1 0 1 0 1 1 1 1 0 0 0 0 0 1 0 0 1 1 0 1 1 0 0 1 1 0 1 1 0 1 0 1 0 1 0 0 1 1 0 1 1 1 0 0 0 0 1 0 1 0 1 1 1 1 1 0 0 0 0 0 1 1 1 0 1 1 0 1 1 1 1 0 1 0 1 1 0 1 0 1 0 0 0 0 0 1 0 0 1 1 0 0 0 1 1 1 1 0 1 0 1 1 1 0 0 0 0 0 1 0 0 0 1 1 0 0 0 1 0 1 1 1 1 1 1 0 1 1 0 0 0 1 1 1 1 1 1 1 0 1 0 0 1 1 1 0 1 1 0 1 1 1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 1 0 1 0 1 1 0 1 0 0 0 0 0 0 0 0 1 1 1 0 0 1 0 1 1 0 1 0 1 1 1 0 0 0 0 0 0 0 0 0 1 0 1 1 0 1 1 0 1 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 1 1 1 0 1 0 0 1 1 1 0 1 0 0 0 1 1 0 1 0 0 1 1 0 1 1 1 0 1 0 1 1 1 1 0 1 1 0 1 1 1 0 0 0 0 1 0 1 0 1 1 0 1 1 0 0 1 1 0 1 0 1 0 0 1 0 0 0 0 0 1 0 0 1 1 0 0 0 0 1 0 1 0 1 1 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0 0 1 0 1 1 1 1 1 1 0 1 1 0 0 0 0 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 1 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 1 0 1 1 1 0 1 1 1 0 1 0 0 0 0 1 1 0 0 1 1 1 0 1 1 1 1 0 1 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 1 1 0 1 0 1 1 1 1 0 1 0 1 1 1 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1 0 1 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 1 1 0 0 1 0 1 1 0 1 0 1 0 1 0 1 1 0 0 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 1 0 0 0 0 1 1 1 0 1 1 0 1 1 1 1 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 1 1 1 0 1 0 0 1 1 1 0 1 0 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 0 0 0 1 0 1 0 1 1 0 1 0 0 0 1 0 0 1 1 0 1 1 1 0 1 0 0 1 1 1 0 1 1 0 1 0 1 0 0 0 1 1 1 1 0 1 1 0 0 0 0 1 1 1 0 1 0 1 0 0 1 0 0 0 0 1 0 0 0 1 0 0 1 0 1 1 0 1 0 1 1 1 1 1 1 0 0 0 0 1 1 0 0 1 1 0 0 0 0 1 0 1 0 1 1 1 0 1 0 0 1 0 0 1 1 0 1 1 1 0 1 0 1 0 1 1 0 1 1 0 1 0 0 0 0 0 0 0 0 1 1 1 1 0 1 0 0 0 0 1 0 1 1 0 0 1 0 0 0 0 0 1 0 0 1 1 1 0 1 0 0 1 1 1 0 1 1 0 1 0 1 0 0 0 1 1 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 0 1 1 1 1 0 0 0 1 0 1 0 0 1 0 0 1 1 0 0 0 1 1 1 1 1 0 1 1 0 0 1 1 1 0 0 1 1 1 0 1 1 1 1 0 1 0 1 1 1 1 1 0 0 1 0 0 1 1 0 1 1 1 0 1 0 0 1 0 1 0 1 1 1 1 1 0 0 0 0 1 1 0 1 1 1 1 0 1 0 0 1 1 1 0 1 1 0 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 1 1 0 1 0 1 1 0 1 1 0 0 0 0 0 1 0 0 0 1 1 0 1 1 0 0 0 1 0 1 0 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 1 0 0 1 1 0 1 1 1 1 0 1 0 1 0 0 1 1 0 1 1 1 0 0 0 1 0 1 1 0 1 0 1 1 1 1 0 0 0 1 1 1 1 1 1 1 0 1 0 0 1 1 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1 0 1 1 0 1 0 1 1 1 0 0 0 0 0 0 0 0 1 0 0 1 1 0 0 0 1 1 0 1 0 1 1 0 0 1 1 0 0 0 0 1 0 0 0 1 1 0 0 0 1 0 0 1 0 1 0 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 1 1 0 1 1 1 0 1 1 1 0 1 0 0 0 0 1 1 1 1 1 1 1 0 1 1 1 0 1 1 0 1 1 1 1 1 0 0 0 0 0 1 0 0 1 1 0 0 1 0 1 1 0 1 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 1 1 0 1 0 0 0 1 1 0 1 1 0 1 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 0 0 0 1 0 1 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 0 1 0 1 1 1 1 0 1 1 0 1 0 1 0 0 0 1 1 0 0 1 1 0 0 1 0 1 1 0 1 0 1 0 1 0 1 1 0 0 0 1 1 1 1 1 1 1 0 1 1 0 0 1 1 0 1 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1 0 1 0 0 1 1 1 0 1 0 1 0 0 0 0 0 0 1 1 1 1 0 1 0 0 1 0 1 1 0 1 0 1 1 0 0 1 0 0 0 0 0 0 0 1 1 1 0 0 1 0 1 1 0 1 0 1 0 1 0 0 0 0 0 0 1 0 1 0 0 1 1 0 1 1 0 1 1 1 0 1 1 0 1 1 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 1 0 1 0 1 0 1 0 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1 0 1 1 1 1 1 1 0 1 1 0 0 0 0 1 1 1 0 1 1 0 0 0 1 0 0 1 0 1 0 0 0 1 0 0 0 0 1 1 1 0 1 1 1 0 0 0 0 1 0 1 0 1 1 0 1 0 0 0 0 0 0 1 0 1 0 1 1 0 0 0 1 0 0 1 0 1 1 1 0 1 0 0 0 0 1 1 1 0 1 1 1 0 1 1 1 1 0 1 0 1 0 0 0 1 0 0 1 0 0 0 0 0 1 1 0 0 1 0 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 1 0 0 1 1 0 0 0 0 1 0 1 0 1 1 0 0 1 1 0 1 0 0 1 1 0 1 1 1 1 1 1 0 1 0 1 0 0 1 1 1 0 1 0 0 1 1 1 1 1 0 1 1 1 0 0 1 0 0 1 1 1 1 0 1 1 0 0 0 0 0 1 1 1 1 1 1 0 1 0 1 1 1 1 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 1 1 0 1 0 0 1 0 1 1 1 1 1 0 1 1 0 0 0 1 1 1 1 0 1 1 0 0 1 1 1 1 1 0 1 0 1 0 0 0 0 0 0 1 1 0 0 1 1 1 0 1 0 0 1 1 1 0 1 1 0 1 1 0 0 0 0 1 1 1 1 0 1 0 0 1 0 1 1 0 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 1 1 1 0 1 0 1 1 1 1 0 1 0 0 0 1 0 0 0 0 0 0 1 0 0 1 1 0 1 1 0 0 0 1 0 1 1 1 1 0 0 0 1 0 0 1 1 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 1 0 0 0 0 1 1 1 0 1 1 1 0 1 1 0 0 1 1 0 1 0 1 0 0 1 0 0 0 1 1 0 0 1 1 1 0 1 0 1 1 1 1 0 1 1 0 1 0 1 0 0 0 1 1 0 0 1 1 0 0 1 0 1 1 0 1 0 1 1 0 0 1 1 0 0 0 0 0 1 0 0 1 1 0 0 0 1 0 1 1 0 1 0 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 1 0 0 1 0 1 1 0 0 1 0 0 0 0 0 1 1 1 0 1 1 0 1 0 1 1 1 1 0 1 1 0 1 1 1 0 1 0 0 1 1 0 1 1 1 0 0 0 1 0 0 1 0 1 1 0 1 0 0 0 0 0 0 0 0 0 1 1 1 0 1 0 0 1 1 1 1 1 1 0 1 0 1 0 1 0 0 1 1 0 1 1 1 1 0 0 0 0 1 1 0 1 1 0 0 1 1 0 0 0 0 0 1 0 0 1 1 0 1 1 0 1 0 1 0 1 1 1 1 1 0 0 1 0 0 1 1 0 1 1 1 0 0 0 0 1 0 1 0 1 1 0 0 1 1 0 0 0 0 0 1 0 0 1 1 0 0 0 1 0 1 1 1 1 1 1 0 1 1 0 0 0 0 1 0 0 0 1 1 0 0 1 1 1 0 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1 1 0 1 0 1 1 0 1 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 1 1 0 1 0 1 0 1 1 1 0 0 0 0 1 1 1 1 0 1 1 0 1 0 0 1 1 1 0 1 0 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 0 0 1 0 1 1 0 1 1 0 0 1 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1 1 0 1 0 1 1 0 1 1 1 0 0 0 0 0 1 0 0 1 1 0 1 0 0 0 0 1 0 1 1 0 0 1 0 0 0 0 0 1 0 0 0 1 1 0 1 0 0 1 0 1 1 1 1 1 0 1 1 0 0 0 0 1 1 0 0 1 1 0 0 0 1 1 0 1 0 1 0 1 0 1 1 0 0 0 1 1 1 1 1 1 1 0 1 1 0 0 1 1 0 1 1 1 0 1 0 0 0 0 0 1 1 1 0 1 1 0 1 1 1 1 0 1 1 1 1 0 1 1 1 0 1 0 0 1 1 0 1 1 1 0 0 0 1 0 0 1 0 1 1 1 1 1 0 0 0 0 0 1 1 0 0 1 1 0 1 1 0 1 0 1 1 1 1 0 1 1 0 0 0 0 1 1 0 1 0 1 1 0 1 1 0 0 1 1 0 1 0 1 0 0 1 0 0 0 0 0 0 0 1 1 1 0 1 0 0 1 0 1 1 1 1 1 0 1 1 0 0 0 0 1 1 0 0 1 1 0 0 0 1 1 0 1 0 1 0 1 0 1 1 0 0 0 0 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 1 0 0 0 0 0 0 0 1 1 0 0 1 1 0 0 0 0 1 0 1 0 1 1 0 0 1 0 0 0 0 0 0 0 1 0 1 1 0 1 1 0 0 0 1 0 1 0 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 0 0 1 0 0 1 0 1 1 1 1 1 0 0 0 0 1 1 1 0 0 1 1 0 0 0 0 1 1 1 0 1 1 0 0 1 0 0 0 0 1 1 1 1 1 1 1 0 1 0 0 1 1 1 1 1 1 1 0 1 1 0 0 0 0 0 0 0 0 1 1 0 1 1 0 0 1 1 0 1 0 1 0 0 1 0 0 0 0 1 0 0 0 1 0 0 1 0 1 1 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 1 1 0 0 0 1 1 0 1 0 1 1 0 0 1 1 0 0 0 0 0 1 0 0 1 1 0 0 0 1 0 1 1 0 1 0 1 1 1 1 0 0 0 0 0 1 0 0 1 1 0 1 0 1 0 1 1 0 1 1 1 0 1 0 0 0 0 1 1 0 0 1 1 1 0 1 0 0 1 1 1 0 1 1 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 1 0 1 1 1 0 1 1 1 1 1 0 0 0 0 1 1 0 0 1 1 1 0 1 1 1 1 0 1 0 1 1 0 1 0 0 0 0 0 0 1 0 0 1 1 1 0 0 0 1 0 1 1 1 1 1 1 0 1 1 0 0 0 1 1 0 0 1 1 1 0 1 1 0 0 1 1 1 1 1 1 0 1 1 0 0 0 1 1 0 1 0 1 1 0 1 1 1 1 1 1 0 1 0 1 1 1 1 0 0 0 0 0 1 0 1 1 1 0 0 0 1 0 1 1 0 1 0 1 1 1 1 0 0 0 0 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 1 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 0 1 0 1 1 0 1 0 1 0 0 1 0 0 0 1 0 1 0 0 1 1 0 0 0 1 1 0 1 0 1 0 1 1 1 1 0 0 0 0 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 1 1 1 0 0 1 1 1 1 1 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 1 1 0 0 0 1 0 1 1 1 1 1 0 1 0 1 0 1 0 0 1 1 0 1 1 1 1 0 0 0 1 0 1 0 1 1 1 1 1 0 0 0 0 1 1 1 1 0 1 1 0 0 0 0 1 0 1 0 1 1 0 0 1 0 0 0 0 0 0 0 1 1 1 1 0 1 0 0 0 1 1 1 1 1 1 0 1 1 0 0 0 0 1 0 0 0 1 1 0 1 1 0 0 0 1 0 1 1 1 0 0 0 0 0 0 1 1 1 1 1 1 1 0 0 1 1 1 1 1 0 1 0 1 0 1 1 0 0 0 1 1 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 0 0 0 0 0 0 1 1 1 0 0 1 0 1 1 0 1 0 1 0 1 0 0 0 0 0 0 1 0 1 0 0 1 1 0 0 0 1 0 1 1 0 1 0 1 1 1 1 0 0 0 0 1 0 0 0 1 1 0 1 1 0 1 1 1 0 1 0 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 0 0 0 0 1 1 0 1 1 0 0 1 0 0 0 0 1 1 0 0 1 1 1 0 1 1 1 1 0 1 1 1 1 1 0 1 1 0 0 0 1 1 0 1 1 1 1 0 1 0 1 1 1 1 0 1 0 1 0 0 1 0 0 0 0 0 1 0 0 1 1 0 1 0 0 1 1 1 0 1 1 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 1 0 0 0 1 1 1 0 1 1 1 0 0 0 0 1 1 1 0 1 0 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 0 0 0 1 0 1 0 1 1 1 1 1 0 0 0 0 1 0 1 0 1 1 1 0 0 0 0 1 0 1 0 1 0 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 1 1 1 1 0 1 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 0 0 0 1 1 0 1 0 1 0 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 0 0 0 0 0 1 0 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0 1 1 1 1 0 1 0 0 0 1 0 1 0 0 1 0 0 1 0 1 1 0 1 0 1 0 1 1 1 1 0 0 0 0 0 1 0 1 1 1 0 1 0 0 1 1 1 0 1 1 0 0 1 0 0 0 0 1 1 1 1 1 1 0 0 1 0 1 1 0 1 0 1 0 1 0 0 1 0 0 0 0 0 0 1 0 1 1 0 1 0 1 0 0 1 0 1 0 1 1 1 0 0 0 0 1 1 1 1 0 1 1 0 0 0 0 1 0 1 0 1 1 0 1 0 1 0 0 0 0 1 0 0 0 1 1 0 0 0 1 0 1 1 0 1 0 1 0 0 0 0 1 0 0 1 1 0 1 1 1 0 1 0 1 1 1 1 0 1 1 1 1 0 0 0 0 0 0 1 1 0 0 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 1 0 0 0 1 1 1 1 0 1 1 0 0 0 0 1 0 1 1 1 1 1 0 1 1 0 0 0 0 1 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 1 1 0 1 0 0 0 0 1 0 1 1 1 1 0 1 0 0 1 1 1 0 1 0 1 0 0 1 0 0 0 0 1 0 0 0 1 1 0 1 1 0 0 0 1 0 1 0 1 1 1 1 0 1 0 0 1 1 0 1 1 1 0 1 0 1 1 1 1 0 1 0 1 1 1 1 0 0 0 1 1 0 0 1 1 1 0 1 0 1 1 1 1 0 1 1 1 0 0 0 0 0 0 0 0 1 1 0 1 0 0 1 0 1 1 0 1 0 1 0 1 1 0 1 0 0 0 0 1 0 0 0 1 1 0 1 0 1 0 1 1 0 1 0 1 1 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 1 0 0 1 0 1 0 1 0 0 0 0 1 0 0 0 0 1 1
+```
+
+2. **Deszyfrowanie:**  
+Zaszyfrowany strumień bitów z pliku `szyfrogram.txt` został odszyfrowany przy użyciu tych samych parametrów LFSR (`[1, 0, 1, 1]` i `[0, 2]`). Operacja XOR między szyfrogramem a strumieniem klucza odtworzyła oryginalny tekst jawny, który zapisano do pliku `tekst_odszyfrowany.txt`.  
+
+**Polecenie wywołania programu:**  
+`python zad4.py -d -in szyfrogram.txt -out tekst_odszyfrowany.txt -i 1 0 1 1 -t 0 2`  
+
+**Wynik z pliku `tekst_odszyfrowany.txt`**  
+```plaintext
+Cryptography is both an art and a science that protects information by transforming it into secure formats. Modern encryption techniques rely on complex algorithms and mathematical principles to ensure data confidentiality. The development of stream ciphers marked significant progress in symmetric cryptography, with LFSR-based systems playing important historical role. While this example uses simplified approach, real-world applications require more sophisticated methods to withstand cryptanalysis. Testing encryption systems with varied input texts helps verify their robustness against different attack vectors.
+```
+
+**Wnioski:**  
+Porównójąc odszyfrowany tekst z oryginalnym, można zauważyć, że są one identyczne. 
+
+1. **Poprawność implementacji:** System działa zgodnie z założeniami – tekst odszyfrowany jest identyczny z oryginalnym, co potwierdza, że operacje szyfrowania i deszyfrowania zostały zaimplementowane prawidłowo.  
+2. **Wrażliwość na parametry LFSR:** Aby deszyfrowanie zakończyło się sukcesem, konieczne jest użycie tych samych parametrów LFSR (stan początkowy i sprzężenia zwrotne), które zastosowano przy szyfrowaniu. Nawet minimalna zmiana tych parametrów uniemożliwia poprawne odszyfrowanie.  
+3. **Bezpieczeństwo:** Podstawowy system z pojedynczym LFSR nie jest bezpieczny dla rzeczywistych zastosowań kryptograficznych, ponieważ rejestry LFSR są podatne na ataki (np. algorytm Berlekampa-Masseya). W praktyce stosuje się bardziej złożone rozwiązania, takie jak łączenie wielu LFSR lub nieliniowe funkcje przejścia.  
+
+Zaimplementowany kryptosystem poprawnie realizuje podstawowe założenia szyfrowania strumieniowego, ale jego użyteczność w praktyce jest ograniczona ze względu na niski poziom bezpieczeństwa. Stanowi jednak dobrą podstawę do zrozumienia działania generatorów strumienia klucza i zasad szyfrowania symetrycznego. Dalsze rozszerzenia mogłyby obejmować implementację bardziej złożonych generatorów lub dodanie mechanizmów zabezpieczających przed kryptoanalizą.  
