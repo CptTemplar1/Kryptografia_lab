@@ -607,7 +607,19 @@ def main():
 
 #### Wyniki
 
-W zadaniu 4 zaimplementowano kryptosystem strumieniowy wykorzystujący rejestr LFSR (Linear Feedback Shift Register) do generowania strumienia klucza. Podstawą działania systemu jest operacja XOR między bitami tekstu jawnego a bitami generowanymi przez LFSR. Ponieważ operacja XOR jest odwracalna (A ⊕ B ⊕ B = A), ten sam strumień klucza może zostać użyty zarówno do szyfrowania, jak i deszyfrowania. Kluczowymi elementami implementacji były: konwersja tekstu na bity, generowanie strumienia klucza przez LFSR oraz wykonanie operacji XOR na odpowiadających sobie bitach. Realizując zadanie wykorzystaliśmy implementację LFSR z zadania 1. 
+W zadaniu 4 zaimplementowano kryptosystem strumieniowy oparty na rejestrze LFSR (Linear Feedback Shift Register). System ten należy do klasy szyfrów symetrycznych, gdzie ten sam klucz jest wykorzystywany zarówno do szyfrowania, jak i deszyfrowania wiadomości. Podstawową zasadą działania jest generowanie pseudolosowego strumienia bitów przez rejestr LFSR i następnie wykonanie operacji XOR między tym strumieniem a bitami tekstu jawnego.
+
+**Rejestr LFSR** wykorzystany jako generator strumienia klucza jest układem sekwencyjnym, który w każdym kroku generuje nowy bit na podstawie liniowej kombinacji (XOR) wybranych bitów swojego stanu wewnętrznego (określonych przez tzw. sprzężenia zwrotne). Długość okresu generowanej sekwencji zależy od stopnia rejestru i właściwego doboru wielomianu sprzężenia zwrotnego. 
+
+**Operacja XOR** stanowi podstawę szyfrowania strumieniowego. Dzięki właściwościom:
+   - Przemienności: A ⊕ B = B ⊕ A
+   - Łączności: A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C
+   - Odwracalności: A ⊕ B ⊕ B = A
+   możliwe jest zarówno zaszyfrowanie, jak i odszyfrowanie wiadomości tą samą operacją przy użyciu identycznego strumienia klucza.
+
+Tekst jawny jest przekształcany na postać binarną (każdy znak na 8-bitowy kod ASCII), co umożliwia wykonanie operacji bitowych. Po stronie odbiorcy następuje odwrotna konwersja bitów na tekst. Dzięki temu możliwe jest szyfrowanie zarówno liter, cyfr jak i znaków specjalnych, takich jak spacje czy znaki interpunkcyjne.
+
+W implementacji wykorzystano wcześniej przygotowany moduł LFSR z zadania 1, co pozwoliło na skupienie się na aspektach związanych z samym szyfrowaniem strumieniowym. System ten, mimo swojej prostoty, dobrze ilustruje podstawowe zasady działania szyfrów strumieniowych i może stanowić punkt wyjścia do bardziej zaawansowanych rozwiązań.
 
 **Przebieg zadania**  
 1. **Szyfrowanie:**  
@@ -639,10 +651,9 @@ Cryptography is both an art and a science that protects information by transform
 ```
 
 **Wnioski:**  
-Porównójąc odszyfrowany tekst z oryginalnym, można zauważyć, że są one identyczne. 
+Porównójąc odszyfrowany tekst z oryginalnym, można zauważyć, że są one identyczne, co potwierdza poprawność działania systemu szyfrowania i deszyfrowania. Aby deszyfrowanie zakończyło się sukcesem, konieczne jest użycie tych samych parametrów LFSR (stan początkowy i sprzężenia zwrotne), które zastosowano przy szyfrowaniu. Nawet minimalna zmiana tych parametrów uniemożliwia poprawne odszyfrowanie. 
 
-1. **Poprawność implementacji:** System działa zgodnie z założeniami – tekst odszyfrowany jest identyczny z oryginalnym, co potwierdza, że operacje szyfrowania i deszyfrowania zostały zaimplementowane prawidłowo.  
-2. **Wrażliwość na parametry LFSR:** Aby deszyfrowanie zakończyło się sukcesem, konieczne jest użycie tych samych parametrów LFSR (stan początkowy i sprzężenia zwrotne), które zastosowano przy szyfrowaniu. Nawet minimalna zmiana tych parametrów uniemożliwia poprawne odszyfrowanie.  
-3. **Bezpieczeństwo:** Podstawowy system z pojedynczym LFSR nie jest bezpieczny dla rzeczywistych zastosowań kryptograficznych, ponieważ rejestry LFSR są podatne na ataki (np. algorytm Berlekampa-Masseya). W praktyce stosuje się bardziej złożone rozwiązania, takie jak łączenie wielu LFSR lub nieliniowe funkcje przejścia.  
-
-Zaimplementowany kryptosystem poprawnie realizuje podstawowe założenia szyfrowania strumieniowego, ale jego użyteczność w praktyce jest ograniczona ze względu na niski poziom bezpieczeństwa. Stanowi jednak dobrą podstawę do zrozumienia działania generatorów strumienia klucza i zasad szyfrowania symetrycznego. Dalsze rozszerzenia mogłyby obejmować implementację bardziej złożonych generatorów lub dodanie mechanizmów zabezpieczających przed kryptoanalizą.  
+W praktyce kryptograficznej pojedynczy LFSR nie zapewnia wystarczającego poziomu bezpieczeństwa, gdyż jest podatny na ataki (np. algorytm Berlekampa-Masseya), dlatego  dalsze rozszerzenia mogłyby obejmować implementację bardziej złożonych generatorów lub dodanie mechanizmów zabezpieczających przed kryptoanalizą. W rzeczywistych systemach stosuje się:
+   - Kombinację wielu LFSR z różnymi sprzężeniami zwrotnymi
+   - Nieliniowe funkcje przejścia 
+   - Dodatkowe warstwy przetwarzania, takie jak permutacje i mieszanie bitów
