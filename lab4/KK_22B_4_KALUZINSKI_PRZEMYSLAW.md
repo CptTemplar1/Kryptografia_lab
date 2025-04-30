@@ -389,10 +389,6 @@ W ramach zadania przeanalizowano sekwencję bitów `[1, 0, 0, 1, 0, 1, 1, 0, 0, 
 `python zad3.py --sequence 1 0 0 1 0 1 1 0 0 1 1 1 1 1 0 0 0 1 1 0 1 1 1 0 1`
 
 **Otrzymane wyniki:**
-- Złożoność liniowa (L): 5
-- Współczynniki wielomianu połączeń (C(x)) (lista współczynników): [1, 0, 1, 0, 0, 1]
-- Wielomian połączeń C(x) w postaci czytelnej: 1 + x^2 + x^5
-
 | Typ wyniku                                                        | Oczekiwany wynik     |Otrzymany wynik      |
 |-------------------------------------------------------------------|----------------------|---------------------|
 | Złożoność liniowa (L):                                            | 5                    | 5                   |
@@ -615,7 +611,8 @@ W zadaniu 4 zaimplementowano kryptosystem strumieniowy oparty na rejestrze LFSR 
    - Przemienności: A ⊕ B = B ⊕ A
    - Łączności: A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C
    - Odwracalności: A ⊕ B ⊕ B = A
-   możliwe jest zarówno zaszyfrowanie, jak i odszyfrowanie wiadomości tą samą operacją przy użyciu identycznego strumienia klucza.
+
+możliwe jest zarówno zaszyfrowanie, jak i odszyfrowanie wiadomości tą samą operacją przy użyciu identycznego strumienia klucza.
 
 Tekst jawny jest przekształcany na postać binarną (każdy znak na 8-bitowy kod ASCII), co umożliwia wykonanie operacji bitowych. Po stronie odbiorcy następuje odwrotna konwersja bitów na tekst. Dzięki temu możliwe jest szyfrowanie zarówno liter, cyfr jak i znaków specjalnych, takich jak spacje czy znaki interpunkcyjne.
 
