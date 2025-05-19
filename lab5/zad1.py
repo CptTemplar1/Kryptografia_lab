@@ -1,5 +1,3 @@
-#Przepisać na CPP albo C#
-
 import argparse
 
 # Funkcja realizująca LFSR — generator strumienia klucza
@@ -23,17 +21,18 @@ def lfsr(initial_state, taps, output_length):
 
 # Zamiana tekstu na listę bitów (ciąg 0 i 1 dla każdego znaku ASCII)
 def text_to_bits(text):
-    return [int(bit) for char in text for bit in format(ord(char), '08b')]
+    # Zamień tekst na bajty w UTF-8, a następnie na bity
+    return [int(bit) for byte in text.encode('utf-8') for bit in format(byte, '08b')]
 
-# Zamiana listy bitów z powrotem na tekst (co 8 bitów = 1 znak)
 def bits_to_text(bits):
-    chars = []
+    # Zamień bity na bajty, a następnie na tekst w UTF-8
+    bytes_list = []
     for b in range(0, len(bits), 8):
         byte = bits[b:b + 8]
         if len(byte) < 8:
-            break  # pomijamy niepełny bajt
-        chars.append(chr(int("".join(map(str, byte)), 2)))
-    return ''.join(chars)
+            break
+        bytes_list.append(int("".join(map(str, byte)), 2))
+    return bytes(bytes_list).decode('utf-8', errors='ignore')
 
 # Funkcja XOR dwóch list bitów
 def xor_bits(bits1, bits2):
