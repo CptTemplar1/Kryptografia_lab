@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace LFSRCKPA
-{
-    class Program
+class Program
     {
         // Konwertuje tablicę bajtów na listę bitów (każdy bajt na 8 bitów, od MSB do LSB)
         static List<int> BytesToBits(byte[] data)
@@ -189,4 +187,3 @@ namespace LFSRCKPA
             }
         }
     }
-}

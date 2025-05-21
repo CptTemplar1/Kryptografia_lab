@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace LFSRCrypto
-{
-    class Program
+class Program
     {
         // Parametry LFSR (Linear Feedback Shift Register)
         // Wielomian: P(x)=1 + x + x^3 + x^5 + x^16 + x^17
@@ -125,5 +123,4 @@ namespace LFSRCrypto
             // Wywołanie funkcji Encrypt (deszyfrowanie jest tym samym co szyfrowanie w LFSR)
             Encrypt(inputFile, outputFile);
         }
-    }
-}
+    }  

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace LFSRAttack
-{
-    class Program
+class Program
     {
         // Algorytm Berlekampa-Massey'a do znajdowania minimalnego wielomianu charakterystycznego LFSR
         // na podstawie fragmentu strumienia klucza (s).
@@ -181,4 +179,3 @@ namespace LFSRAttack
             }
         }
     }
-}
