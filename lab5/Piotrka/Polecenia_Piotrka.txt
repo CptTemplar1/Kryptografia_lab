@@ -1,0 +1,5 @@
+python zad1.py encrypt tekst_jawny.txt zaszyfrowany.txt
+
+python zad2.py tekst_jawny.txt zaszyfrowany.txt odzyskany.txt
+
+python3 zad3.py zaszyfrowany.txt short.txt final.txt
