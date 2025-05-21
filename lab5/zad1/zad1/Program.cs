@@ -6,16 +6,13 @@ namespace LFSRCrypto
 {
     class Program
     {
-        // Hardcoded LFSR parameters
-        // Polinom: P(x)=1 + x + x^3 + x^5 + x^16 + x^17
+        //Parametry LFSR
+        //Wielomian: P(x)=1 + x + x^3 + x^5 + x^16 + x^17
         private static readonly int[] TAPS = { 0, 1, 3, 5, 16 };
 
         // Sekwencja inicjująca: [0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1]
         private static readonly List<int> INITIAL_STATE = new List<int> { 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1 };
 
-        /// <summary>
-        /// Generuje keystream długości `length` bitów na bazie LFSR
-        /// </summary>
         private static List<int> GenerateKeystream(int length)
         {
             List<int> state = new List<int>(INITIAL_STATE);
@@ -23,17 +20,14 @@ namespace LFSRCrypto
 
             for (int i = 0; i < length; i++)
             {
-                // Wyjście: ostatni bit rejestru
                 keystream.Add(state[state.Count - 1]);
 
-                // Oblicz nowy bit jako XOR wybranych tapów
                 int newBit = 0;
                 foreach (int t in TAPS)
                 {
                     newBit ^= state[t];
                 }
 
-                // Przesuń rejestr w prawo i wstaw nowy bit na początku
                 state.Insert(0, newBit);
                 state.RemoveAt(state.Count - 1);
             }
@@ -41,9 +35,6 @@ namespace LFSRCrypto
             return keystream;
         }
 
-        /// <summary>
-        /// Konwertuje bajty na listę bitów MSB-first
-        /// </summary>
         private static List<int> BitsFromBytes(byte[] dataBytes)
         {
             List<int> bits = new List<int>();
@@ -59,9 +50,6 @@ namespace LFSRCrypto
             return bits;
         }
 
-        /// <summary>
-        /// Konwertuje listę bitów MSB-first na bajty
-        /// </summary>
         private static byte[] BytesFromBits(List<int> bits)
         {
             List<byte> outBytes = new List<byte>();
@@ -82,9 +70,6 @@ namespace LFSRCrypto
             return outBytes.ToArray();
         }
 
-        /// <summary>
-        /// Szyfruje lub deszyfruje plik (dla szyfru strumieniowego operacja jest identyczna)
-        /// </summary>
         private static void Encrypt(string inputPath, string outputPath)
         {
             byte[] plaintext = File.ReadAllBytes(inputPath);
@@ -119,7 +104,6 @@ namespace LFSRCrypto
                 Environment.Exit(1);
             }
 
-            // Dla strumieniowego szyfrowania i deszyfrowania operacja jest identyczna
             Encrypt(inputFile, outputFile);
         }
     }

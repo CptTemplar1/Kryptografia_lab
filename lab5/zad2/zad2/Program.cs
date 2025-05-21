@@ -7,9 +7,6 @@ namespace LFSRAttack
 {
     class Program
     {
-        /// <summary>
-        /// Algorytm Berlekamp-Massey do znajdowania LFSR
-        /// </summary>
         static (int L, List<int> C) BerlekampMassey(List<int> s)
         {
             int n = s.Count;
@@ -58,9 +55,6 @@ namespace LFSRAttack
             return (L, C.GetRange(0, L + 1));
         }
 
-        /// <summary>
-        /// Konwertuje bajty na listę bitów (MSB-first)
-        /// </summary>
         static List<int> BitsFromBytes(byte[] data)
         {
             List<int> bits = new List<int>();
@@ -74,9 +68,6 @@ namespace LFSRAttack
             return bits;
         }
 
-        /// <summary>
-        /// Konwertuje listę bitów na bajty (MSB-first)
-        /// </summary>
         static byte[] BytesFromBits(List<int> bits)
         {
             List<byte> outBytes = new List<byte>();
@@ -92,9 +83,6 @@ namespace LFSRAttack
             return outBytes.ToArray();
         }
 
-        /// <summary>
-        /// Generuje keystream na podstawie IV i tapów
-        /// </summary>
         static List<int> GenerateKeystream(List<int> iv, List<int> taps, int length)
         {
             List<int> state = new List<int>(iv);
@@ -131,7 +119,6 @@ namespace LFSRAttack
             List<int> ctBits = BitsFromBytes(ct);
             int n = ctBits.Count;
 
-            // 1) Odzyskanie fragmentu keystreamu
             int minLen = Math.Min(ptBits.Count, n);
             List<int> ksFrag = new List<int>();
             for (int i = 0; i < minLen; i++)
@@ -139,11 +126,9 @@ namespace LFSRAttack
                 ksFrag.Add(ptBits[i] ^ ctBits[i]);
             }
 
-            // 2) Algorytm Berlekamp-Massey
             var (L, C) = BerlekampMassey(ksFrag);
             Console.WriteLine($"Odnalezione LFSR: długość L={L}, wielomian C=[{string.Join(", ", C)}]");
 
-            // 3) Wyznaczenie IV i tapów
             List<int> iv = ksFrag.GetRange(0, L);
             Console.WriteLine($"Zrekonstruowany IV (pierwsze {L} bitów): [{string.Join(", ", iv)}]");
 
@@ -157,7 +142,6 @@ namespace LFSRAttack
             }
             Console.WriteLine($"Pozycje taps: [{string.Join(", ", taps)}]");
 
-            // 4) Generacja pełnego keystreamu i odszyfrowanie
             List<int> fullKs = GenerateKeystream(iv, taps, n);
             List<int> decBits = new List<int>();
             for (int i = 0; i < n; i++)
@@ -168,7 +152,6 @@ namespace LFSRAttack
             File.WriteAllBytes(outFile, plaintext);
             Console.WriteLine($"Odszyfrowano cały szyfrogram do pliku: {outFile}");
 
-            // 5) Walidacja UTF-8
             try
             {
                 string decodedText = Encoding.UTF8.GetString(plaintext);
