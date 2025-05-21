@@ -19,7 +19,7 @@ Implementowany kryptosystem powinien mieć funkcjonalność:
 
 **1. Zmienne globalne**
 
-
+W kodzie zdefiniowano stałe globalne: `TAPS` określające pozycje sprzężeń (tapów) rejestru LFSR zgodnie z wielomianem $P(x)=1+x+x^3+x^5+x^16+x^17$ oraz `INITIAL_STATE`, który zawiera 17-bitową sekwencję inicjującą rejestr. Obie te wartości są podstawą do generowania strumienia klucza w kryptosystemie strumieniowym.
 
 ``` C#
 private static readonly int[] TAPS = { 0, 1, 3, 5, 16 };
@@ -29,14 +29,14 @@ private static readonly List<int> INITIAL_STATE = new List<int> { 0, 1, 0, 1, 0,
 
 **2. Funkcja `GenerateKeystream`**
 
-**Wejście:**
-- 
+***Wejście:**  
+- `length` (int) - długość generowanego strumienia klucza w bitach
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `List<int>` - lista bitów reprezentująca strumień klucza
 
 **Opis:**  
-
+Generuje pseudolosowy strumień klucza przy użyciu rejestru LFSR (Linear Feedback Shift Register). Inicjalizuje stan początkowy wartością `INITIAL_STATE`, następnie dla każdego bitu oblicza nową wartość na podstawie pozycji `TAPS` (operacja XOR). Każda iteracja dodaje ostatni bit stanu do strumienia klucza, wstawia nowy bit na początek rejestru i usuwa ostatni bit.
 
 **Kod:**
 ``` C#
@@ -68,14 +68,14 @@ private static List<int> GenerateKeystream(int length)
 
 **3. Funkcja `BitsFromBytes`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `dataBytes` (byte[]) - tablica bajtów do konwersji
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `List<int>` - lista bitów (0 i 1) reprezentująca przekonwertowane dane
 
 **Opis:**  
-
+Konwertuje tablicę bajtów na listę bitów. Dla każdego bajta w tablicy wyodrębnia poszczególne bity (od najbardziej znaczącego do najmniej znaczącego) i dodaje je do wynikowej listy. Każdy bajt jest rozbijany na 8 bitów.
 
 **Kod:**
 ``` C#
@@ -98,14 +98,14 @@ private static List<int> BitsFromBytes(byte[] dataBytes)
 
 **4. Funkcja `BytesFromBits`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `bits` (List<int>) - lista bitów (0 i 1) do konwersji
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `byte[]` - tablica bajtów reprezentująca przekonwertowane dane
 
 **Opis:**  
-
+Konwertuje listę bitów na tablicę bajtów. Grupuje bity w bloki po 8 (od najbardziej znaczącego do najmniej znaczącego) i łączy je w pojedyncze bajty. Jeśli liczba bitów nie jest podzielna przez 8, ostatni bajt jest uzupełniany zerami.  
 
 **Kod:**
 ``` C#
@@ -131,16 +131,15 @@ private static byte[] BytesFromBits(List<int> bits)
 }
 ```
 
-**5. Funkcja `Encrypt`**
+**Wejście:**  
+- `inputPath` (string) - ścieżka do pliku wejściowego
+- `outputPath` (string) - ścieżka do pliku wyjściowego
 
-**Wejście:**
-- 
-
-**Wyjście:**
-- 
+**Wyjście:**  
+- Brak (wynik zapisywany jest do pliku)
 
 **Opis:**  
-
+Realizuje operację szyfrowania/deszyfrowania pliku przy użyciu algorytmu LFSR. Odczytuje dane wejściowe, konwertuje je na bity, generuje strumień klucza o odpowiedniej długości, wykonuje operację XOR na bitach danych i strumienia klucza, a następnie zapisuje wynik do pliku wyjściowego. W przypadku LFSR operacje szyfrowania i deszyfrowania są identyczne.
 
 **Kod:**
 ``` C#
@@ -168,14 +167,17 @@ private static void Encrypt(string inputPath, string outputPath)
 
 **6. Funkcja `Main`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `args` (string[]) - argumenty wiersza poleceń:
+  - `args[0]` - tryb pracy ("encrypt" lub "decrypt")
+  - `args[1]` - ścieżka do pliku wejściowego
+  - `args[2]` - ścieżka do pliku wyjściowego
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- Brak (wynik zapisywany jest do pliku)
 
 **Opis:**  
-
+Główna funkcja programu, która obsługuje argumenty wiersza poleceń. Sprawdza poprawność liczby i wartości argumentów, a następnie wywołuje funkcję `Encrypt` w odpowiednim trybie. W przypadku błędnych argumentów wyświetla komunikaty i kończy działanie programu.
 
 **Kod:**
 ``` C#
@@ -236,14 +238,16 @@ Następnie:
 
 **1. Funkcja `BerlekampMassey`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `s` (List<int>) - fragment strumienia klucza w postaci listy bitów
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- krotka `(int L, List<int> C)`:
+  - `L` - długość rejestru LFSR
+  - `C` - wielomian charakterystyczny reprezentowany jako lista współczynników
 
 **Opis:**  
-
+Implementuje algorytm Berlekampa-Massey'a służący do identyfikacji parametrów LFSR na podstawie fragmentu jego strumienia wyjściowego. Algorytm iteracyjnie oblicza wielomian charakterystyczny i długość rejestru, minimalizując przy tym złożoność. Wykorzystuje operacje XOR i aktualizację wielomianów charakterystycznych.
 
 **Kod:**
 ``` C#
@@ -300,14 +304,14 @@ static (int L, List<int> C) BerlekampMassey(List<int> s)
 
 **2. Funkcja `BitsFromBytes`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `data` (byte[]) - tablica bajtów do konwersji
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `List<int>` - lista bitów (wartości 0 i 1) reprezentująca przekonwertowane dane
 
 **Opis:**  
-
+Konwertuje dane bajtowe na reprezentację bitową. Każdy bajt jest rozbijany na 8 bitów (od najbardziej znaczącego do najmniej znaczącego) i zapisywany w postaci listy wartości binarnych. Funkcja jest kluczowa dla przygotowania danych do analizy kryptograficznej.
 
 **Kod:**
 ``` C#
@@ -327,13 +331,14 @@ static List<int> BitsFromBytes(byte[] data)
 
 **3. Funkcja `BytesFromBits`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `bits` (List<int>) - lista bitów (wartości 0 i 1) do konwersji
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `byte[]` - tablica bajtów powstała z połączenia bitów
 
 **Opis:**  
+Odwrotność funkcji `BitsFromBytes`. Łączy grupy 8 bitów w pojedyncze bajty, umożliwiając zapis danych w postaci binarnej. Automatycznie obsługuje niepełne grupy bitów (uzupełniając je zerami).
 
 
 **Kod:**
@@ -356,14 +361,16 @@ static byte[] BytesFromBits(List<int> bits)
 
 **4. Funkcja `GenerateKeystream`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `iv` (List<int>) - wektor inicjujący (initial vector)
+- `taps` (List<int>) - pozycje bitów używane do sprzężenia zwrotnego
+- `length` (int) - długość generowanego strumienia w bitach
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `List<int>` - wygenerowany strumień klucza
 
 **Opis:**  
-
+Generuje strumień pseudolosowy za pomocą rejestru LFSR. Wykorzystuje podany wektor inicjujący i pozycje sprzężeń zwrotnych (taps) do iteracyjnego obliczania kolejnych bitów strumienia. Każda iteracja przesuwa rejestr i oblicza nowy bit na podstawie operacji XOR na wskazanych pozycjach.
 
 **Kod:**
 ``` C#
@@ -388,14 +395,24 @@ static List<int> GenerateKeystream(List<int> iv, List<int> taps, int length)
 
 **5. Funkcja `Main`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `args` (string[]) - argumenty wiersza poleceń:
+  - `args[0]` - ścieżka do pliku z znanym fragmentem plaintextu
+  - `args[1]` - ścieżka do pliku z szyfrogramem
+  - `args[2]` - ścieżka do pliku wyjściowego
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- Brak (wyniki zapisywane są do pliku i wyświetlane w konsoli)
 
 **Opis:**  
-
+Główna funkcja programu realizująca atak kryptograficzny ze znanym fragmentem tekstu jawnego. Wykonuje następujące kroki:
+1. Wczytuje i konwertuje dane wejściowe
+2. Rekonstruuje fragment strumienia klucza
+3. Identyfikuje parametry LFSR za pomocą algorytmu Berlekampa-Massey'a
+4. Generuje pełny strumień klucza
+5. Odszyfrowuje cały szyfrogram
+6. Weryfikuje poprawność wyniku poprzez próbę dekodowania UTF-8
+7. Zapisuje wyniki i wyświetla informacje diagnostyczne
 
 **Kod:**
 ``` C#
@@ -490,14 +507,14 @@ Dokonać ataku na zbudowany w ramach pierwszego zadania kryptosystem Przyjąć n
 
 **1. Funkcja `BytesToBits`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `data` (byte[]) - tablica bajtów do konwersji
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `List<int>` - lista bitów (wartości 0 i 1) w kolejności od MSB do LSB
 
 **Opis:**  
-
+Konwertuje dane bajtowe na reprezentację bitową. Dla każdego bajta w tablicy wyodrębnia kolejne bity (od najbardziej znaczącego - bit 7, do najmniej znaczącego - bit 0) i dodaje je do wynikowej listy. Każdy bajt generuje dokładnie 8 bitów w outputcie.
 
 **Kod:**
 ``` C#
@@ -517,14 +534,14 @@ static List<int> BytesToBits(byte[] data)
 
 **2. Funkcja `BitsToBytes`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `bits` (List<int>) - lista bitów do konwersji (wartości 0 i 1)
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `byte[]` - tablica bajtów powstała z połączenia bitów
 
 **Opis:**  
-
+Odwrotna operacja do `BytesToBits`. Łączy grupy po 8 bitów w pojedyncze bajty. Jeśli liczba bitów nie jest podzielna przez 8, ostatni bajt jest uzupełniany zerami z prawej strony (najmniej znaczące bity). Bity są składane w bajty w kolejności od najbardziej znaczącego.
 
 **Kod:**
 ``` C#
@@ -546,14 +563,16 @@ static byte[] BitsToBytes(List<int> bits)
 
 **3. Funkcja `BerlekampMassey`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `s` (List<int>) - fragment strumienia bitów (sekwencka znanych bitów)
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- krotka `(int L, List<int> C)`:
+  - `L` - minimalna długość rejestru LFSR
+  - `C` - wielomian charakterystyczny (współczynniki od x^0 do x^L)
 
 **Opis:**  
-
+Implementuje algorytm Berlekampa-Massey'a służący do identyfikacji parametrów LFSR na podstawie fragmentu jego outputu. Algorytm iteracyjnie znajduje najkrótszy rejestr przesuwny, który mógł wygenerować daną sekwencję. Wykorzystuje aktualizację wielomianu charakterystycznego i długości rejestru w każdej iteracji.
 
 **Kod:**
 ``` C#
@@ -610,14 +629,16 @@ static (int L, List<int> C) BerlekampMassey(List<int> s)
 
 **4. Funkcja `GenerateKeystream`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `iv` (List<int>) - wektor inicjujący (początkowy stan rejestru)
+- `taps` (List<int>) - lista pozycji sprzężeń zwrotnych
+- `length` (int) - żądana długość strumienia wyjściowego
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- `List<int>` - wygenerowany strumień pseudolosowy
 
 **Opis:**  
-
+Generuje strumień klucza przy użyciu rejestru LFSR o podanych parametrach. W każdej iteracji oblicza nowy bit jako XOR bitów na pozycjach określonych przez `taps`, przesuwa rejestr i dodaje ostatni bit do strumienia wyjściowego. Gwarantuje generację dokładnie `length` bitów.
 
 **Kod:**
 ``` C#
@@ -644,14 +665,26 @@ static List<int> GenerateKeystream(List<int> iv, List<int> taps, int length)
 
 **5. Funkcja `Main`**
 
-**Wejście:**
-- 
+**Wejście:**  
+- `args` (string[]) - argumenty wiersza poleceń:
+  - `args[0]` - ścieżka do zaszyfrowanego pliku
+  - `args[1]` - ścieżka do pliku z fragmentem plaintextu
+  - `args[2]` - ścieżka do pliku wynikowego
 
-**Wyjście:**
-- 
+**Wyjście:**  
+- Brak (efekty zapisywane do pliku i konsoli)
 
 **Opis:**  
+Główna funkcja realizująca atak ze znanym fragmentem tekstu. Wykonuje:
+1. Wczytanie i konwersję danych wejściowych
+2. Rekonstrukcję fragmentu strumienia klucza
+3. Identyfikację parametrów LFSR
+4. Generację pełnego strumienia klucza
+5. Odszyfrowanie danych
+6. Weryfikację poprawności przez dekodowanie UTF-8
+7. Zapis wyników i diagnostykę
 
+Dodatkowo oblicza i wyświetla minimalną wymaganą długość znanego tekstu oraz maksymalny okres sekwencji LFSR.
 
 **Kod:**
 ``` C#
