@@ -15,7 +15,8 @@ Odszyfrowano cały szyfrogram do pliku: tekst_odszyfrowany_po_ataku.txt
 Dekodowanie UTF-8 powiodło się.
 
 ZADANIE 3
-dotnet run -- szyfrogram.txt fragment_tekstu_jawnego.txt tekst_odszyfrowany_atakiem.txt
+1. Wystarczający
+dotnet run -- szyfrogram.txt fragment_tekstu_jawnego_1.txt tekst_odszyfrowany_atakiem_1.txt
 
 Zidentyfikowane LFSR: L = 11, wektor C = [1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1]
 Minimalna długość znanego tekstu do pełnego odzyskania: 22 bitów
@@ -23,3 +24,13 @@ Maksymalny okres sekwencji: 2047 bitów
 IV (pierwsze 11 bitów): [1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1]
 Tapy: [4, 5, 7, 9, 10]
 Zdekodowany tekst (UTF-8) zapisano do: tekst_odszyfrowany_atakiem.txt
+
+2. Niewystarczający
+dotnet run -- szyfrogram.txt fragment_tekstu_jawnego_2.txt tekst_odszyfrowany_atakiem_2.txt
+
+Zidentyfikowane LFSR: L = 8, wektor C = [1, 0, 0, 0, 0, 0, 0, 0, 1]
+Minimalna długość znanego tekstu do pełnego odzyskania: 16 bitów
+Maksymalny okres sekwencji: 255 bitów
+IV (pierwsze 8 bitów): [1, 0, 1, 1, 0, 1, 0, 1]
+Tapy: [7]
+Zdekodowany tekst (UTF-8) zapisano do: tekst_odszyfrowany_atakiem_2.txt
