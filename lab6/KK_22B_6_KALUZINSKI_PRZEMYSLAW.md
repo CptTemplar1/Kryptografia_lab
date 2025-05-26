@@ -1,11 +1,9 @@
 # Kryptografia i kryptoanaliza
 ## Laboratorium 6
 ### Grupa 22B
-### Autorzy: Przemysław Kałużiński, Michał Kaczor
+### Autorzy: Przemysław Kałuziński, Michał Kaczor
 
 ### Zadanie 1
-
-## Zadanie 1
 
 Dokonać implementacji kryptosystemu strumieniowego, którego strumień klucza $k$ generowany jest przy pomocy rejestrów przesuwnych $X$, $Y$ oraz $Z$, gdzie:
 - $x_{i+3} = x_i \oplus x_{i+1}$,
@@ -45,17 +43,20 @@ Kryptosystem taki powinien mieć zdefiniowane metody:
 
 **1. Podział na klasy**
 
-
+Program został podzielony na dwie główne klasy: `KeyStreamGenerator` i `StreamCipher`. Klasa `KeyStreamGenerator` odpowiada za generowanie strumienia klucza na podstawie rejestrów X, Y i Z, natomiast klasa `StreamCipher` implementuje funkcje szyfrowania i odszyfrowania danych przy użyciu wygenerowanego strumienia klucza.
 
 **2. Funkcja `KeyStreamGenerator: __init__`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `x_init` (list): Lista 3 bitów inicjalizujących rejestr X.
+- `y_init` (list): Lista 4 bitów inicjalizujących rejestr Y.
+- `z_init` (list): Lista 5 bitów inicjalizujących rejestr Z.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Inicjalizuje obiekt klasy `KeyStreamGenerator`.
 
-**Opis:**  
+**Opis:**
+Funkcja inicjalizuje generator strumienia klucza, sprawdzając poprawność długości podanych rejestrów oraz czy żaden z nich nie jest całkowicie zerowy. Następnie kopiuje wartości inicjalizujące do odpowiednich rejestrów przesuwnych (X, Y, Z).
 
 
 **Kod:**
@@ -76,14 +77,14 @@ def __init__(self, x_init, y_init, z_init):
 
 **3. Funkcja `KeyStreamGenerator: _next_bit`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- Brak parametrów wejściowych.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `ki` (int): Kolejny bit strumienia klucza wygenerowany na podstawie aktualnego stanu rejestrów.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje kolejny bit strumienia klucza, wykorzystując aktualne stany rejestrów X, Y i Z. Oblicza nowy bit na podstawie funkcji nieliniowej, aktualizuje rejestry przesuwne zgodnie z ich równaniami sprzężenia zwrotnego i zwraca wygenerowany bit.
 
 **Kod:**
 ```python
@@ -111,14 +112,14 @@ def _next_bit(self):
 
 **4. Funkcja `KeyStreamGenerator: get_key_stream`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `length` (int): Długość strumienia klucza do wygenerowania.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Lista bitów strumienia klucza o zadanej długości.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje strumień klucza o określonej długości, wielokrotnie wywołując metodę `_next_bit` i zwracając wynik jako listę bitów.
 
 **Kod:**
 ```python
@@ -129,14 +130,14 @@ def get_key_stream(self, length):
 
 **5. Funkcja `StreamCipher: __init__`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `key_bits` (str): 12-bitowy ciąg znaków '0' i '1' reprezentujący klucz.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Inicjalizuje obiekt klasy `StreamCipher`.
 
-**Opis:**  
-
+**Opis:**
+Funkcja waliduje klucz, dzieli go na części odpowiednie dla rejestrów X, Y i Z, a następnie inicjalizuje generator strumienia klucza (`KeyStreamGenerator`) z tymi wartościami.
 
 **Kod:**
 ```python
@@ -156,14 +157,14 @@ def __init__(self, key_bits):  # key_bits to 12-bitowy ciąg znaków '0' i '1'
 
 **6. Funkcja `StreamCipher: _bytes_to_bits`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `byte_data` (bytes): Dane bajtowe do konwersji na bity.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Lista bitów reprezentujących przekazane dane bajtowe.
 
-**Opis:**  
-
+**Opis:**
+Funkcja konwertuje dane bajtowe na listę bitów, rozbijając każdy bajt na 8 bitów i łącząc je w jedną listę.
 
 **Kod:**
 ```python
@@ -175,14 +176,14 @@ def _bytes_to_bits(self, byte_data):
 
 **7. Funkcja `StreamCipher: _bits_to_bytes`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `bits` (list): Lista bitów do konwersji na bajty.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `bytes`: Dane bajtowe powstałe z połączenia bitów.
 
-**Opis:**  
-
+**Opis:**
+Funkcja konwertuje listę bitów z powrotem na bajty, grupując bity w bloki po 8 i zamieniając je na odpowiadające wartości bajtów.
 
 **Kod:**
 ```python
@@ -196,14 +197,15 @@ def _bits_to_bytes(self, bits):
 
 **8. Funkcja `StreamCipher: encrypt`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `input_file` (str): Ścieżka do pliku wejściowego zawierającego dane do zaszyfrowania.
+- `output_file` (str): Ścieżka do pliku wyjściowego, gdzie zostanie zapisany szyfrogram.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Zapisuje zaszyfrowane dane do pliku.
 
-**Opis:**  
-
+**Opis:**
+Funkcja odczytuje dane z pliku wejściowego, konwertuje je na bity, generuje strumień klucza o odpowiedniej długości, wykonuje operację XOR na bitach danych i klucza, a następnie zapisuje wynik do pliku wyjściowego w postaci bajtów.
 
 **Kod:**
 ```python
@@ -227,14 +229,15 @@ def encrypt(self, input_file, output_file):
 
 **9. Funkcja `StreamCipher: decrypt`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `input_file` (str): Ścieżka do pliku wejściowego zawierającego szyfrogram.
+- `output_file` (str): Ścieżka do pliku wyjściowego, gdzie zostanie zapisany odszyfrowany tekst.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Zapisuje odszyfrowane dane do pliku.
 
-**Opis:**  
-
+**Opis:**
+Funkcja wykorzystuje metodę `encrypt` do odszyfrowania danych, ponieważ operacja XOR jest odwracalna. Wymaga ponownej inicjalizacji generatora strumienia klucza z tym samym kluczem.
 
 **Kod:**
 ```python
@@ -245,14 +248,14 @@ def decrypt(self, input_file, output_file):
 
 **10. Funkcja `Main`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- Brak parametrów wejściowych.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Wykonuje przykładowe szyfrowanie i deszyfrowanie plików.
 
-**Opis:**  
-
+**Opis:**
+Funkcja demonstruje użycie klasy `StreamCipher`, inicjalizując szyfr z przykładowym kluczem, szyfrując plik `plain.txt` do `cipher.txt`, a następnie deszyfrując go z powrotem do `decrypted.txt`.
 
 **Kod:**
 ```python
@@ -312,16 +315,19 @@ Atakujący może wykorzystać ten fakt do odzyskania początkowych wypełnień r
 
 **1. Podział na klasy**
 
+Program został podzielony na dwie główne klasy: `KeyStreamGenerator` i `CorrelationAttack`. Klasa `KeyStreamGenerator` jest taka sama jak w zadaniu 1 i odpowiada za generowanie strumienia klucza, natomiast klasa `CorrelationAttack` implementuje atak korelacyjny na rejestry X, Y i Z.
+
 **2. Funkcja `CorrelationAttack: __init__`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `known_plaintext` (bytes): Tekst jawny w postaci bajtów, znany atakującemu.
+- `known_ciphertext` (bytes): Szyfrogram w postaci bajtów, odpowiadający znanemu tekstowi jawnemu.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Inicjalizuje obiekt klasy `CorrelationAttack`.
 
-**Opis:**  
-
+**Opis:**
+Funkcja inicjalizuje atak korelacyjny, konwertując znane dane (tekst jawny i szyfrogram) na bity, odtwarzając strumień klucza poprzez operację XOR oraz przygotowując licznik operacji do statystyk wydajności.
 
 **Kod:**
 ```python
@@ -336,14 +342,14 @@ def __init__(self, known_plaintext, known_ciphertext):
 
 **3. Funkcja `CorrelationAttack: _bytes_to_bits`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `byte_data` (bytes): Dane bajtowe do konwersji na bity.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Lista bitów reprezentujących przekazane dane bajtowe.
 
-**Opis:**  
-
+**Opis:**
+Funkcja konwertuje dane bajtowe na listę bitów, rozbijając każdy bajt na 8 bitów i łącząc je w jedną listę.
 
 **Kod:**
 ```python
@@ -355,14 +361,15 @@ def _bytes_to_bits(self, byte_data):
 
 **4. Funkcja `CorrelationAttack: _pearson_correlation`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `stream1` (list): Pierwszy strumień bitów do porównania.
+- `stream2` (list): Drugi strumień bitów do porównania.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `float`: Wartość współczynnika korelacji Pearsona między strumieniami.
 
-**Opis:**  
-
+**Opis:**
+Funkcja oblicza współczynnik korelacji Pearsona między dwoma strumieniami bitów, mierząc stopień ich liniowej zależności. Aktualizuje również licznik operacji dla celów statystycznych.
 
 **Kod:**
 ```python
@@ -393,14 +400,15 @@ def _pearson_correlation(self, stream1, stream2):
 
 **5. Funkcja `CorrelationAttack: _generate_x_stream`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `x_init` (list): Lista 3 bitów inicjalizujących rejestr X.
+- `length` (int): Długość generowanego strumienia bitów.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Strumień bitów wygenerowany przez rejestr X.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje strumień bitów na podstawie początkowego wypełnienia rejestru X, stosując jego wielomian przesuwający. Aktualizuje licznik operacji.
 
 **Kod:**
 ```python
@@ -418,14 +426,15 @@ def _generate_x_stream(self, x_init, length):
 
 **6. Funkcja `CorrelationAttack: _generate_z_stream`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `z_init` (list): Lista 5 bitów inicjalizujących rejestr Z.
+- `length` (int): Długość generowanego strumienia bitów.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Strumień bitów wygenerowany przez rejestr Z.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje strumień bitów na podstawie początkowego wypełnienia rejestru Z, stosując jego wielomian przesuwający. Aktualizuje licznik operacji.
 
 **Kod:**
 ```python
@@ -443,14 +452,15 @@ def _generate_z_stream(self, z_init, length):
 
 **7. Funkcja `CorrelationAttack: _generate_y_stream`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `y_init` (list): Lista 4 bitów inicjalizujących rejestr Y.
+- `length` (int): Długość generowanego strumienia bitów.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Strumień bitów wygenerowany przez rejestr Y.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje strumień bitów na podstawie początkowego wypełnienia rejestru Y, stosując jego wielomian przesuwający. Aktualizuje licznik operacji.
 
 **Kod:**
 ```python
@@ -468,14 +478,14 @@ def _generate_y_stream(self, y_init, length):
 
 **8. Funkcja `CorrelationAttack: attack_x_register`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- Brak parametrów wejściowych.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Najlepsze znalezione wypełnienie rejestru X.
 
-**Opis:**  
-
+**Opis:**
+Funkcja przeprowadza atak korelacyjny na rejestr X, testując wszystkie możliwe inicjalizacje (z wyjątkiem wektora zerowego) i wybierając tę, której strumień najlepiej koreluje z odzyskanym strumieniem klucza. Wypisuje statystyki przetestowanych kandydatów.
 
 **Kod:**
 ```python
@@ -504,14 +514,14 @@ def attack_x_register(self):
 
 **9. Funkcja `CorrelationAttack: attack_z_register`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- Brak parametrów wejściowych.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Najlepsze znalezione wypełnienie rejestru Z.
 
-**Opis:**  
-
+**Opis:**
+Funkcja przeprowadza atak korelacyjny na rejestr Z, testując wszystkie możliwe inicjalizacje (z wyjątkiem wektora zerowego) i wybierając tę, której strumień najlepiej koreluje z odzyskanym strumieniem klucza. Wypisuje statystyki przetestowanych kandydatów.
 
 **Kod:**
 ```python
@@ -540,14 +550,15 @@ def attack_z_register(self):
 
 **10. Funkcja `CorrelationAttack: attack_y_register`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `x_init` (list): Znalezione wypełnienie rejestru X.
+- `z_init` (list): Znalezione wypełnienie rejestru Z.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Najlepsze znalezione wypełnienie rejestru Y.
 
-**Opis:**  
-
+**Opis:**
+Funkcja odzyskuje wypełnienie rejestru Y poprzez wyczerpujące wyszukiwanie, wykorzystując znane już wypełnienia rejestrów X i Z. Wypisuje statystyki przetestowanych kandydatów.
 
 **Kod:**
 ```python
@@ -579,14 +590,14 @@ def attack_y_register(self, x_init, z_init):
 
 **11. Funkcja `CorrelationAttack: full_attack`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- Brak parametrów wejściowych.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `tuple`: Krotka zawierająca wypełnienia rejestrów X, Y i Z.
 
-**Opis:**  
-
+**Opis:**
+Funkcja wykonuje pełny atak korelacyjny, kolejno odzyskując wypełnienia rejestrów X, Z i Y. Mierzy czas wykonania oraz liczbę operacji, wypisując szczegółowe statystyki wydajności.
 
 **Kod:**
 ```python
@@ -623,14 +634,16 @@ def full_attack(self):
 
 **12. Funkcja `KeyStreamGenerator: __init__`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `x_init` (list): Lista 3 bitów inicjalizujących rejestr X.
+- `y_init` (list): Lista 4 bitów inicjalizujących rejestr Y.
+- `z_init` (list): Lista 5 bitów inicjalizujących rejestr Z.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Inicjalizuje obiekt klasy `KeyStreamGenerator`.
 
-**Opis:**  
-
+**Opis:**
+Funkcja inicjalizuje generator strumienia klucza, sprawdzając poprawność długości podanych rejestrów oraz czy żaden z nich nie jest całkowicie zerowy.
 
 **Kod:**
 ```python
@@ -648,14 +661,14 @@ def __init__(self, x_init, y_init, z_init):
 
 **13. Funkcja `KeyStreamGenerator: _next_bit`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- Brak parametrów wejściowych.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `int`: Kolejny bit strumienia klucza.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje kolejny bit strumienia klucza na podstawie aktualnego stanu rejestrów X, Y i Z, stosując nieliniową funkcję boolowską i aktualizując rejestry przesuwające.
 
 **Kod:**
 ```python
@@ -681,14 +694,14 @@ def _next_bit(self):
 
 **14. Funkcja `KeyStreamGenerator: get_key_stream`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `length` (int): Długość strumienia klucza do wygenerowania.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Lista bitów strumienia klucza o zadanej długości.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje strumień klucza o określonej długości, wielokrotnie wywołując metodę `_next_bit`.
 
 **Kod:**
 ```python
@@ -699,14 +712,15 @@ def get_key_stream(self, length):
 
 **15. Funkcja `Main`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `sys.argv[1]` (str): Ścieżka do pliku z tekstem jawnym.
+- `sys.argv[2]` (str): Ścieżka do pliku z szyfrogramem.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Wypisuje wyniki ataku na standardowe wyjście.
 
-**Opis:**  
-
+**Opis:**
+Funkcja główna programu, która wczytuje dane wejściowe, inicjalizuje atak korelacyjny, wykonuje go i wypisuje odzyskany klucz oraz statystyki. Obsługuje również błędy związane z nieprawidłowymi danymi wejściowymi.
 
 **Kod:**
 ```python
@@ -789,16 +803,19 @@ Przeprowadzić atak na zbudowany w ramach pierwszego zadania kryptosystem, przyj
 
 **1. Podział na klasy**
 
+Program został podzielony na dwie główne klasy: `KeyStreamGenerator` i `BruteForceAttack`. Klasa `KeyStreamGenerator` jest taka sama jak w zadaniu 1 i odpowiada za generowanie strumienia klucza, natomiast klasa `BruteForceAttack` implementuje atak brute force na rejestry X, Y i Z.
+
 **2. Funkcja `BruteForceAttack: __init__`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `known_plaintext` (bytes): Tekst jawny w postaci bajtów, znany atakującemu.
+- `known_ciphertext` (bytes): Szyfrogram w postaci bajtów, odpowiadający znanemu tekstowi jawnemu.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Inicjalizuje obiekt klasy `BruteForceAttack`.
 
-**Opis:**  
-
+**Opis:**
+Funkcja inicjalizuje atak brute force, konwertując znane dane (tekst jawny i szyfrogram) na bity, odtwarzając strumień klucza poprzez operację XOR oraz przygotowując licznik operacji do statystyk wydajności.
 
 **Kod:**
 ```python
@@ -813,14 +830,14 @@ def __init__(self, known_plaintext, known_ciphertext):
 
 **3. Funkcja `BruteForceAttack: _bytes_to_bits`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `byte_data` (bytes): Dane bajtowe do konwersji na bity.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Lista bitów reprezentujących przekazane dane bajtowe.
 
-**Opis:**  
-
+**Opis:**
+Funkcja konwertuje dane bajtowe na listę bitów, rozbijając każdy bajt na 8 bitów i łącząc je w jedną listę.
 
 **Kod:**
 ```python
@@ -832,14 +849,15 @@ def _bytes_to_bits(self, byte_data):
 
 **4. Funkcja `BruteForceAttack: _hamming_distance`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `bits1` (list): Pierwszy strumień bitów do porównania.
+- `bits2` (list): Drugi strumień bitów do porównania.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `int`: Odległość Hamminga między strumieniami bitów.
 
-**Opis:**  
-
+**Opis:**
+Funkcja oblicza odległość Hamminga między dwoma strumieniami bitów, czyli liczbę pozycji, na których odpowiadające sobie bity są różne. Aktualizuje również licznik operacji dla celów statystycznych.
 
 **Kod:**
 ```python
@@ -856,14 +874,14 @@ def _hamming_distance(self, bits1, bits2):
 
 **5. Funkcja `BruteForceAttack: attack`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- Brak parametrów wejściowych.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `dict` lub `None`: Słownik zawierający najlepsze dopasowanie klucza (wraz z wypełnieniami rejestrów i odległością Hamminga) lub `None`, jeśli nie znaleziono dopasowania.
 
-**Opis:**  
-
+**Opis:**
+Funkcja wykonuje atak brute force, testując wszystkie możliwe 12-bitowe klucze (z wyłączeniem klucza zerowego). Dla każdego klucza generuje strumień klucza, oblicza odległość Hamminga od odzyskanego strumienia i wybiera klucz z najmniejszą odległością. Wypisuje szczegółowe statystyki wydajności, w tym liczbę przetestowanych kandydatów, czas wykonania i liczbę operacji.
 
 **Kod:**
 ```python
@@ -938,14 +956,16 @@ def attack(self):
 
 **6. Funkcja `KeyStreamGenerator: __init__`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `x_init` (list): Lista 3 bitów inicjalizujących rejestr X.
+- `y_init` (list): Lista 4 bitów inicjalizujących rejestr Y.
+- `z_init` (list): Lista 5 bitów inicjalizujących rejestr Z.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Inicjalizuje obiekt klasy `KeyStreamGenerator`.
 
-**Opis:**  
-
+**Opis:**
+Funkcja inicjalizuje generator strumienia klucza, sprawdzając poprawność długości podanych rejestrów oraz czy żaden z nich nie jest całkowicie zerowy.
 
 **Kod:**
 ```python
@@ -963,14 +983,14 @@ def __init__(self, x_init, y_init, z_init):
 
 **7. Funkcja `KeyStreamGenerator: _next_bit`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- Brak parametrów wejściowych.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `int`: Kolejny bit strumienia klucza.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje kolejny bit strumienia klucza na podstawie aktualnego stanu rejestrów X, Y i Z, stosując nieliniową funkcję boolowską i aktualizując rejestry przesuwające.
 
 **Kod:**
 ```python
@@ -996,14 +1016,14 @@ def _next_bit(self):
 
 **8. Funkcja `KeyStreamGenerator: get_key_stream`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `length` (int): Długość strumienia klucza do wygenerowania.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- `list`: Lista bitów strumienia klucza o zadanej długości.
 
-**Opis:**  
-
+**Opis:**
+Funkcja generuje strumień klucza o określonej długości, wielokrotnie wywołując metodę `_next_bit`.
 
 **Kod:**
 ```python
@@ -1014,14 +1034,15 @@ def get_key_stream(self, length):
 
 **9. Funkcja `Main`**
 
-***Wejście:**  
-- 
+**Wejście:**
+- `sys.argv[1]` (str): Ścieżka do pliku z tekstem jawnym.
+- `sys.argv[2]` (str): Ścieżka do pliku z szyfrogramem.
 
-**Wyjście:**  
-- 
+**Wyjście:**
+- Brak bezpośredniego wyjścia. Wypisuje wyniki ataku na standardowe wyjście.
 
-**Opis:**  
-
+**Opis:**
+Funkcja główna programu, która wczytuje dane wejściowe, inicjalizuje atak brute force, wykonuje go i wypisuje odzyskany klucz oraz statystyki. Obsługuje również błędy związane z nieprawidłowymi danymi wejściowymi.
 
 **Kod:**
 ```python
