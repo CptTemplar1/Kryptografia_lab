@@ -1,0 +1,97 @@
+ZADANIE 1
+python zad1.py
+
+ZADANIE 2
+python zad2.py plain.txt cipher.txt
+
+Wczytano 1154 bajtów tekstu jawnego
+Wczytano 1154 bajtów szyfrogramu
+
+Rozpoczęcie ataku korelacyjnego...
+Długość analizowanego strumienia: 9232 bitów
+
+Atak na rejestr X...
+Przetestowano 7 kandydatów dla rejestru X
+Znalezione początkowe wypełnienie X: [0, 1, 1]
+
+Atak na rejestr Z...
+Przetestowano 31 kandydatów dla rejestru Z
+Znalezione początkowe wypełnienie Z: [1, 1, 1, 0, 0]
+
+Atak na rejestr Y...
+Przetestowano 15 kandydatów dla rejestru Y
+Znalezione początkowe wypełnienie Y: [0, 1, 0, 1]
+
+Statystyki wydajności:
+Czas wykonania: 0.2889 sekund
+Łączna liczba operacji: 4690386
+Operacje na sekundę: 16232800.90
+
+Odzyskany klucz (12-bitowy): 011010111100
+
+ZADANIE 3
+python zad2.py plain_fragment.txt cipher.txt
+
+Wczytano 449 bajtów tekstu jawnego
+Wczytano 1154 bajtów szyfrogramu
+
+Rozpoczęcie ataku korelacyjnego...
+Długość analizowanego strumienia: 3592 bitów
+
+Atak na rejestr X...
+Przetestowano 7 kandydatów dla rejestru X
+Znalezione początkowe wypełnienie X: [0, 1, 1]
+
+Atak na rejestr Z...
+Przetestowano 31 kandydatów dla rejestru Z
+Znalezione początkowe wypełnienie Z: [1, 1, 1, 0, 0]
+
+Atak na rejestr Y...
+Przetestowano 15 kandydatów dla rejestru Y
+Znalezione początkowe wypełnienie Y: [0, 1, 0, 1]
+
+Statystyki wydajności:
+Czas wykonania: 0.1143 sekund
+Łączna liczba operacji: 1825266
+Operacje na sekundę: 15971045.13
+
+Odzyskany klucz (12-bitowy): 011010111100
+
+ZADANIE 4
+python zad4.py plain.txt cipher.txt
+
+Wczytano 1154 bajtów tekstu jawnego
+Wczytano 1154 bajtów szyfrogramu
+Długość analizowanego strumienia: 9232 bitów
+
+Rozpoczęcie ataku brute force...
+
+Statystyki wydajności:
+Przetestowano kandydatów: 1724
+Czas wykonania: 9.5249 sekund
+Łączna liczba operacji: 79912192
+Operacje na sekundę: 8389832.79
+
+Najlepsze dopasowanie:
+Klucz: 011010111100
+X: [0, 1, 1], Y: [0, 1, 0, 1], Z: [1, 1, 1, 0, 0]
+Odległość Hamminga: 0
+
+
+python zad4.py plain_fragment.txt cipher.txt
+Wczytano 449 bajtów tekstu jawnego
+Wczytano 1154 bajtów szyfrogramu
+Długość analizowanego strumienia: 3592 bitów
+
+Rozpoczęcie ataku brute force...
+
+Statystyki wydajności:
+Przetestowano kandydatów: 1724
+Czas wykonania: 3.5646 sekund
+Łączna liczba operacji: 31092352
+Operacje na sekundę: 8722576.33
+
+Najlepsze dopasowanie:
+Klucz: 011010111100
+X: [0, 1, 1], Y: [0, 1, 0, 1], Z: [1, 1, 1, 0, 0]
+Odległość Hamminga: 0

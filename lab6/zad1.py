@@ -69,7 +69,7 @@ class StreamCipher:
 
     def decrypt(self, input_file, output_file):
         # Deszyfrowanie = ponowne xorowanie z tym samym strumieniem klucza
-        self.encrypt(input_file, output_file)  # identyczne działanie
+        self.encrypt(input_file, output_file) 
 
 
 if __name__ == "__main__":

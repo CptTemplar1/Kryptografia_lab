@@ -1,11 +1,14 @@
 import itertools
 import math
+import sys
+import time
 
 class CorrelationAttack:
     def __init__(self, known_plaintext, known_ciphertext):
         self.known_plain_bits = self._bytes_to_bits(known_plaintext)
         self.known_cipher_bits = self._bytes_to_bits(known_ciphertext)
         self.recovered_key_bits = [p ^ c for p, c in zip(self.known_plain_bits, self.known_cipher_bits)]
+        self.operations_count = 0
         
     def _bytes_to_bits(self, byte_data):
         return list(itertools.chain.from_iterable(
@@ -27,6 +30,8 @@ class CorrelationAttack:
         num = p_sum - (sum1 * sum2 / n)
         den = math.sqrt((sum1_sq - sum1**2 / n) * (sum2_sq - sum2**2 / n))
         
+        self.operations_count += 10 + 6*n  # Szacowana liczba operacji
+        
         if den == 0:
             return 0
             
@@ -39,6 +44,7 @@ class CorrelationAttack:
             stream.append(x_reg[0])
             x_new = x_reg[0] ^ x_reg[2]
             x_reg = x_reg[1:] + [x_new]
+            self.operations_count += 5  # Operacje na rejestrze
         return stream
     
     def _generate_z_stream(self, z_init, length):
@@ -48,6 +54,7 @@ class CorrelationAttack:
             stream.append(z_reg[0])
             z_new = z_reg[0] ^ z_reg[2]
             z_reg = z_reg[1:] + [z_new]
+            self.operations_count += 5
         return stream
     
     def _generate_y_stream(self, y_init, length):
@@ -57,55 +64,62 @@ class CorrelationAttack:
             stream.append(y_reg[0])
             y_new = y_reg[0] ^ y_reg[3]
             y_reg = y_reg[1:] + [y_new]
+            self.operations_count += 5
         return stream
     
     def attack_x_register(self):
         best_corr = -1
         best_x_init = None
+        total_candidates = 0
         
         # Generuj wszystkie możliwe 3-bitowe inicjalizacje X (z wyjątkiem [0,0,0])
         for x_init in itertools.product([0,1], repeat=3):
             if sum(x_init) == 0:
                 continue  # pomiń wektor zerowy
                 
+            total_candidates += 1
             x_stream = self._generate_x_stream(list(x_init), len(self.recovered_key_bits))
             corr = self._pearson_correlation(self.recovered_key_bits, x_stream)
             
-            # Szukamy wysokiej korelacji (bliskiej 1/3)
             if abs(corr - 1/3) < abs(best_corr - 1/3) or best_corr == -1:
                 best_corr = corr
                 best_x_init = list(x_init)
                 
+        print(f"Przetestowano {total_candidates} kandydatów dla rejestru X")
         return best_x_init
     
     def attack_z_register(self):
         best_corr = -1
         best_z_init = None
+        total_candidates = 0
         
         # Generuj wszystkie możliwe 5-bitowe inicjalizacje Z (z wyjątkiem [0,0,0,0,0])
         for z_init in itertools.product([0,1], repeat=5):
             if sum(z_init) == 0:
                 continue  # pomiń wektor zerowy
                 
+            total_candidates += 1
             z_stream = self._generate_z_stream(list(z_init), len(self.recovered_key_bits))
             corr = self._pearson_correlation(self.recovered_key_bits, z_stream)
             
-            # Szukamy wysokiej korelacji (bliskiej 1/3)
             if abs(corr - 1/3) < abs(best_corr - 1/3) or best_corr == -1:
                 best_corr = corr
                 best_z_init = list(z_init)
                 
+        print(f"Przetestowano {total_candidates} kandydatów dla rejestru Z")
         return best_z_init
     
     def attack_y_register(self, x_init, z_init):
         best_corr = -1
         best_y_init = None
+        total_candidates = 0
         
         # Generuj wszystkie możliwe 4-bitowe inicjalizacje Y (z wyjątkiem [0,0,0,0])
         for y_init in itertools.product([0,1], repeat=4):
             if sum(y_init) == 0:
                 continue  # pomiń wektor zerowy
                 
+            total_candidates += 1
             # Symuluj pełny generator klucza
             generator = KeyStreamGenerator(x_init, list(y_init), z_init)
             key_stream = generator.get_key_stream(len(self.recovered_key_bits))
@@ -116,10 +130,17 @@ class CorrelationAttack:
                 best_corr = corr
                 best_y_init = list(y_init)
                 
+        print(f"Przetestowano {total_candidates} kandydatów dla rejestru Y")
         return best_y_init
     
     def full_attack(self):
-        print("Atak na rejestr X...")
+        start_time = time.time()
+        self.operations_count = 0
+        
+        print("\nRozpoczęcie ataku korelacyjnego...")
+        print(f"Długość analizowanego strumienia: {len(self.recovered_key_bits)} bitów")
+        
+        print("\nAtak na rejestr X...")
         x_init = self.attack_x_register()
         print(f"Znalezione początkowe wypełnienie X: {x_init}")
         
@@ -131,9 +152,17 @@ class CorrelationAttack:
         y_init = self.attack_y_register(x_init, z_init)
         print(f"Znalezione początkowe wypełnienie Y: {y_init}")
         
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        
+        print("\nStatystyki wydajności:")
+        print(f"Czas wykonania: {elapsed_time:.4f} sekund")
+        print(f"Łączna liczba operacji: {self.operations_count}")
+        print(f"Operacje na sekundę: {self.operations_count/elapsed_time:.2f}")
+        
         return x_init, y_init, z_init
 
-# Klasa KeyStreamGenerator z Zadania 1 (potrzebna do ataku na rejestr Y)
+# Klasa KeyStreamGenerator z Zadania 1
 class KeyStreamGenerator:
     def __init__(self, x_init, y_init, z_init):
         if len(x_init) != 3 or len(y_init) != 4 or len(z_init) != 5:
@@ -150,10 +179,8 @@ class KeyStreamGenerator:
         yi = self.Y[0]
         zi = self.Z[0]
 
-        # Funkcja łącząca: ki = xi * yi ⊕ yi * zi ⊕ zi
         ki = (xi & yi) ^ (yi & zi) ^ zi
 
-        # Aktualizacja rejestrów
         x_new = self.X[0] ^ self.X[2]
         y_new = self.Y[0] ^ self.Y[3]
         z_new = self.Z[0] ^ self.Z[2]
@@ -168,18 +195,32 @@ class KeyStreamGenerator:
         return [self._next_bit() for _ in range(length)]
 
 if __name__ == "__main__":
-    # Przykład użycia:
-    # Załóżmy, że mamy parę tekst jawnego i szyfrogramu
-    with open("plain.txt", "rb") as f:
-        known_plaintext = f.read()
+    if len(sys.argv) != 3:
+        print("Użycie: python zad2_atak.py plik_jawny.txt plik_szyfrogram.txt")
+        sys.exit(1)
+        
+    plain_file = sys.argv[1]
+    cipher_file = sys.argv[2]
     
-    with open("cipher.txt", "rb") as f:
-        known_ciphertext = f.read()
-    
-    # Przeprowadź atak
-    attacker = CorrelationAttack(known_plaintext, known_ciphertext)
-    x_init, y_init, z_init = attacker.full_attack()
-    
-    # Wyświetl znaleziony klucz
-    key_bits = ''.join(map(str, x_init + y_init + z_init))
-    print(f"\nOdzyskany klucz (12-bitowy): {key_bits}")
+    try:
+        with open(plain_file, "rb") as f:
+            known_plaintext = f.read()
+        
+        with open(cipher_file, "rb") as f:
+            known_ciphertext = f.read()
+            
+        print(f"Wczytano {len(known_plaintext)} bajtów tekstu jawnego")
+        print(f"Wczytano {len(known_ciphertext)} bajtów szyfrogramu")
+        
+        attacker = CorrelationAttack(known_plaintext, known_ciphertext)
+        x_init, y_init, z_init = attacker.full_attack()
+        
+        key_bits = ''.join(map(str, x_init + y_init + z_init))
+        print(f"\nOdzyskany klucz (12-bitowy): {key_bits}")
+        
+    except FileNotFoundError:
+        print("Błąd: Nie można znaleźć pliku")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Błąd: {str(e)}")
+        sys.exit(1)
