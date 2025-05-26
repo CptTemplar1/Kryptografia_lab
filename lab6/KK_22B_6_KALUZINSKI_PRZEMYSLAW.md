@@ -276,7 +276,93 @@ if __name__ == "__main__":
 
 #### Wyniki
 
+W ramach zadania 1 zaimplementowano kryptosystem strumieniowy wykorzystujący trzy rejestry przesuwne (LFSR) X, Y i Z do generowania strumienia klucza. Rejestry zostały skonfigurowane zgodnie z podanymi równaniami sprzężenia zwrotnego:
+- Rejestr X: $x_{i+3} = x_i \oplus x_{i+1}$ (długość cyklu: 7 bitów)
+- Rejestr Y: $y_{i+4} = y_i \oplus y_{i+3}$ (długość cyklu: 15 bitów)
+- Rejestr Z: $z_{i+5} = z_i \oplus z_{i+2}$ (długość cyklu: 31 bitów)
 
+Strumień klucza generowany był za pomocą nieliniowej funkcji łączącej:  
+$$k_i = x_i y_i \oplus y_i z_i \oplus z_i.$$
+
+**Proces szyfrowania:**  
+Program został uruchomiony z przykładowym 12-bitowym kluczem `011010111100`, który odpowiada następującym wypełnieniom rejestrów:
+- X: `[0, 1, 1]`
+- Y: `[0, 1, 0, 1]`
+- Z: `[1, 1, 1, 0, 0]`
+
+Do uruchomienia programu użyto polecenia `python zad1.py`, które w pierwszej kolejności spowodowało zaszyfrowanie pliku `plain.txt` i zapisanie wyniku do pliku `cipher.txt`. 
+
+**Tekst jawny: plik `plain.txt`:**
+```plaintext
+CALL me Ishmael. Some years ago never mind how 
+long precisely having little or no money in my purse, 
+and nothing particular to interest me on shore, I thought 
+I would sail about a little and see the watery part of the 
+world. It is a way I have of driving off the spleen, and 
+regulating the circulation. Whenever I find myself 
+growing grim about the mouth ; whenever it is a damp, 
+drizzly November in my soul ; whenever I find myself 
+involuntarily pausing before coffin warehouses, and bring- 
+ing up the rear of every funeral I meet ; and especially 
+whenever my hypos get such an upper hand of me, that 
+it requires a strong moral principle to prevent me from 
+deliberately stepping into the street, and methodically 
+knocking people's hats off then, I account it high time 
+to get to sea as soon as I can. This is my substitute for 
+pistol and ball. With a philosophical flourish Cato throws 
+himself upon his sword ; I quietly take to the ship. 
+There is nothing surprising in this. If they but knew 
+it, almost all men in their degree, some time or other, 
+cherish very nearly the same feelings toward the ocean 
+with me. 
+```
+
+**Szyfrogram: plik`cipher.txt`:**
+```plaintext
+±(×+ćő^Ä¤O"|M(A±áq[AśÖ0î’WîśÇ)xU‘ó˘'»WüÓĚtršÂéŚ1:¸Ä©Ń
+T6đ'ýIŚ¬
+ĂjŐ>D"†đ	–µb$ÝÓúľLkßGŠŞŁö€3Ćż 9wj†­HNí
+&ťŰĹűë^3ĂŁĚ2ôä ĚĄby+˝ó‚ ˇI”–±dĂ¸ń×ťťÂę‚ éŚÝ%˝LŰ:Ódä_ŤK•<t.‹ˇ ül‰ź7.ăřŢvÉkĘZ5Ý(Ď’é­h«„¬čă.ČIÇĄČüsŢmËţÇ¶ŐYČŃ°#$‘ąě»‚(l«Śłăý˝N– ‡ŹAűt
+ŞÂLŹ¶Üh“K­CëdiľZś-Ć/ô4¦˙9ÍŰ]š˛S'ŘN}–­‰n"—fşÓ±o?7‰ĄV	qŔË ű\ëÜŐýÂ[KŽ÷p¶ÄÔŚąä?= öţM…â–@îÎŹ´ń
+®Z_ź÷ý7ż[­Ú.łZqŁ,Đ4í"Ŕňů ‹}†¶Dďä^bŽ=ńO<¨ĺG˛t]¦Ą–ĄrD
+z‰Ş®W>š°Ëř˝§mĐ0i1_ź¸ż#5JÜŘŇÖđČ°ĘjňT8yă¨[ŘX!Ŕ>śVĽ€Ó}—ŰG'†ĺ7
+’Ţż§sZÂqĂ>ŽDTś˙ô;ĽHôĆµE(kkúçÉ3K^f?ŽG4ÓŽĹ‡á˝cťÓăpŻT†˛‡6´;ŮŁäkË·_
+¤Ťđ ˛¸›śQÓ—wň3´B¨ĄÔ[ďk]zO9ůDÎśź0¨4ŐÜůÖżť5|„ż¦Ľč+ŕéŔ<<^TôŁCt&<‘ďč›“đÉĄŐb
+ěőS`?Ř›Ą¤0)‰ÍÓă<¶•ŢáůĂĺ6Śŕ¦¸ą[Ď[ˇ÷+ÇJÝ†…G×ŻIĄĘ)· [–â:±ľôŠuź&ÍNV’7ďŻF‘˙jWňTŔ¨!BJ.Ľß ` ÉłÖbç˛Ź—>µGŐűĚz P/„¶ÍzýŃ€MżĆOá8˙’N°4€–rö!ĎÄŽSÖ
+ţÚQéŐđt@‰˝_Ď?ś›âQŮîÔĆ°sV»ŻEĽéu ú§Îo[T&ďäüeÉ!Śµ“űúÖG›0
+*ń˘¤ĄÍ~x<ŇÚmáŻ•™Î#őŇ­ü’tžĘć8şČˇ™ILz9c"Ęî9ÓĘ|ŇÔUÁ:ŐęéMsŹcŻe¬VX§Î9hEÉŁ$Đp„Ó“dbž‹¶×ř•—=ý;Cu8’ťńĂ5©z5—ÔĄÜ¤
+ŻÜkăÉtý·ś5WE^öý(‘Z¬:ŐÎî€?F·wz„Ż»-üvŮ†`Cj˙TÉbË°î3žâĎ˘t{VŁ¦T=čď`Ĺ#{$ŠÂ˘ÓČU¦%ŹoďźŃđÓ„&¬`ĄÚ»ůüĘL™ŔgďI¤ż/} ×Ť¶"üK=€}˝OR\©Q·$ÚČoý:ÉÜ´ąŇFÉ*ăŔľ
+```
+
+**Proces deszyfrowania:**  
+Zaszyfrowany plik (`cipher.txt`) został następnie odszyfrowany z użyciem tego samego klucza, co potwierdziło poprawność implementacji. Odszyfrowany tekst (plik `decrypted.txt`) był identyczny z oryginalnym tekstem jawnym.
+
+**Tekst odszyfrowany: plik `decrypted.txt`:**  
+```plaintext
+CALL me Ishmael. Some years ago never mind how 
+long precisely having little or no money in my purse, 
+and nothing particular to interest me on shore, I thought 
+I would sail about a little and see the watery part of the 
+world. It is a way I have of driving off the spleen, and 
+regulating the circulation. Whenever I find myself 
+growing grim about the mouth ; whenever it is a damp, 
+drizzly November in my soul ; whenever I find myself 
+involuntarily pausing before coffin warehouses, and bring- 
+ing up the rear of every funeral I meet ; and especially 
+whenever my hypos get such an upper hand of me, that 
+it requires a strong moral principle to prevent me from 
+deliberately stepping into the street, and methodically 
+knocking people's hats off then, I account it high time 
+to get to sea as soon as I can. This is my substitute for 
+pistol and ball. With a philosophical flourish Cato throws 
+himself upon his sword ; I quietly take to the ship. 
+There is nothing surprising in this. If they but knew 
+it, almost all men in their degree, some time or other, 
+cherish very nearly the same feelings toward the ocean 
+with me. 
+```
+
+Implementacja kryptosystemu działa zgodnie z założeniami. Operacja XOR na bitach tekstu jawnego i strumienia klucza jest w pełni odwracalna, co pozwoliło na poprawne odszyfrowanie wiadomości. Długość cyklu generatora klucza wynosząca 3255 bitów (LCM(7, 15, 31)) zapewnia wystarczającą losowość strumienia klucza dla krótkich wiadomości.
 
 ### Zadanie 2
 
@@ -759,6 +845,7 @@ if __name__ == "__main__":
 
 #### Wyniki
 
+W ramach zadania 2 przeprowadzono atak korelacyjny na kryptosystem strumieniowy zaimplementowany w zadaniu 1, wykorzystując znany tekst jawny (`plain.txt`) oraz odpowiadający mu szyfrogram (`cipher.txt`). Celem ataku było odzyskanie 12-bitowego klucza inicjalizującego rejestry X, Y i Z generatora strumienia klucza. Atak wykorzystywał algorytm Pearsona i polegał na analizie statystycznej zależności między odzyskanym strumieniem klucza a generowanymi sekwencjami z poszczególnych rejestrów LFSR.
 
 ---
 **Współczynnik korelacji Pearsona**
@@ -781,6 +868,43 @@ if __name__ == "__main__":
 
 ---
 
+Algorytm Pearsona mierzy liniową zależność między dwoma strumieniami bitów, obliczając wartość z przedziału [-1, 1], gdzie:
+- 1 oznacza pełną korelację dodatnią
+- -1 oznacza pełną korelację ujemną
+- 0 oznacza brak korelacji
+
+Dla rejestrów X i Z oczekiwano wartości bliskiej 0.33 (odpowiadającej teoretycznemu prawdopodobieństwu 3/4 zgodności bitów), natomiast dla rejestru Y - braku korelacji (wartość ~0).
+
+**Przebieg ataku:**
+1. **Przygotowanie danych:**
+   - Wczytano pliki wejściowe: tekst jawny (1154 bajty) i szyfrogram (1154 bajty).
+   - Odtworzono strumień klucza poprzez operację XOR na odpowiadających sobie bitach tekstu jawnego i szyfrogramu (łącznie 9232 bity).
+
+2. **Faza korelacyjna (rejestry X i Z):**
+   - Dla każdego możliwego wypełnienia rejestru:
+     1) Generowano próbny strumień bitów
+     2) Obliczano współczynnik Pearsona między strumieniem próbnym a odzyskanym
+     3) Wybierano wypełnienie o współczynniku najbliższym oczekiwanej wartości
+   - Dla rejestru X (3 bity) sprawdzono 7 kombinacji
+   - Dla rejestru Z (5 bitów) sprawdzono 31 kombinacji
+
+3. **Faza brute-force (rejestr Y):**
+   - Po ustaleniu X i Z, przetestowano wszystkie 15 możliwych kombinacji Y
+   - Wybrano wersję generującą strumień najbardziej zbliżony do oryginalnego
+
+**Wynik działania programu:**
+- **Odzyskany klucz:** `011010111100` (X: `011`, Y: `0101`, Z: `11100`)
+- **Statystyki:** 
+  - Czas wykonania: 0.2889 sekundy
+  - Operacje: 4 690 386 (~16.2 mln operacji/sekundę)
+  - Trafność: 100% (klucz zgodny z przykładem z zadania 1)
+
+**Wnioski:**
+1. Atak Pearsona okazał się skuteczny dla rejestrów X i Z dzięki silnej korelacji (3/4)
+2. Brak korelacji dla rejestru Y wymusił zastosowanie metody brute-force
+3. Wydajność algorytmu (~16 mln operacji/sek.) pokazuje praktyczną skuteczność ataku
+4. Wynik potwierdza słabość systemów opartych na pojedynczych LFSR z prostymi funkcjami nieliniowymi
+
 ### Zadanie 3
 
 Przeprowadzić atak korelacyjny na zbudowany w ramach pierwszego zadania kryptosystem, przyjmując iż znany jest szyfrogram i tylko fragment danych jawnych.
@@ -791,13 +915,34 @@ W tym zadaniu wykorzystano program z zadania 2 w niezmienionej formie, lecz z in
 
 #### Wyniki
 
+W ramach zadania 3 przeprowadzono atak korelacyjny przy użyciu fragmentu tekstu jawnego (449 bajtów) i pełnego szyfrogramu (1154 bajty). Pomimo ograniczonej ilości znanych danych, atak zakończył się pełnym sukcesem, odzyskując prawidłowy 12-bitowy klucz `011010111100` w czasie krótszym niż w zadaniu 2 (0.1143s vs 0.2889s).
 
+**Fragment tekstu jawnego: plik `plain_fragment.txt`**
+```plaintext
+CALL me Ishmael. Some years ago never mind how 
+long precisely having little or no money in my purse, 
+and nothing particular to interest me on shore, I thought 
+I would sail about a little and see the watery part of the 
+world. It is a way I have of driving off the spleen, and 
+regulating the circulation. Whenever I find myself 
+growing grim about the mouth ; whenever it is a damp, 
+drizzly November in my soul ; whenever I find myself 
+```
+
+**Statystyki wydajności:**
+| Metryka               | Zadanie 3 (fragment tekstu jawnego) | Zadanie 2 (pełen tekst jawny) |
+|-----------------------|-------------------------------------|-------------------------------|
+| Czas wykonania        | 0.1143s                             | 0.2889s                       |
+| Przetworzone operacje | 1 825 266                           | 4 690 386                     |
+| Wydajność             | 15.97 Mops                          | 16.23 Mops                    |
+
+**Wnioski:**
+Osiągnięcie lepszego wyniku przy krótszym strumieniu danych wejściowych wynikało przede wszystkim z mniejszej liczby bitów do analizy (3592 zamiast 9232), co przełożyło się na mniejszą liczbę obliczeń korelacyjnych oraz lepsze wykorzystanie cache’u procesora dzięki mniejszemu zużyciu pamięci i większej lokalności danych. Dodatkowo krótszy strumień był wolny od szumu charakterystycznego dla dalszych fragmentów szyfrogramu, co pozwoliło algorytmowi Pearsona skuteczniej uwidocznić wyraźne korelacje pomiędzy fragmentami danych. Tym samym okazało się, że już 449 bajtów (3592 bitów) wystarcza do skutecznego przeprowadzenia ataku, co potwierdza, że bezpieczeństwo systemu nie zależy bezpośrednio od długości analizowanego szyfrogramu, lecz od obecności silnych korelacji. Skuteczność ataku przy częściowej znajomości tekstu jawnego wskazuje na realną podatność systemu szyfrowania, a zwiększona wydajność przy krótszym strumieniu podkreśla, że nie zawsze większa ilość danych przekłada się na lepszy wynik – kluczowe jest ich jakościowe znaczenie dla analizy.
 
 ### Zadanie 4
 
 Przeprowadzić atak na zbudowany w ramach pierwszego zadania kryptosystem, przyjmując założenia z poprzedniego zadania, stosując jedynie technikę wyczerpującego wyszukiwania.
 - Porównać wymagany do przeprowadzenia ataku nakład obliczeniowy z nakładem obliczeniowym wymaganym do prze- prowadzenia ataku korelacyjnego.
-
 
 #### Implementacja
 
@@ -1081,7 +1226,26 @@ if __name__ == "__main__":
 
 #### Wyniki
 
+W ramach zadania 4 przeprowadzono atak brute force na kryptosystem strumieniowy, testując jego skuteczność dla pełnego tekstu jawnego (1154 bajty) oraz jego fragmentu (449 bajtów). W obu przypadkach atak zakończył się pełnym sukcesem, odzyskując prawidłowy 12-bitowy klucz `011010111100` z zerową odległością Hamminga.
 
+**Statystyki wydajności:**
+| Parametr               | Pełny tekst jawny | Fragment tekstu jawnego |
+|------------------------|-------------------|-------------------------|
+| Długość strumienia     | 9232 bity         | 3592 bity               |
+| Przetestowane klucze   | 1724              | 1724                    |
+| Czas wykonania         | 9.5249 s          | 3.5646 s (62% szybciej) |
+| Łączne operacje        | 79 912 192        | 31 092 352              |
+| Wydajność              | 8.39 Mops         | 8.72 Mops               |
+
+
+**Efektywność ataku:**  
+Przeprowadzenie ataku na skróconym fragmencie danych (3592 bity zamiast 9232) pozwoliło skrócić czas jego trwania o 62% przy zachowaniu pełnej, 100-procentowej skuteczności. Co istotne, liczba testowanych kandydatów pozostała taka sama (1724), ponieważ przestrzeń kluczy – zdefiniowana przez długość rejestru LFSR – nie uległa zmianie. Poprawa wydajności wynikała natomiast z ograniczenia liczby operacji korelacyjnych, które musiały zostać wykonane na krótszym strumieniu bitów. Mniejszy rozmiar danych nie tylko ograniczył czas obliczeń, ale również wpłynął korzystnie na wykorzystanie cache’u procesora oraz lokalność pamięci, co dodatkowo przyspieszyło analizę.
+
+**Stabilność metody:**  
+W obu przypadkach (dla pełnego i skróconego strumienia) uzyskano zerową odległość Hamminga między odszyfrowanym a rzeczywistym tekstem, co jednoznacznie potwierdza idealne dopasowanie i pełną skuteczność ataku. Pokazuje to, że brute force – choć metodą kosztowną obliczeniowo – cechuje się wysoką niezawodnością. Skrócenie długości analizowanego strumienia nie wpłynęło na jakość końcowego wyniku, a jedynie zwiększyło efektywność całego procesu, czyniąc go bardziej praktycznym w warunkach ograniczonych zasobów obliczeniowych.
+
+**Wnioski:**  
+Metoda brute force pozostaje najpewniejszym sposobem złamania szyfru, choć jednocześnie jest jedną z najbardziej czasochłonnych. Redukcja długości danych wejściowych znacząco poprawia wydajność, nie wpływając negatywnie na skuteczność ataku, o ile korelacje między tekstem jawnym a szyfrogramem są dostatecznie wyraźne. W przypadku 12-bitowego klucza, który daje 4096 możliwych konfiguracji, taka metoda okazuje się w pełni wykonalna w rozsądnym czasie. Jednak jej praktyczne zastosowanie dla dłuższych kluczy byłoby ograniczone przez wykładniczy wzrost złożoności obliczeniowej, co czyniłoby ją nieefektywną bez zastosowania optymalizacji lub bardziej zaawansowanych technik analizy kryptograficznej.
 
 ### Zadanie 5
 
@@ -1089,3 +1253,11 @@ Przedstawić wnioski dotyczące budowy nieliniowego generatora strumienia klucza
 
 #### Wyniki
 
+
+| Metryka               | Algorytm Pearsona (pełny tekst) | Algorytm Pearsona (fragment) | Brute Force (pełny tekst) | Brute Force (fragment) |
+|-----------------------|--------------------------------|-----------------------------|--------------------------|------------------------|
+| **Długość strumienia** | 9232 bity                     | 3592 bity                   | 9232 bity               | 3592 bity             |
+| **Czas wykonania**    | 0.2889 s                      | 0.1143 s (60% szybciej)     | 9.5249 s                | 3.5646 s (62% szybciej) |
+| **Operacje**          | 4 690 386                     | 1 825 266                   | 79 912 192              | 31 092 352            |
+| **Wydajność**         | 16.23 Mops                    | 15.97 Mops                  | 8.39 Mops               | 8.72 Mops             |
+| **Przetestowane klucze** | N/D (korelacja)              | N/D (korelacja)             | 1724                    | 1724                  |
