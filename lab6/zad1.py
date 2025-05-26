@@ -72,7 +72,6 @@ class StreamCipher:
         self.encrypt(input_file, output_file)  # identyczne działanie
 
 
-# Przykład użycia
 if __name__ == "__main__":
     klucz = "011010111100"  # X: 011, Y: 0101, Z: 11100
 
