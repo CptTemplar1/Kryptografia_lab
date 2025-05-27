@@ -1253,6 +1253,7 @@ Przedstawić wnioski dotyczące budowy nieliniowego generatora strumienia klucza
 
 #### Wyniki
 
+Wnioski dotyczące budowy nieliniowego generatora strumienia klucza dla kryptosystemu strumieniowego można wyciągnąć na podstawie porównania wydajności ataków korelacyjnych (Pearson) i brute force. Atak korelacyjny okazał się znacznie bardziej wydajny niż brute force, zarówno dla pełnego tekstu jawnego, jak i jego fragmentu. Dla pełnego tekstu (**1154 bajty**) atak Pearsona zajął **0.2889 sekundy** (**4 690 386 operacji**), podczas gdy brute force wymagał **9.5249 sekundy** (**79 912 192 operacji**). Dla fragmentu tekstu (**449 bajtów**) różnica była jeszcze bardziej wyraźna: **0.1143 sekundy** (**1 825 266 operacji**) dla Pearsona vs **3.5646 sekundy** (**31 092 352 operacji**) dla brute force.
 
 | Metryka               | Algorytm Pearsona (pełny tekst) | Algorytm Pearsona (fragment) | Brute Force (pełny tekst) | Brute Force (fragment) |
 |-----------------------|--------------------------------|-----------------------------|--------------------------|------------------------|
@@ -1261,3 +1262,15 @@ Przedstawić wnioski dotyczące budowy nieliniowego generatora strumienia klucza
 | **Operacje**          | 4 690 386                     | 1 825 266                   | 79 912 192              | 31 092 352            |
 | **Wydajność**         | 16.23 Mops                    | 15.97 Mops                  | 8.39 Mops               | 8.72 Mops             |
 | **Przetestowane klucze** | N/D (korelacja)              | N/D (korelacja)             | 1724                    | 1724                  |
+
+Atak korelacyjny wykorzystał słabości nieliniowej funkcji łączącej, która wprowadzała silne korelacje między strumieniem klucza a poszczególnymi rejestrami LFSR. W przypadku rejestrów X i Z, gdzie prawdopodobieństwo zgodności bitów wynosiło 3/4, Pearson osiągał wysoką skuteczność. Natomiast brute force, choć zawsze skuteczny, był znacznie mniej efektywny obliczeniowo, zwłaszcza dla dłuższych strumieni danych. 
+
+Przeprowadzone eksperymenty jasno wykazały wyraźną przewagę ataku korelacyjnego opartego na metodzie Pearsona nad klasycznym atakiem brute force. Dla pełnego strumienia danych metoda Pearsona była aż 33 razy szybsza, a dla jego skróconej wersji – 31 razy. Tak znaczna różnica wynika z faktu, że atak korelacyjny skutecznie wykorzystuje zależności statystyczne pomiędzy strumieniem klucza a stanami rejestrów, co pozwala znacząco ograniczyć przestrzeń przeszukiwań. Tym samym możliwe jest odzyskanie klucza przy znacznie mniejszym nakładzie obliczeniowym.
+
+Skrócenie długości analizowanego strumienia danych wpłynęło pozytywnie na wydajność obu metod, jednak to Pearson zachował większą stabilność działania. Pomimo redukcji ilości danych, wydajność jego ataku utrzymała się na poziomie 15–16 milionów operacji na sekundę, podczas gdy brute force osiągał jedynie około 8,5 Mops. Sugeruje to, że atak korelacyjny nie tylko jest szybszy, ale i lepiej skalowalny względem długości wejścia.
+
+Z perspektywy bezpieczeństwa generowanych strumieni klucza, wyniki potwierdzają, że nawet podstawowy wariant ataku korelacyjnego może stanowić poważne zagrożenie dla systemów wykorzystujących proste funkcje nieliniowe. Choć brute force wciąż pozostaje skuteczny przy krótkich długościach klucza, to jego zastosowanie w praktyce staje się coraz mniej efektywne wraz ze wzrostem rozmiaru przestrzeni kluczy. Eksperymenty z 12-bitowym kluczem pokazują, że taka długość jest niewystarczająca – możliwa do złamania w czasie liczonym w sekundach.
+
+W kontekście projektowania generatorów strumienia klucza istotne jest unikanie prostych funkcji logicznych, które mogą wprowadzać silne korelacje pomiędzy stanami rejestrów a generowanym strumieniem. Zastosowanie dłuższych kluczy – co najmniej 128-bitowych – oraz większej liczby rejestrów LFSR o zróżnicowanych długościach i bardziej złożonych funkcjach sprzężenia zwrotnego może znacząco utrudnić przeprowadzenie skutecznej analizy statystycznej. Dodatkowo, generator powinien zostać poddany testom korelacyjnym, które pozwolą wykryć potencjalne zależności możliwe do wykorzystania w ataku.
+
+Podsumowując, uzyskane wyniki wskazują, że odporność generatora na ataki korelacyjne i brute force wymaga zarówno zwiększenia złożoności funkcji nieliniowej, jak i zastosowania odpowiednio długiego klucza. Tylko połączenie tych dwóch elementów zapewnia odpowiedni poziom bezpieczeństwa w nowoczesnych systemach kryptograficznych.
